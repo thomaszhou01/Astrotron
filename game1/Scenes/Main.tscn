@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Weapons/PulseCannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Blob.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Gun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Weapons/RailGun.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
@@ -75,7 +76,7 @@ position = Vector2( 32.0431, -122.563 )
 position = Vector2( 104.92, -71.1203 )
 
 [node name="Blob22" parent="." instance=ExtResource( 5 )]
-position = Vector2( 0.32016, -81.4088 )
+position = Vector2( -21.8164, -71.1919 )
 
 [node name="Blob23" parent="." instance=ExtResource( 5 )]
 position = Vector2( 210.377, -35.9679 )
@@ -89,5 +90,7 @@ position = Vector2( 296.703, -5.65734 )
 [node name="Blob5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 440.118, 11.9037 )
 
-[node name="Gun" parent="." instance=ExtResource( 6 )]
-position = Vector2( -9.63647, 56.5805 )
+[node name="PulseCannon" parent="." instance=ExtResource( 4 )]
+position = Vector2( 22.7013, 107.947 )
+
+[node name="RailGun" parent="." instance=ExtResource( 6 )]

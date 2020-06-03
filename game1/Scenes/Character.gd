@@ -16,10 +16,11 @@ var on_ground = false
 var doubleJump = false
 var dashReady = false
 var init_pos
+var freeHand = true 
 
 onready var animationPlayer = $AnimationPlayer
 var can_fire = true 
-var railgun = preload("res://Scenes/Gun.tscn")
+var railgun = preload("res://Scenes/Weapons/RailGun.tscn")
 
 
 #ready
@@ -83,7 +84,7 @@ func _physics_process(_delta):
 	
 	
 	velocity = move_and_slide(velocity, FLOOR)
-	
+	print(freeHand)
 
 
 func die():
@@ -91,10 +92,10 @@ func die():
 	velocity.x = 0
 	velocity.y = 0
 
-func equipt(var gun):
-	if gun == "Railgun":
-		var railgun_instance = railgun.instance()
-		railgun_instance.position = $holdPoint.global_position
-		railgun_instance.disableCollide()
-		get_parent().add_child(railgun_instance)
+func handFree():
+	freeHand = true
 
+func _on_Area2D_body_entered(body):
+	if ("RailGun" in body.name || "PulseCannon" in body.name) && freeHand:
+		body.held()
+		freeHand = false
