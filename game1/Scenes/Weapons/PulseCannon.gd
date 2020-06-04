@@ -9,8 +9,8 @@ var held = false
 var direction = 1
 
 
+#collision box not working/sticking to railgun
 
-# Called when the node enters the scene atree for the first time.
 func _ready():
 	pass # Replace with function body.
 
@@ -22,11 +22,10 @@ func _process(_delta):
 		self.position = get_node("../Character/holdPoint").global_position
 		if get_node("../Character/holdPoint").position.x == -4:
 			$Sprite.flip_h = true
-			$bulletpoint.position.x = -6.5
+			$bulletpoint.position.x = -9.5
 		else:
 			$Sprite.flip_h = false 
-			$bulletpoint.position.x = 6.5
-	
+			$bulletpoint.position.x = 9.5
 	
 	if Input.is_action_just_pressed("fire") && held:
 		var bullet_instance = bullet.instance()
@@ -34,20 +33,14 @@ func _process(_delta):
 		#set the bullet direction using the bulletpoint location
 		bullet_instance.set_bullet_direction(sign($bulletpoint.position.x))
 		
-		get_parent().add_child(bullet_instance)
+		get_parent().get_parent().add_child(bullet_instance)
 		bullet_instance.position = $bulletpoint.global_position
+		
 	elif Input.is_action_just_pressed("drop") && held:
 		held = false
-		$CollisionPolygon2D.call_deferred("set_disabled", false)
 		get_parent().get_node("Character").handFree()
 
 
 func held():
 	held = true
-
-
-func _on_PlayerCollide_body_entered(body):
-	if "Character" in body.name:
-		pass
-
 

@@ -29,7 +29,7 @@ animations = [ {
 extents = Vector2( 7.10993, 4.45851 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8.24882, 6.06955 )
+extents = Vector2( 8.9433, 6.06955 )
 
 [node name="Blob" type="KinematicBody2D"]
 collision_layer = 2

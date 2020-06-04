@@ -84,7 +84,6 @@ func _physics_process(_delta):
 	
 	
 	velocity = move_and_slide(velocity, FLOOR)
-	print(freeHand)
 
 
 func die():
