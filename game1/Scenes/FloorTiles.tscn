@@ -3,10 +3,10 @@
 [ext_resource path="res://Resources/Sprites/floor.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.97087, 1.54209 )
+extents = Vector2( 7.97087, 1.51473 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.08482, 8.05063 )
+extents = Vector2( 7.99513, 8.00989 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -18,7 +18,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [node name="Area2D" type="StaticBody2D" parent="Sprite"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
-position = Vector2( 3.8147e-06, 6.44802 )
+position = Vector2( 0, 6.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="."]

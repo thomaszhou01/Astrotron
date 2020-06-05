@@ -6,8 +6,8 @@ export var speed = 100  # How fast the player will move (pixels/sec).
 export var dash = 50  
 export var fire_rate = 0.2
 var screen_size  # Size of the game window.
-const gravity = 20
-const jump = -250
+const gravity = 10
+const jump = -200
 const acceleration = 10
 const stop = 10
 const FLOOR = Vector2(0, -1)
@@ -92,6 +92,7 @@ func die():
 	velocity.y = 0
 
 func handFree():
+	$holdPoint.position.y = 2
 	freeHand = true
 
 func _on_Area2D_body_entered(body):

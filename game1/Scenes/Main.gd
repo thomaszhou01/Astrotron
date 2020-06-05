@@ -13,6 +13,12 @@ func _ready():
 func _process(_delta):
 	if $Character.position.y > 1000:
 		get_tree().reload_current_scene()
+	
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+		
+
+
 #	pass
 func reset():
 	get_tree().reload_current_scene()

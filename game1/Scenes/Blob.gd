@@ -4,11 +4,20 @@ const gravity = 50
 const speed = 60
 const FLOOR = Vector2(0, -1)
 
+var hp
 var velocity = Vector2();
 var direction = 1
 
 var is_dead = false 
 # Called when the node enters the scene tree for the first time.
+
+func _ready():
+	hp = 100
+
+func hit(damage):
+	hp -= damage
+	if hp <=0:
+		dead()
 
 func dead(): 
 	is_dead = true
