@@ -17,6 +17,8 @@ var doubleJump = false
 var dashReady = false
 var init_pos
 var freeHand = true 
+var moving = false
+var animationDirRight = true
 
 onready var animationPlayer = $AnimationPlayer
 var can_fire = true 
@@ -32,31 +34,41 @@ func _ready():
 #delta
 func _physics_process(_delta):
 	#move character 
+	mousePlace()
 	movement()
 	velocity = move_and_slide(velocity, FLOOR)
 
+func mousePlace():
+	if get_viewport().get_mouse_position().x > (get_viewport_rect().size.x/2):
+		animationDirRight = true
+	else: 
+		animationDirRight = false
+
 func movement():
 	if Input.is_action_pressed("move_right") && abs(velocity.x) < speed:
-		animationPlayer.play("RunRight")
+		moving = true
 		velocity.x += acceleration
-		if sign($holdPoint.position.x) == -1:
-			$holdPoint.position.x *= -1
 	elif Input.is_action_pressed("move_left")&& abs(velocity.x) < speed:
-		animationPlayer.play("RunLeft")
+		moving = true
 		velocity.x += -acceleration
-		if sign($holdPoint.position.x) == 1:
-			$holdPoint.position.x *= -1
 	else:
 		if velocity.x > 0:
 			velocity.x += -stop
 		elif velocity.x < 0:
 			velocity.x += stop
 	
+	#fix this 
 	if abs(velocity.x) < 10:
 		velocity.x = 0
-		if sign($holdPoint.position.x) == 1:
+		moving = false
+	
+	if animationDirRight && moving:
+		animationPlayer.play("RunRight")
+	elif !animationDirRight && moving:
+		animationPlayer.play("RunLeft")
+	elif animationDirRight  && !moving:
 			animationPlayer.play("IdleRight")
-		else:
+	elif !animationDirRight  && !moving:
 			animationPlayer.play("IdleLeft")
 	
 	velocity.y += gravity
@@ -91,7 +103,8 @@ func handFree():
 	$holdPoint.position.y = 2
 	freeHand = true
 
-func _on_Area2D_body_entered(body):
+
+func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
 	if ("RailGun" in body.name || "PulseCannon" in body.name || "Gun" in body.name) && freeHand:
 		body.held()
 		freeHand = false

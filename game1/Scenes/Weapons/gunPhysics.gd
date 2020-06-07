@@ -7,7 +7,6 @@ extends RigidBody2D
 var bullet = preload("res://Scenes/bullet.tscn")
 var held = false
 var canShoot = true
-var direction = 1
 export (int) var damage 
 export (int) var bulletSprite
 export (float) var fireRate
@@ -20,22 +19,20 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if held:
-		self.rotation_degrees = 0
+		self.look_at(get_global_mouse_position())
 		self.position = get_node("../Character/holdPoint").global_position
-		if get_node("../Character/holdPoint").position.x == -4:
-			$Sprite.flip_h = true
-			$bulletpoint.position.x = -10
+		if self.global_rotation<1.5 && self.global_rotation>-1.5:
+			$Sprite.flip_v = false
+			$bulletpoint.position.y = -0.5
 		else:
-			$Sprite.flip_h = false 
-			$bulletpoint.position.x = 10
-
-
+			$Sprite.flip_v = true 
+			$bulletpoint.position.y = 0.5
+	
 	if (Input.is_action_just_pressed("fire") && held) && canShoot:
 		var bullet_instance = bullet.instance()
+		var direction = Vector2(1,0).rotated(self.global_rotation)
 		#set the bullet direction using the bulletpoint location
-		bullet_instance.set_bullet_direction(sign($bulletpoint.position.x))
-		bullet_instance.set_damage(damage)
-		bullet_instance.setSprite(bulletSprite)
+		bullet_instance.start(direction, damage, bulletSprite)
 		get_parent().get_parent().add_child(bullet_instance)
 		bullet_instance.position = $bulletpoint.global_position
 		canShoot = false
@@ -44,4 +41,4 @@ func _process(delta):
 		held = false
 		get_parent().get_node("Character").handFree()
 		self.global_position.y = self.global_position.y - 5
-		self.global_position.x = self.global_position.x + 10 * sign($bulletpoint.position.x)
+		self.global_position.x = self.global_position.x + 15 * sign($bulletpoint.position.x)

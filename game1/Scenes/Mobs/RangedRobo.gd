@@ -22,7 +22,6 @@ func hit(damage):
 func dead(): 
 	is_dead = true
 	velocity = Vector2(0,0)
-	$AnimatedSprite.play("dead")
 	$Timer.start()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$BodyDetector/CollisionShape2D.call_deferred("set_disabled", true)
@@ -30,13 +29,12 @@ func dead():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	if direction == 1:
+		$Sprite.flip_h = false
+	else:
+		$Sprite.flip_h = true
+	
 	if is_dead==false:
-		if direction == 1:
-			$AnimatedSprite.flip_h = false
-		else:
-			$AnimatedSprite.flip_h = true
-		
-		$AnimatedSprite.play("walk")
 		velocity.x = speed*direction
 		
 		velocity.y += gravity
@@ -50,6 +48,8 @@ func _physics_process(_delta):
 	if $RayCast2D.is_colliding() == false:
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
+
+
 
 
 func _on_Timer_timeout():

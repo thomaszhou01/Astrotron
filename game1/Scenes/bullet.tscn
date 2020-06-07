@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/bullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.75411, 1.49505 )
+extents = Vector2( 2.47477, 1.49505 )
 
 [node name="bullet" type="Area2D"]
 collision_mask = 11
@@ -14,14 +14,13 @@ script = ExtResource( 2 )
 position = Vector2( 0.0786142, -0.471682 )
 texture = ExtResource( 1 )
 hframes = 2
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.285474, -0.222491 )
+position = Vector2( 0.381787, -0.0491264 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0.183877, -0.313037 )
+position = Vector2( 0.337979, -0.0818844 )
 scale = Vector2( 0.292394, 0.190872 )
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
