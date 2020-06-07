@@ -32,6 +32,10 @@ func _ready():
 #delta
 func _physics_process(_delta):
 	#move character 
+	movement()
+	velocity = move_and_slide(velocity, FLOOR)
+
+func movement():
 	if Input.is_action_pressed("move_right") && abs(velocity.x) < speed:
 		animationPlayer.play("RunRight")
 		velocity.x += acceleration
@@ -77,14 +81,6 @@ func _physics_process(_delta):
 		velocity.y = -200
 		dashReady = false 
 		
-	if abs(velocity.x)>0:
-		pass
-	else:
-		pass
-	
-	
-	velocity = move_and_slide(velocity, FLOOR)
-
 
 func die():
 	set_global_position(init_pos)

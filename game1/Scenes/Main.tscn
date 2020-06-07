@@ -12,10 +12,10 @@
 script = ExtResource( 3 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
-position = Vector2( -170.334, 105.313 )
+position = Vector2( -97.1838, 100.563 )
 
 [node name="PulseCannon" parent="." instance=ExtResource( 4 )]
-position = Vector2( 353.866, -239.45 )
+position = Vector2( 23.2653, 97.8008 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -74,10 +74,10 @@ position = Vector2( 383.423, -306.655 )
 position = Vector2( 96.041, -231.782 )
 
 [node name="Blob13" parent="." instance=ExtResource( 5 )]
-position = Vector2( 62.8921, -304.477 )
+position = Vector2( 87.5922, -307.327 )
 
 [node name="Blob14" parent="." instance=ExtResource( 5 )]
-position = Vector2( 62.8921, -304.477 )
+position = Vector2( 11.592, -307.327 )
 
 [node name="Blob15" parent="." instance=ExtResource( 5 )]
 position = Vector2( -75.2482, -422.973 )

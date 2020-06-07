@@ -5,6 +5,8 @@
 
 [node name="PulseCannon" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+damage = 100
+bulletSprite = 1
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( -0.0875955, -0.33189 )
