@@ -96,6 +96,6 @@ func handFree():
 	freeHand = true
 
 func _on_Area2D_body_entered(body):
-	if ("RailGun" in body.name || "PulseCannon" in body.name) && freeHand:
+	if ("RailGun" in body.name || "PulseCannon" in body.name || "Gun" in body.name) && freeHand:
 		body.held()
 		freeHand = false

@@ -20,8 +20,8 @@ func _ready():
 func _process(_delta):
 	if held:
 		self.rotation_degrees = 0
-		self.position = get_node("../Character/holdPoint").global_position
-		if get_node("../Character/holdPoint").position.x == -4:
+		self.position = get_parent().get_node("../Character/holdPoint").global_position
+		if get_parent().get_node("../Character/holdPoint").position.x == -4:
 			$Sprite.flip_h = true
 			$bulletpoint.position.x = -10
 		else:

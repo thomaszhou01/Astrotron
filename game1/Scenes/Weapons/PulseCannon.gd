@@ -8,6 +8,7 @@ var bullet = preload("res://Scenes/bullet.tscn")
 var held = false
 var direction = 1
 var damage = 100
+var canShoot = true
 
 #collision box not working/sticking to railgun
 
@@ -27,22 +28,29 @@ func _process(_delta):
 			$Sprite.flip_h = false 
 			$bulletpoint.position.x = 10
 	
-	if Input.is_action_just_pressed("fire") && held:
+	if (Input.is_action_just_pressed("fire") && held) && canShoot:
 		var bullet_instance = bullet.instance()
 		
 		#set the bullet direction using the bulletpoint location
 		bullet_instance.set_bullet_direction(sign($bulletpoint.position.x))
 		bullet_instance.set_damage(damage)
 		bullet_instance.setSprite(1)
-		
 		get_parent().get_parent().add_child(bullet_instance)
 		bullet_instance.position = $bulletpoint.global_position
-		
+		canShoot = false
+		$Timer.start()
 	elif Input.is_action_just_pressed("drop") && held:
 		held = false
 		get_parent().get_node("Character").handFree()
+		self.global_position.y = self.global_position.y - 5
+		self.global_position.x = self.global_position.x + 10 * sign($bulletpoint.position.x)
+
 
 
 func held():
 	held = true
 
+
+
+func _on_Timer_timeout():
+	canShoot = true
