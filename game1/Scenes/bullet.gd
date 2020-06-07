@@ -1,7 +1,7 @@
 extends Area2D	
 
 
-const speed = 250
+const speed = 300
 var velocity = Vector2()	
 var direction = 1
 var damage

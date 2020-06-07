@@ -15,7 +15,7 @@ script = ExtResource( 3 )
 position = Vector2( -97.1838, 100.563 )
 
 [node name="PulseCannon" parent="." instance=ExtResource( 4 )]
-position = Vector2( 23.2653, 97.8008 )
+position = Vector2( 355.266, -236.2 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
