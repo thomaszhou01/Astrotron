@@ -1,8 +1,8 @@
 extends Area2D	
 
 
-const speed = 300
-var direction = 1
+var speed
+var direction
 var damage
 var velocity = Vector2()
 
@@ -11,12 +11,14 @@ var velocity = Vector2()
 func _ready():
 	pass
 
-func start(dir, dmg, sprite):
+func start(dir, dmg, sprite, spd):
 	damage = dmg
 	direction = dir 
 	rotation = dir.angle()
+	speed = spd
 	velocity = dir * speed
 	$Sprite.set_frame(sprite)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,6 +29,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_bullet_body_entered(body):
-	if "Blob" in body.name:
+	if body.has_method("hit"):
 		body.hit(damage)
 	queue_free()

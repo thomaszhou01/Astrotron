@@ -10,14 +10,17 @@ var canShoot = true
 export (int) var damage 
 export (int) var bulletSprite
 export (float) var fireRate
+export (int) var bulletSpeed 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Sprite.set_hframes(3)
+	$Timer.set_wait_time(fireRate)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+
 	if held:
 		self.look_at(get_global_mouse_position())
 		self.position = get_node("../Character/holdPoint").global_position
@@ -28,12 +31,12 @@ func _process(delta):
 			$Sprite.flip_v = true 
 			$bulletpoint.position.y = 0.5
 	
-	if (Input.is_action_just_pressed("fire") && held) && canShoot:
+	if (Input.is_action_pressed("fire") && held) && canShoot:
 		var bullet_instance = bullet.instance()
 		var direction = Vector2(1,0).rotated(self.global_rotation)
 		#set the bullet direction using the bulletpoint location
-		bullet_instance.start(direction, damage, bulletSprite)
-		get_parent().get_parent().add_child(bullet_instance)
+		bullet_instance.start(direction, damage, bulletSprite, bulletSpeed)
+		get_parent().add_child(bullet_instance)
 		bullet_instance.position = $bulletpoint.global_position
 		canShoot = false
 		$Timer.start()
@@ -41,4 +44,4 @@ func _process(delta):
 		held = false
 		get_parent().get_node("Character").handFree()
 		self.global_position.y = self.global_position.y - 5
-		self.global_position.x = self.global_position.x + 15 * sign($bulletpoint.position.x)
+		$Sprite.offset.x = 0

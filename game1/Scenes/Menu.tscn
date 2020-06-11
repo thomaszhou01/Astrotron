@@ -24,7 +24,7 @@ margin_right = 317.0
 margin_bottom = 178.0
 text = "WASD to move
 Space to jump/doublejump
-Shift to dash
+Shift to dash											   E to use
 Q to drop weapon"
 readonly = true
 context_menu_enabled = false

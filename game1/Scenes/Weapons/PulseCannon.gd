@@ -13,9 +13,12 @@ func _process(_delta):
 
 func held():
 	held = true
-
+	$Sprite.offset.x = 5
 
 
 
 func _on_Timer_timeout():
 	canShoot = true
+
+
+

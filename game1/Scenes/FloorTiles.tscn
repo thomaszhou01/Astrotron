@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Resources/Sprites/floor.png" type="Texture" id=1]
 
@@ -8,12 +8,18 @@ extents = Vector2( 7.97087, 1.51473 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7.99513, 8.00989 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.03408, 6.95434 )
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Area2D" type="StaticBody2D" parent="Sprite"]
 
@@ -25,9 +31,53 @@ shape = SubResource( 1 )
 position = Vector2( 0.197361, 20.047 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 16, 16, 16 )
+region_rect = Rect2( 16, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Area2D" type="StaticBody2D" parent="Sprite2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2/Area2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 0, 40.327 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Area2D" type="StaticBody2D" parent="Sprite3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite3/Area2D"]
+position = Vector2( 0, -6.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 0, 51.341 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite4/StaticBody2D"]
+position = Vector2( 0, 1.025 )
+shape = SubResource( 3 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( -0.413074, 71.5225 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Area2D" type="StaticBody2D" parent="Sprite5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite5/Area2D"]
 shape = SubResource( 2 )

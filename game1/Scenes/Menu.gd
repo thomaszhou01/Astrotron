@@ -1,4 +1,4 @@
-extends Node
+extends "res://Scenes/Main.gd"
 
 
 # Declare member variables here. Examples:
@@ -16,4 +16,4 @@ func _ready():
 #	pass
 
 func _on_TextureButton_pressed():
-	get_tree().change_scene("res://Scenes/Main.tscn")
+	get_tree().change_scene("res://Scenes/Maps/Map1.tscn")

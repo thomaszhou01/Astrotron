@@ -11,6 +11,7 @@ const jump = -200
 const acceleration = 10
 const stop = 10
 const FLOOR = Vector2(0, -1)
+var hp
 var velocity = Vector2();
 var on_ground = false 
 var doubleJump = false
@@ -19,6 +20,7 @@ var init_pos
 var freeHand = true 
 var moving = false
 var animationDirRight = true
+var object = null
 
 onready var animationPlayer = $AnimationPlayer
 var can_fire = true 
@@ -28,6 +30,7 @@ var railgun = preload("res://Scenes/Weapons/RailGun.tscn")
 #ready
 func _ready():
 	init_pos = get_global_transform().origin
+	hp = 200
 
 
 
@@ -36,6 +39,7 @@ func _physics_process(_delta):
 	#move character 
 	mousePlace()
 	movement()
+	pickup()
 	velocity = move_and_slide(velocity, FLOOR)
 
 func mousePlace():
@@ -92,7 +96,6 @@ func movement():
 		velocity.x = 80*$holdPoint.position.x
 		velocity.y = -200
 		dashReady = false 
-		
 
 func die():
 	set_global_position(init_pos)
@@ -100,11 +103,27 @@ func die():
 	velocity.y = 0
 
 func handFree():
-	$holdPoint.position.y = 2
 	freeHand = true
 
+func hit(damage):
+	hp -= damage
+	if hp <= 0:
+		get_tree().reload_current_scene()
 
-func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
-	if ("RailGun" in body.name || "PulseCannon" in body.name || "Gun" in body.name) && freeHand:
-		body.held()
+
+func pickup():
+	if object != null && Input.is_action_just_pressed("use") && freeHand:
+		object.held()
 		freeHand = false
+
+
+
+func _on_Area2D_body_entered(body):
+	if body.has_method("held") && freeHand:
+		object = body
+
+
+
+func _on_Area2D_body_exited(body):
+	if body.has_method("held"):
+		object = null

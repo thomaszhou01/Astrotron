@@ -11,10 +11,12 @@ extents = Vector2( 6.68204, 3.89444 )
 
 [node name="RailGun" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 contact_monitor = true
 script = ExtResource( 2 )
 damage = 50
+fireRate = 0.2
+bulletSpeed = 300
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -25,10 +27,9 @@ position = Vector2( 0.015235, -0.0698052 )
 shape = SubResource( 1 )
 
 [node name="bulletpoint" type="Position2D" parent="."]
-position = Vector2( 9.302, -0.5 )
+position = Vector2( 11, -0.5 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
 
 [node name="Area2D" type="Area2D" parent="."]
 
