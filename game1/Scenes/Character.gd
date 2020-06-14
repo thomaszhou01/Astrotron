@@ -2,9 +2,7 @@ extends KinematicBody2D
 
 
 
-export var speed = 100  # How fast the player will move (pixels/sec).
-export var dash = 50  
-export var fire_rate = 0.2
+
 var screen_size  # Size of the game window.
 const gravity = 10
 const jump = -200
@@ -21,11 +19,13 @@ var freeHand = true
 var moving = false
 var animationDirRight = true
 var object = null
-
-onready var animationPlayer = $AnimationPlayer
 var can_fire = true 
 var railgun = preload("res://Scenes/Weapons/RailGun.tscn")
-
+onready var animationPlayer = $AnimationPlayer
+export var speed = 100  # How fast the player will move (pixels/sec).
+export var dash = 50  #Currently unused 
+export var fire_rate = 0.2
+export (int) var knockback
 
 #ready
 func _ready():
@@ -90,12 +90,6 @@ func movement():
 	elif Input.is_action_just_pressed("jump") && doubleJump:
 		velocity.y = jump
 		doubleJump = false
-	
-	
-	if Input.is_action_just_pressed("dash") && dashReady:
-		velocity.x = 80*$holdPoint.position.x
-		velocity.y = -200
-		dashReady = false 
 
 func die():
 	set_global_position(init_pos)
@@ -105,11 +99,14 @@ func die():
 func handFree():
 	freeHand = true
 
-func hit(damage):
+func hit(damage, dir, knock):
 	hp -= damage
+	if dir >= self.global_position.x && knock:
+		velocity.x = -knockback
+	elif dir <= self.global_position.x && knock:
+		velocity.x = knockback
 	if hp <= 0:
 		get_tree().reload_current_scene()
-
 
 func pickup():
 	if object != null && Input.is_action_just_pressed("use") && freeHand:

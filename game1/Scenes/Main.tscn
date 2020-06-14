@@ -7,5 +7,3 @@
 script = ExtResource( 3 )
 
 [node name="Menu" parent="." instance=ExtResource( 9 )]
-
-[node name="Levels" type="Node" parent="."]

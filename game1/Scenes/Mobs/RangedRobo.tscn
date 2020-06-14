@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Mobs/RangedRobo.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/tank.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 4.03468
 height = 5.08551
 
@@ -16,7 +16,6 @@ collision_layer = 2
 script = ExtResource( 1 )
 turretTurn = 5.0
 fireRate = 1.0
-hp = 100
 damage = 50
 bulletSpeed = 200
 
@@ -26,10 +25,9 @@ hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0921364, -1.61925 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 6, -4.951 )
 enabled = true
 cast_to = Vector2( 0, 10.568 )
@@ -40,9 +38,9 @@ collision_mask = 2
 [node name="Timer" type="Timer" parent="."]
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+visible = false
 shape = SubResource( 2 )
 
 [node name="Turret" type="Sprite" parent="."]

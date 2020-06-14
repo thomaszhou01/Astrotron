@@ -32,7 +32,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -1.02819, 0.351885 ) ]
+"values": [ Vector2( -1.028, 0.4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("holdPoint:position")
@@ -113,7 +113,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -1.02819, 0.417854 ) ]
+"values": [ Vector2( -1.028, 0.4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("holdPoint:position")
@@ -154,7 +154,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.941291, 0.417854 ) ]
+"values": [ Vector2( 0.941, 0.4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("holdPoint:position")
@@ -174,14 +174,14 @@ extents = Vector2( 7.6526, 7.93576 )
 
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 3 )
+knockback = 150
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 16
-frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.02819, 0.417854 )
+position = Vector2( 0.941291, 0.417854 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -189,7 +189,7 @@ current = true
 editor_draw_drag_margin = true
 
 [node name="holdPoint" type="Position2D" parent="."]
-position = Vector2( -1, 2.5 )
+position = Vector2( 1, 2.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleRight"

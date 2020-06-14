@@ -19,7 +19,7 @@ var hp
 
 
 func _ready():
-	bulletSprite = 0
+	bulletSprite = 2
 	right = true
 	$FireRate.set_wait_time(fireRate)
 	hp = 100
@@ -51,7 +51,7 @@ func _physics_process(delta):
 		if fire && target_dir.dot(current_dir) > 0.9:
 			var bullet_instance = bullet.instance()
 			#set the bullet direction using the bulletpoint location
-			bullet_instance.start(current_dir, damage, bulletSprite, bulletSpeed, false)
+			bullet_instance.start(current_dir, damage, bulletSprite, bulletSpeed, true)
 			bullet_instance.position = $Turret/bulletpoint.global_position
 			get_parent().add_child(bullet_instance)
 			$FireRate.start()
@@ -64,10 +64,10 @@ func _physics_process(delta):
 	
 	
 	if direction == 1 || right:
-		$Sprite.flip_h = false
+		$AnimatedSprite.flip_h = false
 		
 	elif direction == -1 || !right:
-		$Sprite.flip_h = true
+		$AnimatedSprite.flip_h = true
 	
 	if !is_dead:
 		velocity.x = speed*direction

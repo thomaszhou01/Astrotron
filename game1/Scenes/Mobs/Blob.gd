@@ -1,20 +1,15 @@
-extends KinematicBody2D
+extends "res://Scenes/Mobs/mobs.gd"
 
-const gravity = 50
-const speed = 60
-const FLOOR = Vector2(0, -1)
 
-var hp
-var velocity = Vector2();
+
 var direction = 1
-
 var is_dead = false 
+export (int) var hp
+
 # Called when the node enters the scene tree for the first time.
 
-func _ready():
-	hp = 100
 
-func hit(damage):
+func hit(damage, pos, knock):
 	hp -= damage
 	if hp <=0:
 		dead()
@@ -58,4 +53,4 @@ func _on_Timer_timeout():
 
 
 func _on_BodyDetector_body_entered(body):
-	body.die()
+	body.hit(50, self.global_position.x, true)

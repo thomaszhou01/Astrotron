@@ -14,33 +14,34 @@ region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "dead",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 7.10993, 4.45851 )
+extents = Vector2( 7.10993, 3.52762 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 7.57441, 5.11875 )
+extents = Vector2( 7.57441, 3.76576 )
 
 [node name="Blob" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
+hp = 100
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-animation = "dead"
+animation = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3.61104 )
+position = Vector2( 0.242981, 4.50198 )
 shape = SubResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -55,7 +56,7 @@ collision_mask = 2
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyDetector"]
-position = Vector2( -0.0274263, 2.97058 )
+position = Vector2( 0.185514, 4.24299 )
 shape = SubResource( 5 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="BodyDetector" to="." method="_on_BodyDetector_body_entered"]

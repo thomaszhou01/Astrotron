@@ -9,7 +9,7 @@ extents = Vector2( 7.97087, 1.51473 )
 extents = Vector2( 7.99513, 8.00989 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8.03408, 6.95434 )
+extents = Vector2( 8.03408, 6.50782 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -65,7 +65,7 @@ region_rect = Rect2( 48, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite4"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite4/StaticBody2D"]
-position = Vector2( 0, 1.025 )
+position = Vector2( 0, 1.481 )
 shape = SubResource( 3 )
 
 [node name="Sprite5" type="Sprite" parent="."]

@@ -35,7 +35,7 @@ func _process(delta):
 		var bullet_instance = bullet.instance()
 		var direction = Vector2(1,0).rotated(self.global_rotation)
 		#set the bullet direction using the bulletpoint location
-		bullet_instance.start(direction, damage, bulletSprite, bulletSpeed)
+		bullet_instance.start(direction, damage, bulletSprite, bulletSpeed, false)
 		get_parent().add_child(bullet_instance)
 		bullet_instance.position = $bulletpoint.global_position
 		canShoot = false
