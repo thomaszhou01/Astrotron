@@ -98,6 +98,7 @@ func die():
 
 func handFree():
 	freeHand = true
+	object = null
 
 func hit(damage, dir, knock):
 	hp -= damage

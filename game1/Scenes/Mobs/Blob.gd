@@ -53,4 +53,5 @@ func _on_Timer_timeout():
 
 
 func _on_BodyDetector_body_entered(body):
-	body.hit(50, self.global_position.x, true)
+	if body.has_method("hit"):
+		body.hit(50, self.global_position.x, true)

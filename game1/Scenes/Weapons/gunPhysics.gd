@@ -5,12 +5,14 @@ extends RigidBody2D
 # var a = 2
 # var b = "text"
 var bullet = preload("res://Scenes/bullet.tscn")
+var grenade = preload("res://Scenes/Weapons/grenade.tscn")
 var held = false
 var canShoot = true
 export (int) var damage 
 export (int) var bulletSprite
 export (float) var fireRate
-export (int) var bulletSpeed 
+export (int) var bulletSpeed
+export (int) var bulletType
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +33,8 @@ func _process(delta):
 			$Sprite.flip_v = true 
 			$bulletpoint.position.y = 0.5
 	
-	if (Input.is_action_pressed("fire") && held) && canShoot:
+	#currently testing grenades
+	if (Input.is_action_pressed("fire") && held) && canShoot && bulletType == 0:
 		var bullet_instance = bullet.instance()
 		var direction = Vector2(1,0).rotated(self.global_rotation)
 		#set the bullet direction using the bulletpoint location
@@ -40,7 +43,18 @@ func _process(delta):
 		bullet_instance.position = $bulletpoint.global_position
 		canShoot = false
 		$Timer.start()
-	elif Input.is_action_just_pressed("drop") && held:
+	elif (Input.is_action_pressed("fire") && held) && canShoot && bulletType == 1:
+		var bullet_instance = grenade.instance()
+		var direction = Vector2(1,0).rotated(self.global_rotation)
+		#set the bullet direction using the bulletpoint location
+		bullet_instance.start(direction, damage, bulletSprite, bulletSpeed, false)
+		bullet_instance.shoot()
+		get_parent().add_child(bullet_instance)
+		bullet_instance.position = $bulletpoint.global_position
+		canShoot = false
+		$Timer.start()
+	
+	if Input.is_action_just_pressed("drop") && held:
 		held = false
 		get_parent().get_node("Character").handFree()
 		self.global_position.y = self.global_position.y - 5
