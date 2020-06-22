@@ -20,7 +20,6 @@ var moving = false
 var animationDirRight = true
 var object = null
 var can_fire = true 
-var railgun = preload("res://Scenes/Weapons/RailGun.tscn")
 onready var animationPlayer = $AnimationPlayer
 export var speed = 100  # How fast the player will move (pixels/sec).
 export var dash = 50  #Currently unused 
@@ -31,6 +30,7 @@ export (int) var knockback
 func _ready():
 	init_pos = get_global_transform().origin
 	hp = 200
+	$CanvasLayer/HealthBar.getMaxHP(200)
 
 
 
@@ -107,7 +107,10 @@ func hit(damage, dir, knock):
 	elif dir <= self.global_position.x && knock:
 		velocity.x = knockback
 	if hp <= 0:
+		
 		get_tree().reload_current_scene()
+	$CanvasLayer/HealthBar.setHP(hp)
+	
 
 func pickup():
 	if object != null && Input.is_action_just_pressed("use") && freeHand:

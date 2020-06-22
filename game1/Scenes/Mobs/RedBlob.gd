@@ -22,6 +22,7 @@ func _ready():
 	bulletSprite = 2
 	right = true
 	$FireRate.set_wait_time(fireRate)
+	$AnimatedSprite.play("default")
 	hp = 100
 
 #HP DOESNT SET FROM MOBS.GD??????
