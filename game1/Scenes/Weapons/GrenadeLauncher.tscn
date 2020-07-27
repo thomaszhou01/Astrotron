@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Weapons/GrenadeLauncher.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.00343, 3.03822 )
+
+[node name="GrenadeLauncher" type="RigidBody2D"]
+position = Vector2( 0.0496063, 0 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+damage = 150
+fireRate = 0.75
+bulletSpeed = 400
+bulletType = 1
+ammoPerClip = 4
+reloadTime = 2
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 80, 0, 16, 16 )
+
+[node name="hitBox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="bulletpoint" type="Position2D" parent="."]
+position = Vector2( 13.22, -0.595275 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Reload" type="Timer" parent="."]
+one_shot = true
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Reload" to="." method="_on_Reload_timeout"]

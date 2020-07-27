@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/itemback.wav-8fd021ecaababdf81093b7bb660a8667.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Interactables/itemback.wav"
+dest_files=[ "res://.import/itemback.wav-8fd021ecaababdf81093b7bb660a8667.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

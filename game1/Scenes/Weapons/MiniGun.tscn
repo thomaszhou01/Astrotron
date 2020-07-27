@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Weapons/MiniGun.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Audio/Items/Guns/pew.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.97033, 3.1506 )
+
+[node name="MiniGun" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 2
+sleeping = true
+can_sleep = false
+script = ExtResource( 2 )
+damage = 20
+fireRate = 0.1
+bulletSpeed = 280
+ammoPerClip = 50
+reloadTime = 5
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 16, 16 )
+
+[node name="hitBox" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0278406, -1.11362 )
+shape = SubResource( 1 )
+
+[node name="bulletpoint" type="Position2D" parent="."]
+position = Vector2( 14.7447, -0.576737 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Reload" type="Timer" parent="."]
+one_shot = true
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Reload" to="." method="_on_Reload_timeout"]

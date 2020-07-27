@@ -1,0 +1,195 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Mobs/RedBlob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Mobs/Blob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Mobs/meleeRobot.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Mobs/RangedRobo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Resources/TileSets/passthrough.tres" type="TileSet" id=6]
+[ext_resource path="res://Scenes/Weapons/RailGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Weapons/GrenadeLauncher.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Weapons/RocketLauncher.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Weapons/MiniGun.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Weapons/PulseCannon.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Weapons/Gun.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Resources/Sprites/Structures/props.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Structures/ladder.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Items/shieldCell.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Items/healthPack.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Items/keyCard.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Interactables/buyTerminal.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/Interactables/buyDropper.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Interactables/movableBox.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/Interactables/ExpolosiveBarrel.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Maps/TestScene.gd" type="Script" id=23]
+[ext_resource path="res://Scenes/Interactables/doorKey.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Interactables/doorSwitch.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/Misc/DeathBox.tscn" type="PackedScene" id=26]
+
+[sub_resource type="TileSet" id=1]
+0/name = "props.png 0"
+0/texture = ExtResource( 14 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "props.png 1"
+1/texture = ExtResource( 14 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 16, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[node name="TestScene" type="Node"]
+script = ExtResource( 23 )
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Floor" type="TileMap" parent="Environment"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+collision_mask = 79
+format = 1
+tile_data = PoolIntArray( -131111, 12, 0, -131110, 11, 0, -131076, 12, 0, -131075, 28, 0, -131074, 28, 0, -131073, 11, 0, -65575, 13, 0, -65574, 14, 0, -65566, 12, 0, -65565, 11, 0, -65558, 12, 0, -65557, 11, 0, -65548, 12, 0, -65547, 11, 0, -65540, 13, 0, -65539, 4, 0, -65538, 4, 0, -65537, 51, 0, -131072, 11, 0, -39, 13, 0, -38, 14, 0, -30, 13, 0, -29, 14, 0, -22, 13, 0, -21, 14, 0, -12, 13, 0, -11, 14, 0, -4, 13, 0, -3, 4, 0, -2, 4, 0, -1, 4, 0, -65536, 51, 0, -65535, 11, 0, 65497, 13, 0, 65498, 14, 0, 65506, 13, 0, 65507, 14, 0, 65514, 13, 0, 65515, 14, 0, 65524, 13, 0, 65525, 14, 0, 65532, 13, 0, 65533, 4, 0, 65534, 4, 0, 65535, 4, 0, 0, 4, 0, 1, 51, 0, 2, 11, 0, 131033, 13, 0, 131034, 51, 0, 131035, 28, 0, 131036, 28, 0, 131037, 28, 0, 131038, 28, 0, 131039, 28, 0, 131040, 28, 0, 131041, 28, 0, 131042, 48, 0, 131043, 51, 0, 131044, 28, 0, 131045, 28, 0, 131046, 28, 0, 131047, 28, 0, 131048, 28, 0, 131049, 28, 0, 131050, 48, 0, 131051, 51, 0, 131052, 28, 0, 131053, 28, 0, 131054, 28, 0, 131055, 28, 0, 131056, 28, 0, 131057, 28, 0, 131058, 28, 0, 131059, 28, 0, 131060, 48, 0, 131061, 51, 0, 131062, 28, 0, 131063, 28, 0, 131064, 28, 0, 131065, 28, 0, 131066, 28, 0, 131067, 28, 0, 131068, 48, 0, 131069, 4, 0, 131070, 4, 0, 131071, 4, 0, 65536, 4, 0, 65537, 4, 0, 65538, 51, 0, 65539, 28, 0, 65540, 28, 0, 65541, 28, 0, 65542, 28, 0, 65543, 28, 0, 65544, 28, 0, 65545, 28, 0, 65546, 28, 0, 65547, 28, 0, 65548, 28, 0, 65549, 28, 0, 65550, 28, 0, 65551, 28, 0, 65552, 28, 0, 65553, 28, 0, 65554, 28, 0, 65555, 28, 0, 65556, 28, 0, 65557, 28, 0, 65558, 28, 0, 65559, 28, 0, 65560, 28, 0, 65561, 28, 0, 65562, 28, 0, 65563, 28, 0, 65564, 28, 0, 65565, 28, 0, 65566, 28, 0, 65567, 28, 0, 65568, 28, 0, 65569, 28, 0, 65570, 28, 0, 65571, 28, 0, 65572, 28, 0, 65573, 28, 0, 65574, 28, 0, 65575, 28, 0, 65576, 28, 0, 65577, 28, 0, 65578, 11, 0, 196569, 10, 0, 196570, 8, 0, 196571, 8, 0, 196572, 8, 0, 196573, 8, 0, 196574, 8, 0, 196575, 8, 0, 196576, 8, 0, 196577, 8, 0, 196578, 8, 0, 196579, 8, 0, 196580, 8, 0, 196581, 8, 0, 196582, 8, 0, 196583, 8, 0, 196584, 8, 0, 196585, 8, 0, 196586, 8, 0, 196587, 8, 0, 196588, 8, 0, 196589, 8, 0, 196590, 8, 0, 196591, 8, 0, 196592, 8, 0, 196593, 8, 0, 196594, 8, 0, 196595, 8, 0, 196596, 8, 0, 196597, 8, 0, 196598, 8, 0, 196599, 8, 0, 196600, 8, 0, 196601, 8, 0, 196602, 8, 0, 196603, 8, 0, 196604, 8, 0, 196605, 8, 0, 196606, 8, 0, 196607, 8, 0, 131072, 8, 0, 131073, 8, 0, 131074, 8, 0, 131075, 8, 0, 131076, 8, 0, 131077, 8, 0, 131078, 8, 0, 131079, 8, 0, 131080, 8, 0, 131081, 8, 0, 131082, 8, 0, 131083, 8, 0, 131084, 8, 0, 131085, 8, 0, 131086, 8, 0, 131087, 8, 0, 131088, 8, 0, 131089, 8, 0, 131090, 8, 0, 131091, 8, 0, 131092, 8, 0, 131093, 8, 0, 131094, 8, 0, 131095, 8, 0, 131096, 8, 0, 131097, 8, 0, 131098, 8, 0, 131099, 8, 0, 131100, 8, 0, 131101, 8, 0, 131102, 8, 0, 131103, 8, 0, 131104, 8, 0, 131105, 8, 0, 131106, 8, 0, 131107, 8, 0, 131108, 8, 0, 131109, 8, 0, 131110, 8, 0, 131111, 8, 0, 131112, 8, 0, 131113, 8, 0, 131114, 9, 0 )
+
+[node name="Props" type="TileMap" parent="Environment"]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -131109, 0, 0, -131100, 0, 0, -131092, 0, 0, -131082, 0, 0, -65573, 0, 0, -65564, 0, 0, -65556, 0, 0, -65546, 0, 0, -37, 0, 0, -28, 0, 0, -20, 0, 0, -10, 0, 0, 65499, 0, 0, 65508, 0, 0, 65516, 0, 0, 65526, 0, 0 )
+
+[node name="PassThrough" type="TileMap" parent="Environment"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 32
+collision_mask = 78
+format = 1
+tile_data = PoolIntArray( -131109, 0, 0, -131108, 0, 0, -131107, 0, 0, -131106, 0, 0, -131105, 0, 0, -131104, 0, 0, -131103, 0, 0, -131102, 0, 0, -131101, 0, 0, -131100, 0, 0, -131099, 0, 0, -131098, 0, 0, -131097, 0, 0, -131096, 0, 0, -131095, 0, 0, -131094, 0, 0, -131093, 0, 0, -131092, 0, 0, -131091, 0, 0, -131090, 0, 0, -131089, 0, 0, -131088, 0, 0, -131087, 0, 0, -131086, 0, 0, -131085, 0, 0, -131084, 0, 0, -131083, 0, 0, -131082, 0, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -131078, 0, 0, -131077, 0, 0 )
+
+[node name="ladder" parent="Environment" instance=ExtResource( 15 )]
+position = Vector2( -152, -16 )
+levels = 4
+
+[node name="ladder2" parent="Environment" instance=ExtResource( 15 )]
+position = Vector2( -312, -16 )
+levels = 4
+
+[node name="ladder3" parent="Environment" instance=ExtResource( 15 )]
+position = Vector2( -440, -16 )
+levels = 4
+
+[node name="ladder4" parent="Environment" instance=ExtResource( 15 )]
+position = Vector2( -584, -16 )
+levels = 4
+
+[node name="buyDropper" parent="Environment" instance=ExtResource( 20 )]
+position = Vector2( 543.026, -41.5774 )
+
+[node name="buyTerminal" parent="Environment/buyDropper" instance=ExtResource( 19 )]
+position = Vector2( -40.4578, 52.6503 )
+
+[node name="movableBox" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 597.152, 6.73666 )
+
+[node name="movableBox2" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 610.449, 7.11123 )
+
+[node name="movableBox3" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 597.901, -8.24642 )
+
+[node name="movableBox4" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 611.573, -6.18624 )
+
+[node name="movableBox5" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 624.87, 7.86039 )
+
+[node name="movableBox6" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 581.981, 7.11123 )
+
+[node name="movableBox7" parent="Environment" instance=ExtResource( 21 )]
+position = Vector2( 606.142, -23.0422 )
+
+[node name="ExpolosiveBarrel" parent="Environment" instance=ExtResource( 22 )]
+position = Vector2( 667.825, 3.31922 )
+
+[node name="doorKey" parent="Environment" instance=ExtResource( 24 )]
+position = Vector2( -56.9527, -66.2331 )
+
+[node name="doorSwitch" parent="Environment/doorKey" instance=ExtResource( 25 )]
+position = Vector2( 17.1176, 18.24 )
+needsKey = true
+
+[node name="DeathBox" parent="Environment" instance=ExtResource( 26 )]
+position = Vector2( -985.399, 62.0767 )
+scale = Vector2( 5.21091, -1.2596 )
+
+[node name="DeathBox2" parent="Environment" instance=ExtResource( 26 )]
+position = Vector2( 1051.3, 66.4415 )
+scale = Vector2( 5.21091, -1.2596 )
+
+[node name="Mobs" type="Node" parent="."]
+
+[node name="Blob" parent="Mobs" instance=ExtResource( 3 )]
+position = Vector2( -556.628, -8.00902 )
+
+[node name="RedBlob" parent="Mobs" instance=ExtResource( 2 )]
+position = Vector2( -404.456, -12.681 )
+
+[node name="meleeRobot" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -249.615, -2.00226 )
+
+[node name="RangedRobo" parent="Mobs" instance=ExtResource( 5 )]
+position = Vector2( -99.4456, 6.49018 )
+
+[node name="Items" type="Node" parent="."]
+
+[node name="keyCard" parent="Items" instance=ExtResource( 18 )]
+position = Vector2( 78.0546, -33.3983 )
+
+[node name="healthPack" parent="Items" instance=ExtResource( 17 )]
+position = Vector2( 453.949, 5.43863 )
+
+[node name="shieldCell" parent="Items" instance=ExtResource( 16 )]
+position = Vector2( 438.319, 6.29641 )
+
+[node name="Character" parent="." instance=ExtResource( 12 )]
+position = Vector2( 137.556, 2.5 )
+maxHP = 2000
+
+[node name="Gun" parent="." instance=ExtResource( 13 )]
+position = Vector2( 173.729, 9.21424 )
+
+[node name="MiniGun" parent="." instance=ExtResource( 10 )]
+position = Vector2( 406.086, 12.2933 )
+
+[node name="RailGun" parent="." instance=ExtResource( 7 )]
+position = Vector2( 212.318, 12.8749 )
+
+[node name="PulseCannon" parent="." instance=ExtResource( 11 )]
+position = Vector2( 262.899, 11.7538 )
+
+[node name="RocketLauncher" parent="." instance=ExtResource( 9 )]
+position = Vector2( 360.776, 6.17728 )
+
+[node name="GrenadeLauncher" parent="." instance=ExtResource( 8 )]
+position = Vector2( 315.991, 11.0115 )

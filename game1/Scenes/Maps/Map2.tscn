@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
+[ext_resource path="res://Resources/TileSets/passthrough.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/Sprites/interactables/doors.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Misc/LevelComplete.tscn" type="PackedScene" id=5]
+
+[node name="Map2" type="Node"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Floor" type="TileMap" parent="Environment"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_mask = 15
+format = 1
+tile_data = PoolIntArray( 131066, 3, 0, 131067, 3, 0, 131068, 3, 0, 131069, 3, 0, 131070, 3, 0, 131071, 3, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 3, 0, 65540, 3, 0, 65541, 3, 0, 65542, 3, 0, 65543, 3, 0, 65544, 3, 0, 65545, 3, 0, 65546, 3, 0 )
+
+[node name="Passthrough" type="TileMap" parent="Environment"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 32
+collision_mask = 14
+format = 1
+
+[node name="Door" type="Sprite" parent="Environment"]
+position = Vector2( 0.147066, 2.35317 )
+texture = ExtResource( 4 )
+
+[node name="Mobs" type="Node" parent="."]
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Character" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0.0625496, 1.8167 )
+
+[node name="LevelComplete" parent="." instance=ExtResource( 5 )]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/mobs/RedBlob.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Sprites/characters/redBlob.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 4.53877
+height = 6.67181
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 160.0
+
+[node name="RedBlob" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource( 2 )
+damage = 25
+hp = 200
+speed = 70
+patrolRange = 100
+coinsDropped = 2
+turretTurn = 8.0
+fireRate = 1.0
+bulletSpeed = 200
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.476311, 0.416771 )
+shape = SubResource( 4 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 4.981, -3.468 )
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="FireRate" type="Timer" parent="."]
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 5 )
+
+[node name="Turret" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 3 )
+offset = Vector2( 3, 0 )
+hframes = 3
+frame = 2
+
+[node name="bulletpoint" type="Position2D" parent="Turret"]
+position = Vector2( 6.93744, -0.0271237 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 1 )]
+margin_left = -11.336
+margin_top = -10.4555
+margin_right = -11.336
+margin_bottom = -10.4555
+rect_scale = Vector2( 0.2, 0.1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+process_parent = true
+physics_process_parent = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]
+[connection signal="body_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_body_exited"]

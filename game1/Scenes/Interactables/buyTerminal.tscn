@@ -1,0 +1,513 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Resources/Sprites/interactables/buyStation.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Interactables/buyTerminal.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Interactables/buyWindow.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/UI/usePrompt.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Resources/Sprites/StatusBars/buyWindowBorder.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Sprites/Items/items.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Resources/Sprites/Buttons/buyMenuButtonsAdd.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Sprites/Buttons/buyMenuButtonsAdd2.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Sprites/Buttons/buyMenuButtonsBuy2.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Sprites/Buttons/buyMenuButtonsBuy.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.01835, 4.01997 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 8 )
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("buyWindow/Window:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 180.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("buyWindow/Window:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 170.08 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("buyWindow/Window:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("buyWindow/Window:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 180.0, 10.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("buyWindow/Window:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 170.08, -0.920013 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("buyWindow/Window:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("buyWindow/Window:margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 180.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("buyWindow/Window:margin_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0799866, 170.08 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("buyWindow/Window:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="buyTerminal" type="Area2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = -4
+texture = ExtResource( 1 )
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -5.01738 )
+shape = SubResource( 1 )
+
+[node name="buyWindow" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource( 4 )
+
+[node name="buttonEffects" type="AudioStreamPlayer2D" parent="buyWindow"]
+pause_mode = 2
+
+[node name="Window" type="Control" parent="buyWindow"]
+visible = false
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 20.0
+margin_top = 180.0
+margin_right = 0.159973
+margin_bottom = 170.08
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="buyWindow/Window"]
+margin_right = 280.0
+margin_bottom = 160.0
+color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="buyWindow/Window"]
+margin_left = 10.0
+margin_top = 9.78978
+margin_right = 270.0
+margin_bottom = 149.79
+color = Color( 0.00784314, 0.854902, 0.847059, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunImage" type="Sprite" parent="buyWindow/Window"]
+position = Vector2( 44.2603, 30.6627 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Sprite2" type="Sprite" parent="buyWindow/Window"]
+position = Vector2( 140, 65 )
+texture = ExtResource( 6 )
+
+[node name="Sprite3" type="Sprite" parent="buyWindow/Window"]
+position = Vector2( 171.229, 32.9215 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 208, 0, 16, 16 )
+
+[node name="Sprite4" type="Sprite" parent="buyWindow/Window"]
+position = Vector2( 41.6723, 87.8255 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="ShieldImage" type="Sprite" parent="buyWindow/Window"]
+position = Vector2( 170.969, 90.4357 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="Sprite6" type="Sprite" parent="buyWindow/Window"]
+position = Vector2( 24.0049, 135.598 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 16, 16 )
+
+[node name="GunText" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 65.0968
+margin_top = 4.92
+margin_right = 40.0968
+margin_bottom = 113.68
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Gun:
+-Damage 50
+-Fast Firerate
+-10 round clip
+
+
+30 gold"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 182.807
+margin_top = 4.92
+margin_right = 170.807
+margin_bottom = 92.68
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Ammo:
+-Restores one clip of the current weapon
+
+
+5 gold"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 65.0968
+margin_top = 62.1
+margin_right = 31.0968
+margin_bottom = 170.86
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Health Pack:
+-Fully Heals
+-One time use
+
+
+
+10 gold"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldText" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 182.807
+margin_top = 62.1
+margin_right = 148.807
+margin_bottom = 65.14
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Shield Cell:
+-Fully Shields
+-One time use
+-Shields slowly recharge
+
+
+10 gold"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunQuantity" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 9.15073
+margin_top = 42.3676
+margin_right = -113.849
+margin_bottom = -80.5924
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Quantity: 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoQuantity" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 137.64
+margin_top = 41.92
+margin_right = 43.64
+margin_bottom = -81.04
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Quantity: 5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthQuantity" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 9.64
+margin_top = 95.92
+margin_right = -86.36
+margin_bottom = -27.04
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Quantity: 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldQuantity" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 137.64
+margin_top = 95.92
+margin_right = 43.64
+margin_bottom = -27.04
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Quantity: 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="moneyText" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 12.3468
+margin_top = 124.153
+margin_right = -21.6532
+margin_bottom = 106.913
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "5"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cartItems" type="Label" parent="buyWindow/Window"]
+anchor_left = 0.062
+anchor_top = 0.063
+anchor_right = 0.937
+anchor_bottom = 0.944
+margin_left = 34.64
+margin_top = 117.983
+margin_right = 0.640015
+margin_bottom = 3.90399
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.0588235, 0.101961, 0.219608, 1 )
+text = "Items in Cart:"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunButton" type="TextureButton" parent="buyWindow/Window"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 109.408
+margin_top = 42.6976
+margin_right = -140.592
+margin_bottom = -104.302
+rect_scale = Vector2( 0.75, 0.75 )
+texture_normal = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoButton" type="TextureButton" parent="buyWindow/Window"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 229.083
+margin_top = 42.6976
+margin_right = -20.9174
+margin_bottom = -104.302
+rect_scale = Vector2( 0.75, 0.75 )
+texture_normal = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthButton" type="TextureButton" parent="buyWindow/Window"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 109.408
+margin_top = 100.096
+margin_right = -140.592
+margin_bottom = -46.9043
+rect_scale = Vector2( 0.75, 0.75 )
+texture_normal = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldButton" type="TextureButton" parent="buyWindow/Window"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 229.083
+margin_top = 100.096
+margin_right = -20.9174
+margin_bottom = -46.9043
+rect_scale = Vector2( 0.75, 0.75 )
+texture_normal = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyButton" type="TextureButton" parent="buyWindow/Window"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 229.083
+margin_top = 129.979
+margin_right = -20.9175
+margin_bottom = -177.021
+rect_scale = Vector2( 0.75, 0.75 )
+texture_normal = ExtResource( 12 )
+texture_hover = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 3 )
+anims/load = SubResource( 4 )
+anims/unload = SubResource( 5 )
+
+[node name="effects" type="AudioStreamPlayer2D" parent="."]
+volume_db = 2.0
+
+[node name="usePrompt" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -11.4572 )
+[connection signal="body_entered" from="." to="." method="_on_buyTerminal_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_buyTerminal_body_exited"]
+[connection signal="pressed" from="buyWindow/Window/GunButton" to="buyWindow" method="_on_GunButton_pressed"]
+[connection signal="pressed" from="buyWindow/Window/AmmoButton" to="buyWindow" method="_on_AmmoButton_pressed"]
+[connection signal="pressed" from="buyWindow/Window/HealthButton" to="buyWindow" method="_on_HealthButton_pressed"]
+[connection signal="pressed" from="buyWindow/Window/ShieldButton" to="buyWindow" method="_on_ShieldButton_pressed"]
+[connection signal="pressed" from="buyWindow/Window/BuyButton" to="buyWindow" method="_on_BuyButton_pressed"]

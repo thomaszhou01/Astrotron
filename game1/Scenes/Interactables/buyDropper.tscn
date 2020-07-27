@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Sprites/interactables/buyStation.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2.06175, 12.8163 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.95663, 12.8163 )
+
+[node name="buyDropper" type="StaticBody2D"]
+z_index = 4
+collision_layer = 2
+collision_mask = 2147483651
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 3
+frame = 1
+
+[node name="spawnPoint" type="Position2D" parent="."]
+position = Vector2( 0, 8.09363 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -16, 3.27755 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 16, 3.27755 )
+shape = SubResource( 2 )

@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Resources/Sprites/characters/blob.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Mobs/Blob.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Sprites/characters/dedblob.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 7, 8, -7, 8, -7, 7, 0, 0, 7, 7 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 7.66513, 4.75284 )
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 90.0
+
+[node name="Blob" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource( 2 )
+damage = 25
+hp = 100
+speed = 60
+patrolRange = 200
+coinsDropped = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 2.20435, 6.56907 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
+
+[node name="Pause" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="DamageTick" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BodyDetector" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyDetector"]
+position = Vector2( 0, 4.213 )
+shape = SubResource( 6 )
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 7 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+margin_left = -8.78397
+margin_top = -3.95256
+margin_right = -8.78397
+margin_bottom = -3.95256
+rect_scale = Vector2( 0.15, 0.1 )
+barColour = Color( 0.105882, 0.878431, 0.0980392, 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+process_parent = true
+physics_process_parent = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="timeout" from="Pause" to="." method="_on_Pause_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DamageTick" to="." method="_on_DamageTick_timeout"]
+[connection signal="body_entered" from="BodyDetector" to="." method="_on_BodyDetector_body_entered"]
+[connection signal="body_exited" from="BodyDetector" to="." method="_on_BodyDetector_body_exited"]
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]
+[connection signal="body_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_body_exited"]

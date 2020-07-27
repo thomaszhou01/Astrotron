@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Sprites/projectiles.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/bullet.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.43833
+height = 5.3399
+
+[node name="bullet" type="Area2D"]
+scale = Vector2( 0.75, 0.75 )
+collision_layer = 16
+collision_mask = 2147483682
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.0786142, -0.471682 )
+texture = ExtResource( 1 )
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.381787, -0.0491264 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.337979, -0.0818844 )
+scale = Vector2( 0.292394, 0.190872 )
+[connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

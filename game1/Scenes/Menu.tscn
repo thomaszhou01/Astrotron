@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Menu.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/Buttons/play1.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Sprites/back1.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Sprites/Buttons/play2.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Resources/Audio/Ambiant/dark fallout.ogg" type="AudioStream" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 5 )
+
+[node name="Menu" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 130, 90 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 134.022
+margin_top = 132.0
+margin_right = -133.978
+margin_bottom = -33.0
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 49.5874
+margin_top = 61.5874
+margin_right = -40.4126
+margin_bottom = -100.413
+custom_fonts/font = SubResource( 1 )
+text = "[Insert Game Name]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -3.0
+autoplay = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Mobs/RangedRobo.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/tank.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.22983, 5.01639 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 116.483
+
+[node name="RangedRobo" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="bulletpoint" type="Position2D" parent="."]
+position = Vector2( 12.464, -1.449 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 5.452, -4.951 )
+enabled = true
+cast_to = Vector2( 0, 10.331 )
+collision_mask = 2
+
+[node name="FireRate" type="Timer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 2 )
+[connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]
+[connection signal="body_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_body_exited"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Weapons/RocketLauncher.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.27823, 4.26457 )
+
+[node name="RocketLauncher" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 2
+sleeping = true
+can_sleep = false
+script = ExtResource( 1 )
+damage = 300
+bulletSprite = 4
+fireRate = 1.0
+bulletSpeed = 150
+bulletType = 2
+ammoPerClip = 3
+reloadTime = 3
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 16, 16 )
+
+[node name="hitBox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.334087 )
+shape = SubResource( 1 )
+
+[node name="bulletpoint" type="Position2D" parent="."]
+position = Vector2( 8.96467, -1.33635 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Reload" type="Timer" parent="."]
+one_shot = true
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Reload" to="." method="_on_Reload_timeout"]

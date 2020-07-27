@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Sprites/Items/items.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Items/shieldCell.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.05089, 4.86574 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.7138, 6.01478 )
+
+[node name="shieldCell" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 66
+can_sleep = false
+script = ExtResource( 2 )
+shield = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="shieldCell" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shieldCell"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="shieldCell" to="." method="_on_shieldCell_body_entered"]

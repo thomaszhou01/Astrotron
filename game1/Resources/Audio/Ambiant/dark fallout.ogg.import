@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dark fallout.ogg-24c83f3fa523bbe550bb0ad50a3cd748.oggstr"
+
+[deps]
+
+source_file="res://Resources/Audio/Ambiant/dark fallout.ogg"
+dest_files=[ "res://.import/dark fallout.ogg-24c83f3fa523bbe550bb0ad50a3cd748.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

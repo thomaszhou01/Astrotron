@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Pause.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/Buttons/resume2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/mainScript.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Sprites/Buttons/resume1.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Sprites/Buttons/quit2.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Sprites/Buttons/quit1.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Menu.tscn" type="PackedScene" id=9]
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Menu" parent="." instance=ExtResource( 9 )]
+
+[node name="Worlds" type="Node" parent="."]
+
+[node name="PauseTab" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Pause" type="Control" parent="PauseTab"]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseTab/Pause"]
+margin_left = -25.4004
+margin_top = -12.1735
+margin_right = 349.6
+margin_bottom = 196.826
+color = Color( 0, 0, 0, 0.313726 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="TextureButton" parent="PauseTab/Pause"]
+anchor_right = 8.0
+anchor_bottom = 4.5
+margin_left = 133.032
+margin_top = 63.1591
+margin_right = -134.968
+margin_bottom = -101.841
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 2 )
+
+[node name="Quit" type="TextureButton" parent="PauseTab/Pause"]
+anchor_right = 8.0
+anchor_bottom = 4.5
+margin_left = 133.454
+margin_top = 91.2952
+margin_right = -134.546
+margin_bottom = -73.7048
+texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 5 )
+
+[node name="CheckButton" type="CheckButton" parent="PauseTab/Pause"]
+margin_left = 129.547
+margin_top = 118.384
+margin_right = 246.547
+margin_bottom = 158.384
+rect_scale = Vector2( 0.5, 0.5 )
+pressed = true
+text = "Audio"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="PauseTab/Pause/Resume" to="PauseTab/Pause" method="_on_Resume_pressed"]
+[connection signal="pressed" from="PauseTab/Pause/Quit" to="PauseTab/Pause" method="_on_Quit_pressed"]
+[connection signal="pressed" from="PauseTab/Pause/CheckButton" to="PauseTab/Pause" method="_on_CheckButton_pressed"]

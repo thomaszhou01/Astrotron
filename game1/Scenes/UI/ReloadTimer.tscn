@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Sprites/StatusBars/healthBarBorderpng.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Sprites/StatusBars/healthBarBack.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Sprites/StatusBars/healthBar.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/UI/ReloadTimer.gd" type="Script" id=4]
+
+[node name="ReloadTimer" type="Control"]
+anchor_top = -0.006
+anchor_right = 0.109
+anchor_bottom = 0.022
+margin_top = 0.08
+margin_right = 35.12
+margin_bottom = 5.04
+rect_scale = Vector2( 0.4, 0.4 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadBar" type="TextureProgress" parent="."]
+margin_right = 70.0
+margin_bottom = 10.0
+step = 0.0
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Update" type="Tween" parent="."]

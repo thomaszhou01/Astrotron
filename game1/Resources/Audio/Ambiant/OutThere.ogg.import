@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OutThere.ogg-be5f0d58829e42683691f0ea82697f78.oggstr"
+
+[deps]
+
+source_file="res://Resources/Audio/Ambiant/OutThere.ogg"
+dest_files=[ "res://.import/OutThere.ogg-be5f0d58829e42683691f0ea82697f78.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

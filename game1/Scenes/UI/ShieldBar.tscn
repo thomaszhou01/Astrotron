@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Sprites/StatusBars/healthBar.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Sprites/StatusBars/healthBarBorderpng.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/UI/ShieldBar.gd" type="Script" id=4]
+
+[node name="ShieldBar" type="Control"]
+anchor_top = -0.006
+anchor_right = 0.219
+anchor_bottom = 0.05
+margin_top = 0.08
+margin_right = -0.0800018
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldUnder" type="TextureProgress" parent="."]
+margin_right = 70.0
+margin_bottom = 10.0
+texture_progress = ExtResource( 1 )
+tint_progress = Color( 0.929412, 0.254902, 0.254902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldBar" type="TextureProgress" parent="."]
+margin_right = 70.0
+margin_bottom = 10.0
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Update" type="Tween" parent="."]

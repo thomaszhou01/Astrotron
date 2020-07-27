@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/walking_on_metal.wav-b977c54dda88ca649ff215818f5dab90.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Player/walking_on_metal.wav"
+dest_files=[ "res://.import/walking_on_metal.wav-b977c54dda88ca649ff215818f5dab90.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

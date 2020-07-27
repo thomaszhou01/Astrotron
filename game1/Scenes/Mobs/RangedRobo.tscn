@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Mobs/RangedRobo.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/characters/tank.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.32021, 6.69814 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 100.0
+
+[node name="RangedRobo" type="KinematicBody2D"]
+position = Vector2( 0, -0.184029 )
+collision_layer = 8
+collision_mask = 11
+script = ExtResource( 1 )
+damage = 30
+hp = 300
+speed = 50
+patrolRange = 200
+coinsDropped = 2
+turretTurn = 4.0
+fireRate = 0.75
+bulletSpeed = 250
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0921364, -1.61925 )
+shape = SubResource( 1 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 6, -4.951 )
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 2
+
+[node name="FireRate" type="Timer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 2 )
+
+[node name="Turret" type="Sprite" parent="."]
+position = Vector2( 0, -4 )
+rotation = -1.5708
+texture = ExtResource( 2 )
+hframes = 2
+frame = 1
+
+[node name="bulletpoint" type="Position2D" parent="Turret"]
+position = Vector2( 9.141, -0.128 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
+margin_left = -11.815
+margin_top = -11.9651
+margin_right = -11.815
+margin_bottom = -11.9651
+rect_scale = Vector2( 0.2, 0.1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+process_parent = true
+physics_process_parent = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]
+[connection signal="body_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_body_exited"]
