@@ -1,6 +1,7 @@
 extends Node2D
 
 export (float) var dist
+export (bool) var autoStart
 var moveTo 
 var speed = 10
 var object = null
@@ -18,6 +19,8 @@ func _ready():
 	moveTo = Vector2.UP*dist
 	$platform/AnimatedSprite.play("idle")
 	buttonLight = 0
+	if autoStart:
+		goUp()
 	
 
 

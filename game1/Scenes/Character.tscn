@@ -380,7 +380,7 @@ inertia = 50
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 46
-frame = 20
+frame = 44
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.470533 )
