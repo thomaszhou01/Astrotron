@@ -13,6 +13,7 @@ var on_ground = false
 var doubleJump = false
 var init_pos
 var freeHand = true 
+var freeHand2 = true 
 var moving = false
 var animationDirRight = true
 var object = null
@@ -20,6 +21,8 @@ var can_fire = true
 var onLadder = false
 var alive
 var direction = 1
+var gun
+var gunHeld = 1
 onready var animationPlayer = $AnimationPlayer
 export var speed = 100  # How fast the player will move (pixels/sec).
 export var fire_rate = 0.2
@@ -74,8 +77,6 @@ func _process(delta):
 		else:
 			$UI/KeySprite.visible = false
 
-
-
 func mousePlace():
 	if get_viewport().get_mouse_position().x > (get_viewport_rect().size.x/2):
 		animationDirRight = true
@@ -83,11 +84,14 @@ func mousePlace():
 		animationDirRight = false
 
 func _input(event):
+	switchWeapon()
 	if Input.is_action_just_pressed("revive") && !alive:
 		SceneTransition.fadeIn()
 		yield(get_tree().create_timer(.5), "timeout")
 		set_global_position(Global.respawnLoc)
-		alive = true
+		SceneTransition.fadeOut()
+		
+		yield(get_tree().create_timer(.01), "timeout")
 		hp = maxHP*0.5
 		$UI/HealthBar.setHP(hp)
 		$statusText/DisplayHP.getValue(hp)
@@ -95,7 +99,18 @@ func _input(event):
 		$statusText/DeadMessage.visible_characters = 0
 		set_collision_layer_bit(0, true)
 		set_collision_layer_bit(1, false)
-		SceneTransition.fadeOut()
+		alive = true
+
+func switchWeapon():
+	print(gunHeld)
+	if Input.is_action_just_pressed("switchWeapon") && Global.gunID != null && Global.gunID2 != null:
+		if gunHeld == 1:
+			gunHeld = 2
+		elif gunHeld == 2:
+			gunHeld = 1
+		#make guns invisible if not main gun 
+		#make sure they cant be visible and not able to shoot
+
 
 func movement():
 	if Input.is_action_pressed("move_right") && abs(velocity.x) < speed:
@@ -184,6 +199,7 @@ func movement():
 		animationPlayer.play("RunRightLookLeft")
 
 func die():
+	alive = false 
 	hp = 0
 	shield = 0
 	velocity.x = 0
@@ -200,7 +216,6 @@ func die():
 		animationPlayer.play("DeadLeftLookLeft")
 	elif !animationDirRight && direction == 1:
 		animationPlayer.play("DeadRightLookLeft")
-	alive = false 
 	set_collision_layer_bit(0, false)
 	set_collision_layer_bit(1, true)
 	$statusText/DisplayText.start()
@@ -214,6 +229,7 @@ func handFree():
 	freeHand = true
 	$UI/AmmoBar.getMaxAmmo(0, 0)
 	$UI/ReloadTimer.setReload(0)
+
 
 func hit(damage, hitBy, knock, type):
 	if shield > 0 && shield >= damage:
@@ -268,16 +284,18 @@ func pickup():
 
 
 func _on_Area2D_body_entered(body):
-	
+	#fix the pickup method
 	if body.has_method("held") && freeHand:
 		object = body
-		Global.gunID = object.filename
-	
-	if body.has_method("held") && freeHand:
+		Global.gunID = object
 		object.held(self)
 		freeHand = false
 		$UI/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 		$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+	elif body.has_method("held") && Global.gunID != null && Global.gunID2 == null:
+		Global.gunID2 = body
+		print(Global.gunID2)
+		print(Global.gunID)
 	
 	if body.has_method("magnet"):
 		body.queue_free()

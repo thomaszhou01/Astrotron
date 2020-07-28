@@ -13,6 +13,7 @@ var ammo
 var reloading
 var parent
 var clipAmmo
+var used
 var originallyInScene = true
 export (int) var damage 
 export (int) var bulletSprite
@@ -30,6 +31,7 @@ func _ready():
 		ammo = ammoPerClip
 		clipAmmo = ammoPerClip * 3
 	reloading = false
+	used = false
 
 
 func _process(delta):
@@ -91,16 +93,19 @@ func _process(delta):
 		
 		
 		if Input.is_action_just_pressed("drop") && held:
-			get_parent().get_node("Character").handFree()
-			held = false
-			self.global_position.y = self.global_position.y - 5
-			$Sprite.offset.x = 0
-			$Reload.stop()
-			reloading = false
-			$hitBox.disabled = false
+			drop()
 	elif held && !parent.alive && reloading:
 		$Reload.stop()
 		reloading = false
+
+func drop():
+	get_parent().get_node("Character").handFree()
+	held = false
+	self.global_position.y = self.global_position.y - 5
+	$Sprite.offset.x = 0
+	$Reload.stop()
+	reloading = false
+	$hitBox.disabled = false
 
 func getReloadDuration():
 	return $Reload.get_time_left()

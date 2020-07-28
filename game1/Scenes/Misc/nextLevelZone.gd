@@ -18,7 +18,7 @@ func _on_nextLevelZone_body_entered(body):
 	if body.name == "Character":
 		var map = maps.instance()
 		if Global.gunID != null:
-			gun = load(Global.gunID)
+			gun = load(Global.gunID.filename)
 			var newGun = gun.instance()
 			map.add_child(newGun)
 			newGun.originallyInScene = false
@@ -27,5 +27,5 @@ func _on_nextLevelZone_body_entered(body):
 		SceneTransition.fadeIn()
 		yield(get_tree().create_timer(1), "timeout")
 		get_parent().get_parent().queue_free()
-		get_parent().get_parent().get_parent().get_parent().add_child(map)
+		get_parent().get_parent().get_parent().add_child(map)
 		SceneTransition.fadeOut()

@@ -7,4 +7,5 @@ var mobCount
 var kills
 var hasKey = false
 var gunID
+var gunID2
 var money = 0

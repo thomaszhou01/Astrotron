@@ -1,6 +1,6 @@
 extends Node
 
-# Declare member variables here. Examples:
+# Declare member variabls here. Examples:
 # var a = 2
 # var b = "text"
 

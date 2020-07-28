@@ -13,13 +13,13 @@ colors = PoolColorArray( 0.00784314, 0.545098, 0.854902, 1, 0.243137, 0.776471, 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.313636 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 1
 emission_sphere_radius = 1.5
 flag_disable_z = true
@@ -27,7 +27,7 @@ gravity = Vector3( -100, 100, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
 
 [sub_resource type="Gradient" id=7]
@@ -74,7 +74,7 @@ z_index = -2
 amount = 20
 lifetime = 0.1
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 
 [node name="Particles2D2" type="Particles2D" parent="platform"]
 position = Vector2( 13.3999, 4.37872 )
