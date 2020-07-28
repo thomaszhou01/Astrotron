@@ -44,6 +44,7 @@ func _ready():
 	Global.respawnLoc = get_global_transform().origin
 	Global.initialMobCount = get_parent().get_node("Mobs").get_child_count()
 	Global.mobCount = Global.initialMobCount
+	$UI/GunSprite.visible = false
 
 func _physics_process(_delta):
 	if alive:
@@ -70,7 +71,7 @@ func _process(delta):
 	if alive:
 		#pickup()
 		if !freeHand && object != null:
-			$UI/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 			$UI/ReloadTimer.setReload(object.reloadTime-object.getReloadDuration())
 		if Global.hasKey:
 			$UI/KeySprite.visible = true
@@ -102,12 +103,14 @@ func _input(event):
 		alive = true
 
 func switchWeapon():
-	print(gunHeld)
 	if Input.is_action_just_pressed("switchWeapon") && Global.gunID != null && Global.gunID2 != null:
+		print(gunHeld)
 		if gunHeld == 1:
 			gunHeld = 2
+			$UI/GunSprite.region_rect.position.x = Global.gunID2.getSprite()
 		elif gunHeld == 2:
 			gunHeld = 1
+			$UI/GunSprite.region_rect.position.x = object.getSprite()
 		#make guns invisible if not main gun 
 		#make sure they cant be visible and not able to shoot
 
@@ -227,8 +230,9 @@ func die():
 
 func handFree():
 	freeHand = true
-	$UI/AmmoBar.getMaxAmmo(0, 0)
+	$statusText/AmmoBar.getMaxAmmo(0, 0)
 	$UI/ReloadTimer.setReload(0)
+	$UI/GunSprite.visible = false
 
 
 func hit(damage, hitBy, knock, type):
@@ -279,7 +283,7 @@ func pickup():
 	if object != null && Input.is_action_just_pressed("use") && freeHand:
 		object.held(self)
 		freeHand = false
-		$UI/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+		$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 		$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
 
 
@@ -290,8 +294,10 @@ func _on_Area2D_body_entered(body):
 		Global.gunID = object
 		object.held(self)
 		freeHand = false
-		$UI/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+		$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 		$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+		$UI/GunSprite.visible = true
+		$UI/GunSprite.region_rect.position.x = object.getSprite()
 	elif body.has_method("held") && Global.gunID != null && Global.gunID2 == null:
 		Global.gunID2 = body
 		print(Global.gunID2)

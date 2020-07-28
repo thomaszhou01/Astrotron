@@ -109,3 +109,6 @@ func drop():
 
 func getReloadDuration():
 	return $Reload.get_time_left()
+
+func getSprite():
+	return ($Sprite.region_rect.position.x)

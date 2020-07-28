@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Resources/Sprites/characters/blue.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/UI/DisplayStat.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Resources/Audio/Player/walking_on_metal.wav" type="AudioStream" id=10]
+[ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.43497, 7.4996 )
@@ -467,6 +468,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AmmoBar" parent="statusText" instance=ExtResource( 5 )]
+margin_left = 1225.22
+margin_top = 100.288
+margin_right = 1162.02
+margin_bottom = 100.288
+text = "[0/0]"
+
 [node name="DisplayText" type="Timer" parent="statusText"]
 wait_time = 0.05
 
@@ -493,18 +501,11 @@ margin_bottom = 11.0874
 rect_scale = Vector2( 1, 0.7 )
 barColour = Color( 0.0431373, 0.176471, 0.886275, 1 )
 
-[node name="AmmoBar" parent="UI" instance=ExtResource( 5 )]
-margin_left = 255.887
-margin_top = -1.22225
-margin_right = 243.807
-margin_bottom = -1.22225
-text = "[0/0]"
-
 [node name="ReloadTimer" parent="UI" instance=ExtResource( 6 )]
-margin_left = 262.825
-margin_top = 20.1897
-margin_right = 262.745
-margin_bottom = 20.1097
+margin_left = 264.667
+margin_top = -2.44768
+margin_right = 349.787
+margin_bottom = 6.51232
 barColour = Color( 0.831373, 0.0470588, 0.0470588, 1 )
 
 [node name="KeySprite" type="Sprite" parent="UI"]
@@ -513,6 +514,13 @@ position = Vector2( 302.6, 36.2113 )
 texture = ExtResource( 7 )
 region_enabled = true
 region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="GunSprite" type="Sprite" parent="UI"]
+position = Vector2( 289.301, 10.277 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 10 )
