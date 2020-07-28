@@ -13,10 +13,10 @@ var on_ground = false
 var doubleJump = false
 var init_pos
 var freeHand = true 
-var freeHand2 = true 
 var moving = false
 var animationDirRight = true
 var object = null
+var object2 = null
 var can_fire = true 
 var onLadder = false
 var alive
@@ -70,9 +70,18 @@ func _process(delta):
 	$statusText/DisplayCoin.setCoin()
 	if alive:
 		#pickup()
-		if !freeHand && object != null:
-			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-			$UI/ReloadTimer.setReload(object.reloadTime-object.getReloadDuration())
+		if object != null || object2 != null:
+			if gunHeld == 1:
+				$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+				$UI/ReloadTimer.setReload(object.reloadTime-object.getReloadDuration())
+			elif gunHeld == 2:
+				$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
+				$UI/ReloadTimer.setReload(object2.reloadTime-object2.getReloadDuration())
+		else:
+			$statusText/AmmoBar.getMaxAmmo(0,0)
+			$UI/ReloadTimer.setReload(0)
+			$UI/GunSprite.visible = false
+			
 		if Global.hasKey:
 			$UI/KeySprite.visible = true
 		else:
@@ -104,12 +113,19 @@ func _input(event):
 
 func switchWeapon():
 	if Input.is_action_just_pressed("switchWeapon") && Global.gunID != null && Global.gunID2 != null:
-		print(gunHeld)
 		if gunHeld == 1:
+			object.notUsed()
+			object2.used()
 			gunHeld = 2
-			$UI/GunSprite.region_rect.position.x = Global.gunID2.getSprite()
+			$UI/GunSprite.region_rect.position.x = object2.getSprite()
+			$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
+			$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
 		elif gunHeld == 2:
+			object.used()
+			object2.notUsed()
 			gunHeld = 1
+			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
 			$UI/GunSprite.region_rect.position.x = object.getSprite()
 		#make guns invisible if not main gun 
 		#make sure they cant be visible and not able to shoot
@@ -229,10 +245,39 @@ func die():
 
 
 func handFree():
+	#randomly drops both weapons unwanted
 	freeHand = true
-	$statusText/AmmoBar.getMaxAmmo(0, 0)
-	$UI/ReloadTimer.setReload(0)
-	$UI/GunSprite.visible = false
+	if freeHand:
+		if object != null && object2 != null:
+			print(object.held)
+			print(object2.held)
+			if gunHeld == 1:
+				object.notUsed()
+				object = null
+				Global.gunID = null
+				gunHeld = 2
+				object2.used()
+				$UI/GunSprite.region_rect.position.x = object2.getSprite()
+				$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
+				$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
+			elif gunHeld == 2:
+				object2.notUsed()
+				object2 = null
+				Global.gunID2 = null
+				gunHeld = 1
+				object.used()
+				$UI/GunSprite.region_rect.position.x = object.getSprite()
+				$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+				$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+		else:
+			if gunHeld == 1:
+				object = null
+				Global.gunID = null
+				gunHeld = 1
+			elif gunHeld == 2:
+				object2 = null
+				Global.gunID2 = null
+				gunHeld = 1
 
 
 func hit(damage, hitBy, knock, type):
@@ -290,19 +335,32 @@ func pickup():
 func _on_Area2D_body_entered(body):
 	#fix the pickup method
 	if body.has_method("held") && freeHand:
-		object = body
-		Global.gunID = object
-		object.held(self)
-		freeHand = false
-		$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-		$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
-		$UI/GunSprite.visible = true
-		$UI/GunSprite.region_rect.position.x = object.getSprite()
-	elif body.has_method("held") && Global.gunID != null && Global.gunID2 == null:
-		Global.gunID2 = body
-		print(Global.gunID2)
-		print(Global.gunID)
-	
+		#change the changing of objects to the drop function
+		if Global.gunID == null && Global.gunID2 == null:
+			print("a")
+			object = body
+			Global.gunID = object
+			object.held(self)
+			object.used()
+			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+			$UI/GunSprite.visible = true
+			$UI/GunSprite.region_rect.position.x = object.getSprite()
+		elif Global.gunID != null && Global.gunID2 == null:
+			print("b")
+			object2 = body
+			Global.gunID2 = object2
+			object2.held(self)
+			freeHand = false
+			object2.notUsed()
+		elif Global.gunID == null && Global.gunID2 != null:
+			print("c")
+			object = body
+			Global.gunID = object
+			object.held(self)
+			freeHand = false
+			object.notUsed()
+		
 	if body.has_method("magnet"):
 		body.queue_free()
 		Global.money += 1
@@ -312,9 +370,7 @@ func _on_Area2D_body_entered(body):
 
 #Object suddenly becomes null
 func _on_Area2D_body_exited(body):
-	if body.has_method("held") && freeHand:
-		object = null
-		Global.gunID = null
+	pass
 
 
 func _on_ShieldCharge_timeout():

@@ -49,7 +49,7 @@ func _process(delta):
 	elif held && !parent.alive:
 		self.position = parent.get_node("holdPoint").global_position
 	
-	if held && parent.alive:
+	if held && parent.alive && used:
 		#Reload
 		if (Input.is_action_just_pressed("reload") || (Input.is_action_pressed("fire") && ammo == 0)) && held && ammo != ammoPerClip && $Reload.get_time_left() == 0 && clipAmmo != 0:
 			reloading = true
@@ -92,23 +92,40 @@ func _process(delta):
 		
 		
 		
-		if Input.is_action_just_pressed("drop") && held:
-			drop()
 	elif held && !parent.alive && reloading:
 		$Reload.stop()
 		reloading = false
 
+func _input(event):
+	if held && parent.alive:
+		if Input.is_action_just_pressed("drop") && held && used:
+			drop()
+
+
+
 func drop():
-	get_parent().get_node("Character").handFree()
 	held = false
+	get_parent().get_node("Character").handFree()
 	self.global_position.y = self.global_position.y - 5
 	$Sprite.offset.x = 0
 	$Reload.stop()
 	reloading = false
 	$hitBox.disabled = false
+	$Sprite.visible = true
+	used = false
 
 func getReloadDuration():
 	return $Reload.get_time_left()
 
 func getSprite():
 	return ($Sprite.region_rect.position.x)
+
+func notUsed():
+	used = false
+	$Sprite.visible = false
+	$Reload.stop()
+	reloading = false
+
+func used():
+	used = true
+	$Sprite.visible = true
