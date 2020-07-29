@@ -712,7 +712,7 @@ tracks/9/keys = {
 
 [node name="meleeRobot" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 2147483659
+collision_mask = 2147483691
 script = ExtResource( 1 )
 damage = 75
 hp = 300
@@ -795,7 +795,7 @@ shape = SubResource( 4 )
 position = Vector2( 6.68585, -3.76694 )
 enabled = true
 cast_to = Vector2( 0, 20 )
-collision_mask = 2
+collision_mask = 34
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RunRight"

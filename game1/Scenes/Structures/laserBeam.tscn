@@ -28,6 +28,7 @@ offset = Vector2( 0, -8 )
 [node name="Laser" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 100, 0 )
+collision_mask = 3
 
 [node name="End" type="Position2D" parent="."]
 position = Vector2( 100, 0 )

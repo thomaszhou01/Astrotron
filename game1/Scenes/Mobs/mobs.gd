@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const gravity = 50
+const gravity = 10
 const FLOOR = Vector2.UP
 const inertia = 50
 var bullet = preload("res://Scenes/bullet.tscn")

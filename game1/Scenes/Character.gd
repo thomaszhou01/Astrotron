@@ -95,7 +95,8 @@ func mousePlace():
 		animationDirRight = false
 
 func _input(event):
-	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null:
+	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null && alive:
+		yield(get_tree(), "idle_frame")
 		switchWeapon()
 	if Input.is_action_just_pressed("revive") && !alive:
 		SceneTransition.fadeIn()
@@ -245,36 +246,34 @@ func die():
 
 func handFree():
 	#fixed with yield in gunphysics 
-	if canDrop:
-		if object != null && object2 != null:
-			if gunHeld == 1:
-				object.notUsed()
-				object = null
-				Global.gunID = null
-				gunHeld = 2
-				object2.used()
-				$UI/GunSprite.region_rect.position.x = object2.getSprite()
-				$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
-				$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
-			elif gunHeld == 2:
-				object2.notUsed()
-				object2 = null
-				Global.gunID2 = null
-				gunHeld = 1
-				object.used()
-				$UI/GunSprite.region_rect.position.x = object.getSprite()
-				$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-				$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
-		else:
-			if gunHeld == 1:
-				object = null
-				Global.gunID = null
-				gunHeld = 1
-			elif gunHeld == 2:
-				object2 = null
-				Global.gunID2 = null
-				gunHeld = 1
-	
+	if object != null && object2 != null:
+		if gunHeld == 1:
+			object.notUsed()
+			object = null
+			Global.gunID = null
+			gunHeld = 2
+			object2.used()
+			$UI/GunSprite.region_rect.position.x = object2.getSprite()
+			$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
+			$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
+		elif gunHeld == 2:
+			object2.notUsed()
+			object2 = null
+			Global.gunID2 = null
+			gunHeld = 1
+			object.used()
+			$UI/GunSprite.region_rect.position.x = object.getSprite()
+			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+	else:
+		if gunHeld == 1:
+			object = null
+			Global.gunID = null
+			gunHeld = 1
+		elif gunHeld == 2:
+			object2 = null
+			Global.gunID2 = null
+			gunHeld = 1
 	freeHand = true
 
 
@@ -291,13 +290,13 @@ func hit(damage, hitBy, knock, type):
 	if shield == 0:
 		$ShieldCharge.stop()
 	
-	if knock:
+	if knock && alive:
 		if type == 0:
 			velocity = knockback * hitBy.velocity.normalized()
 		elif type == 1:
 			velocity = knockback * (position - hitBy.position).normalized()
 	
-	if hp <= 0:
+	if hp <= 0 && alive:
 		die()
 	$UI/HealthBar.setHP(hp)
 	$UI/ShieldBar.setShield(shield)
@@ -334,27 +333,28 @@ func _on_Area2D_body_entered(body):
 	#fix the pickup method
 	if body.has_method("held") && freeHand:
 		#change the changing of objects to the drop function
-		if object == null && object2 == null:
-			object = body
-			Global.gunID = object
-			object.held(self)
-			object.used()
-			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
-			$UI/GunSprite.visible = true
-			$UI/GunSprite.region_rect.position.x = object.getSprite()
-		elif object != null && object2 == null:
-			object2 = body
-			Global.gunID2 = object2
-			object2.held(self)
-			freeHand = false
-			object2.notUsed()
-		elif object == null && object2 != null:
-			object = body
-			Global.gunID = object
-			object.held(self)
-			freeHand = false
-			object.notUsed()
+		if object != body && object2 != body:
+			if object == null && object2 == null:
+				object = body
+				Global.gunID = object
+				object.held(self)
+				object.used()
+				$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+				$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+				$UI/GunSprite.visible = true
+				$UI/GunSprite.region_rect.position.x = object.getSprite()
+			elif object != null && object2 == null:
+				object2 = body
+				Global.gunID2 = object2
+				object2.held(self)
+				freeHand = false
+				object2.notUsed()
+			elif object == null && object2 != null:
+				object = body
+				Global.gunID = object
+				object.held(self)
+				freeHand = false
+				object.notUsed()
 		
 	if body.has_method("magnet"):
 		body.queue_free()

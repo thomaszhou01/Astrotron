@@ -29,7 +29,7 @@ radius = 160.0
 
 [node name="RedBlob" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 43
 script = ExtResource( 2 )
 damage = 25
 hp = 200
@@ -51,7 +51,7 @@ shape = SubResource( 4 )
 position = Vector2( 4.981, -3.468 )
 enabled = true
 cast_to = Vector2( 0, 20 )
-collision_mask = 2
+collision_mask = 34
 
 [node name="Timer" type="Timer" parent="."]
 

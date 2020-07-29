@@ -2,11 +2,13 @@ extends Area2D
 
 var object
 export (int) var levels
+export (int) var width
 
 
 #get tileset tile to be ladder 4head
 func _ready():
 	$CollisionShape2D.shape.extents.y = levels * 8
+	$CollisionShape2D.shape.extents.x = (width+1) * 8
 
 
 func _input(_event):

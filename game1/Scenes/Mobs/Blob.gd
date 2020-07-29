@@ -86,7 +86,7 @@ func detect():
 	var result = space_state.intersect_ray(position, target.position, [self], collision_mask)
 	if result:
 		hitPos = result.position
-		#update()
+		update()
 		if result.collider.name == "Character":
 			chase()
 			detected = true

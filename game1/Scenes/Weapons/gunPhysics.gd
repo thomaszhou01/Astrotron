@@ -100,7 +100,8 @@ func _input(event):
 	if held && parent.alive:
 		if Input.is_action_just_pressed("drop") && held && used:
 			#used yield to solve problem
-			yield(get_tree().create_timer(.05), "timeout")
+			yield(get_tree(), "idle_frame")
+			yield(get_tree(), "idle_frame")
 			drop()
 
 

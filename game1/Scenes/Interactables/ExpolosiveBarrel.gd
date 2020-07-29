@@ -3,6 +3,7 @@ extends RigidBody2D
 
 export (int) var maxHP
 export (int) var damage
+export (int) var type
 var hp
 var primed 
 
@@ -10,6 +11,10 @@ var primed
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hp = maxHP
+	if type == 0:
+		$AnimatedSprite.play("default")
+	elif type == 1:
+		$AnimatedSprite.play("redCell")
 
 func _process(delta):
 	if $AnimatedSprite.get_frame() == 8:

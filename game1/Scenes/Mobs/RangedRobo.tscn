@@ -13,10 +13,10 @@ radius = 100.0
 [node name="RangedRobo" type="KinematicBody2D"]
 position = Vector2( 0, -0.184029 )
 collision_layer = 8
-collision_mask = 11
+collision_mask = 43
 script = ExtResource( 1 )
 damage = 30
-hp = 300
+hp = 150
 speed = 50
 patrolRange = 200
 coinsDropped = 2
@@ -36,7 +36,7 @@ shape = SubResource( 1 )
 position = Vector2( 6, -4.951 )
 enabled = true
 cast_to = Vector2( 0, 20 )
-collision_mask = 2
+collision_mask = 34
 
 [node name="FireRate" type="Timer" parent="."]
 
