@@ -19,14 +19,14 @@ bulletSpeed = 500
 ammoPerClip = 10
 reloadTime = 2
 
-[node name="hitBox" type="CollisionShape2D" parent="."]
-position = Vector2( 0.015235, -0.0698052 )
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="hitBox" type="CollisionShape2D" parent="."]
+position = Vector2( 0.015235, -0.0698052 )
+shape = SubResource( 1 )
 
 [node name="bulletpoint" type="Position2D" parent="."]
 position = Vector2( 11, -0.5 )

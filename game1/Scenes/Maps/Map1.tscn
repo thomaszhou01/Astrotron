@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Resources/TileSets/Props.tres" type="TileSet" id=22]
 [ext_resource path="res://Scenes/Interactables/Chest.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Interactables/elevatorButton.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Weapons/RailGun.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Interactables/movableBox.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Interactables/ExpolosiveBarrel.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Resources/TileSets/passthrough.tres" type="TileSet" id=28]
@@ -333,6 +334,9 @@ position = Vector2( 2377.62, 1517.87 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2391.54, 1528.9 )
+
+[node name="RailGun" parent="." instance=ExtResource( 25 )]
+position = Vector2( 2415.54, 1524.68 )
 
 [node name="DisplayTextArea" parent="." instance=ExtResource( 31 )]
 position = Vector2( -70.9058, 133.447 )

@@ -10,13 +10,36 @@ var gun
 func _input(event):
 	if Input.is_action_just_pressed("use") && object != null:
 		var map = maps.instance()
-		if Global.gunID != null:
-			gun = load(Global.gunID)
-			var newGun = gun.instance()
-			map.add_child(newGun)
-			newGun.originallyInScene = false
-			newGun.ammo = object.object.ammo
-			newGun.clipAmmo = object.object.clipAmmo
+		if object.gunHeld == 1:
+			if Global.gunID != null:
+				gun = load(Global.gunID.filename)
+				var newGun = gun.instance()
+				map.add_child(newGun)
+				newGun.originallyInScene = false
+				newGun.ammo = object.object.ammo
+				newGun.clipAmmo = object.object.clipAmmo
+			if Global.gunID2 != null:
+				gun = load(Global.gunID2.filename)
+				var newGun = gun.instance()
+				map.add_child(newGun)
+				newGun.originallyInScene = false
+				newGun.ammo = object.object2.ammo
+				newGun.clipAmmo = object.object2.clipAmmo
+		elif object.gunHeld == 2:
+			if Global.gunID2 != null:
+				gun = load(Global.gunID2.filename)
+				var newGun = gun.instance()
+				map.add_child(newGun)
+				newGun.originallyInScene = false
+				newGun.ammo = object.object2.ammo
+				newGun.clipAmmo = object.object2.clipAmmo
+			if Global.gunID != null:
+				gun = load(Global.gunID.filename)
+				var newGun = gun.instance()
+				map.add_child(newGun)
+				newGun.originallyInScene = false
+				newGun.ammo = object.object.ammo
+				newGun.clipAmmo = object.object.clipAmmo
 		SceneTransition.fadeIn()
 		yield(get_tree().create_timer(1), "timeout")
 		get_parent().get_parent().queue_free()

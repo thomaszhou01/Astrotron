@@ -23,6 +23,7 @@ var alive
 var direction = 1
 var gun
 var gunHeld = 1
+var canDrop = true
 onready var animationPlayer = $AnimationPlayer
 export var speed = 100  # How fast the player will move (pixels/sec).
 export var fire_rate = 0.2
@@ -94,7 +95,8 @@ func mousePlace():
 		animationDirRight = false
 
 func _input(event):
-	switchWeapon()
+	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null:
+		switchWeapon()
 	if Input.is_action_just_pressed("revive") && !alive:
 		SceneTransition.fadeIn()
 		yield(get_tree().create_timer(.5), "timeout")
@@ -112,23 +114,20 @@ func _input(event):
 		alive = true
 
 func switchWeapon():
-	if Input.is_action_just_pressed("switchWeapon") && Global.gunID != null && Global.gunID2 != null:
-		if gunHeld == 1:
-			object.notUsed()
-			object2.used()
-			gunHeld = 2
-			$UI/GunSprite.region_rect.position.x = object2.getSprite()
-			$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
-			$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
-		elif gunHeld == 2:
-			object.used()
-			object2.notUsed()
-			gunHeld = 1
-			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
-			$UI/GunSprite.region_rect.position.x = object.getSprite()
-		#make guns invisible if not main gun 
-		#make sure they cant be visible and not able to shoot
+	if gunHeld == 1:
+		object.notUsed()
+		object2.used()
+		gunHeld = 2
+		$UI/GunSprite.region_rect.position.x = object2.getSprite()
+		$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
+		$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
+	elif gunHeld == 2:
+		object.used()
+		object2.notUsed()
+		gunHeld = 1
+		$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+		$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+		$UI/GunSprite.region_rect.position.x = object.getSprite()
 
 
 func movement():
@@ -245,12 +244,9 @@ func die():
 
 
 func handFree():
-	#randomly drops both weapons unwanted
-	freeHand = true
-	if freeHand:
+	#fixed with yield in gunphysics 
+	if canDrop:
 		if object != null && object2 != null:
-			print(object.held)
-			print(object2.held)
 			if gunHeld == 1:
 				object.notUsed()
 				object = null
@@ -278,6 +274,8 @@ func handFree():
 				object2 = null
 				Global.gunID2 = null
 				gunHeld = 1
+	
+	freeHand = true
 
 
 func hit(damage, hitBy, knock, type):
@@ -336,8 +334,7 @@ func _on_Area2D_body_entered(body):
 	#fix the pickup method
 	if body.has_method("held") && freeHand:
 		#change the changing of objects to the drop function
-		if Global.gunID == null && Global.gunID2 == null:
-			print("a")
+		if object == null && object2 == null:
 			object = body
 			Global.gunID = object
 			object.held(self)
@@ -346,15 +343,13 @@ func _on_Area2D_body_entered(body):
 			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
 			$UI/GunSprite.visible = true
 			$UI/GunSprite.region_rect.position.x = object.getSprite()
-		elif Global.gunID != null && Global.gunID2 == null:
-			print("b")
+		elif object != null && object2 == null:
 			object2 = body
 			Global.gunID2 = object2
 			object2.held(self)
 			freeHand = false
 			object2.notUsed()
-		elif Global.gunID == null && Global.gunID2 != null:
-			print("c")
+		elif object == null && object2 != null:
 			object = body
 			Global.gunID = object
 			object.held(self)

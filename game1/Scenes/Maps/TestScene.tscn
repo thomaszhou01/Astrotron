@@ -176,14 +176,14 @@ position = Vector2( 438.319, 6.29641 )
 position = Vector2( 137.556, 2.5 )
 maxHP = 2000
 
+[node name="RailGun" parent="." instance=ExtResource( 7 )]
+position = Vector2( 212.318, 12.8749 )
+
 [node name="Gun" parent="." instance=ExtResource( 13 )]
 position = Vector2( 173.729, 9.21424 )
 
 [node name="MiniGun" parent="." instance=ExtResource( 10 )]
 position = Vector2( 406.086, 12.2933 )
-
-[node name="RailGun" parent="." instance=ExtResource( 7 )]
-position = Vector2( 212.318, 12.8749 )
 
 [node name="PulseCannon" parent="." instance=ExtResource( 11 )]
 position = Vector2( 262.899, 11.7538 )
