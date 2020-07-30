@@ -45,7 +45,7 @@ func _ready():
 	if gunNumb == 0:
 		gunType = railGun
 		gunCost = 30
-		$Window/GunText.text = "RailGun: \n-Damage 50\n-Fast Firerate\n-10 round clip\n\n\n30 gold"
+		$Window/GunText.text = "RailGun: \n-Damage 40\n-Fast Firerate\n-12 round clip\n\n\n30 gold"
 	elif gunNumb == 1:
 		gunType = pulseCannon
 		gunCost = 40

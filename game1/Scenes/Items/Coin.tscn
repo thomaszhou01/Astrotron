@@ -29,6 +29,7 @@ tracks/0/keys = {
 ]]
 collision_layer = 64
 collision_mask = 0
+mode = 2
 can_sleep = false
 script = ExtResource( 2 )
 

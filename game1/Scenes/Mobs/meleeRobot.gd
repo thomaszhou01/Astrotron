@@ -102,7 +102,7 @@ func _on_DetectBox_body_entered(body):
 
 func _on_DetectPlayer_body_entered(body):
 	if body.name == "Character":
-		speed += 50
+		speed += 30
 		detected = true
 		if body.global_position.x > global_position.x:
 			direction = 1
@@ -114,5 +114,5 @@ func _on_DetectPlayer_body_entered(body):
 
 func _on_DetectPlayer_body_exited(body):
 	if body.name == "Character":
-		speed -= 50
+		speed -= 30
 		detected = false

@@ -45,9 +45,9 @@ func _physics_process(delta):
 	platform.position = platform.position.linear_interpolate(follow, 0.2)
 	currentPos = Vector2(round(platform.position.x), round(platform.position.y))
 	
-	if object != null && Input.is_action_just_pressed("use") && goingUP && useButton:
+	if object != null && Input.is_action_just_pressed("use") && goingUP && useButton && !autoStart:
 		goUp()
-	elif object != null && Input.is_action_just_pressed("use") && !goingUP && useButton: 
+	elif object != null && Input.is_action_just_pressed("use") && !goingUP && useButton && !autoStart: 
 		goDown()
 	
 
@@ -73,13 +73,13 @@ func _process(delta):
 				buttonLight = 2
 
 func _on_Button_body_entered(body):
-	if body.name == "Character":
+	if body.name == "Character" && !autoStart:
 		object = body
 		$platform/usePrompt.showPrompt()
 
 
 func _on_Button_body_exited(body):
-	if body.name == "Character":
+	if body.name == "Character" && !autoStart:
 		object = null
 		$platform/usePrompt.hidePrompt()
 

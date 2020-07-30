@@ -278,26 +278,28 @@ func handFree():
 
 
 func hit(damage, hitBy, knock, type):
-	if shield > 0 && shield >= damage:
-		shield -= damage
-		$ShieldCharge.start()
-	elif shield > 0 && shield <= damage:
-		hp -= (damage-shield)
-		shield = 0
-	else:
-		hp -= damage
+	if alive:
+		if shield > 0 && shield >= damage:
+			shield -= damage
+			$ShieldCharge.start()
+		elif shield > 0 && shield <= damage:
+			hp -= (damage-shield)
+			shield = 0
+		else:
+			hp -= damage
+			
+		if shield == 0:
+			$ShieldCharge.stop()
 		
-	if shield == 0:
-		$ShieldCharge.stop()
-	
-	if knock && alive:
-		if type == 0:
-			velocity = knockback * hitBy.velocity.normalized()
-		elif type == 1:
-			velocity = knockback * (position - hitBy.position).normalized()
-	
-	if hp <= 0 && alive:
-		die()
+		if knock:
+			if type == 0:
+				velocity = knockback * hitBy.velocity.normalized()
+			elif type == 1:
+				velocity = knockback * (position - hitBy.position).normalized()
+		
+		if hp <= 0:
+			die()
+		
 	$UI/HealthBar.setHP(hp)
 	$UI/ShieldBar.setShield(shield)
 	$statusText/DisplayHP.getValue(hp)
@@ -359,8 +361,11 @@ func _on_Area2D_body_entered(body):
 	if body.has_method("magnet"):
 		body.queue_free()
 		Global.money += 1
-	if body.has_method("hasAmmo") && object != null:
-		object.clipAmmo += object.ammoPerClip
+	if body.has_method("hasAmmo"):
+		if object != null && gunHeld == 1:
+			object.clipAmmo += object.ammoPerClip
+		elif object2 != null && gunHeld == 2:
+			object2.clipAmmo += object2.ammoPerClip
 		body.queue_free()
 
 #Object suddenly becomes null

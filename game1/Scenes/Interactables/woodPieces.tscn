@@ -7,7 +7,7 @@
 extents = Vector2( 1.51807, 4.48414 )
 
 [node name="woodPieces" type="RigidBody2D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 

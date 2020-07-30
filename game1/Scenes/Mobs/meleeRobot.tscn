@@ -716,7 +716,7 @@ collision_mask = 2147483691
 script = ExtResource( 1 )
 damage = 75
 hp = 300
-speed = 50
+speed = 30
 patrolRange = 50
 coinsDropped = 3
 
@@ -766,6 +766,7 @@ shadow_filter = 1
 [node name="HurtBox" type="Area2D" parent="Arm/Sword"]
 position = Vector2( 5.9649, -5.89129 )
 collision_layer = 0
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Sword/HurtBox"]
 position = Vector2( -14.8549, -3.12741 )

@@ -15,7 +15,6 @@ func _ready():
 
 func hit(damage, hitBy, knock, type):
 	hp -= damage
-	
 	if hp <= 0:
 		rng.randomize()
 		for i in range(0, rng.randi_range(1, 3)):
