@@ -13,7 +13,7 @@ collision_layer = 2
 collision_mask = 2147483683
 mass = 10.0
 script = ExtResource( 2 )
-maxHP = 250
+maxHP = 100
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.6, 0.6 )

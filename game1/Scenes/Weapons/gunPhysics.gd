@@ -96,19 +96,9 @@ func _process(delta):
 		$Reload.stop()
 		reloading = false
 
-func _input(event):
-	if held && parent.alive:
-		if Input.is_action_just_pressed("drop") && held && used:
-			#used yield to solve problem
-			yield(get_tree(), "idle_frame")
-			yield(get_tree(), "idle_frame")
-			drop()
-
-
 
 func drop():
 	held = false
-	get_parent().get_node("Character").handFree()
 	self.global_position.y = self.global_position.y - 5
 	$Sprite.offset.x = 0
 	$Reload.stop()

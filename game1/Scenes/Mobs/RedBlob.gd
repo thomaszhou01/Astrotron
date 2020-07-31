@@ -48,6 +48,7 @@ func dead():
 	$FireRate.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Tween.interpolate_property($AnimatedSprite, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Turret, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 
@@ -84,7 +85,7 @@ func _physics_process(delta):
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 	
-	if $RayCast2D.is_colliding() == false:
+	if $RayCast2D.is_colliding() == false && !detected:
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 

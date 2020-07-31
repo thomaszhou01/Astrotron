@@ -20,4 +20,3 @@ func _on_Reload_timeout():
 	elif (clipAmmo + ammo) < ammoPerClip:
 		ammo = clipAmmo + ammo
 		clipAmmo = 0
-

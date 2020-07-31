@@ -10,13 +10,12 @@ var hp
 var shield
 var velocity = Vector2();
 var on_ground = false 
-var doubleJump = false
 var init_pos
-var freeHand = true 
 var moving = false
 var animationDirRight = true
 var object = null
 var object2 = null
+var tempObject = null
 var can_fire = true 
 var onLadder = false
 var alive
@@ -24,6 +23,7 @@ var direction = 1
 var gun
 var gunHeld = 1
 var canDrop = true
+var canSetAmmo
 onready var animationPlayer = $AnimationPlayer
 export var speed = 100  # How fast the player will move (pixels/sec).
 export var fire_rate = 0.2
@@ -46,6 +46,7 @@ func _ready():
 	Global.initialMobCount = get_parent().get_node("Mobs").get_child_count()
 	Global.mobCount = Global.initialMobCount
 	$UI/GunSprite.visible = false
+	canSetAmmo = true
 
 func _physics_process(_delta):
 	if alive:
@@ -70,8 +71,7 @@ func _physics_process(_delta):
 func _process(delta):
 	$statusText/DisplayCoin.setCoin()
 	if alive:
-		#pickup()
-		if object != null || object2 != null:
+		if (object != null || object2 != null) && canSetAmmo:
 			if gunHeld == 1:
 				$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 				$UI/ReloadTimer.setReload(object.reloadTime-object.getReloadDuration())
@@ -82,7 +82,7 @@ func _process(delta):
 			$statusText/AmmoBar.getMaxAmmo(0,0)
 			$UI/ReloadTimer.setReload(0)
 			$UI/GunSprite.visible = false
-			
+		
 		if Global.hasKey:
 			$UI/KeySprite.visible = true
 		else:
@@ -95,6 +95,8 @@ func mousePlace():
 		animationDirRight = false
 
 func _input(event):
+	if alive && Input.is_action_just_pressed("use"):
+		pickup()
 	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null && alive:
 		yield(get_tree(), "idle_frame")
 		switchWeapon()
@@ -159,16 +161,12 @@ func movement():
 	
 	if is_on_floor():
 		on_ground = true
-		doubleJump = true
 	else: 
 		on_ground = false
 	
 	if Input.is_action_just_pressed("jump") && on_ground:
 		velocity.y = jump
 		on_ground = false
-	#elif Input.is_action_just_pressed("jump") && doubleJump:
-	#	velocity.y = jump
-		#doubleJump = false
 	
 	#use a Ladder
 	if onLadder:
@@ -243,42 +241,22 @@ func die():
 	else:
 		Global.money = 0
 
-
 func handFree():
 	#fixed with yield in gunphysics 
 	if object != null && object2 != null:
 		if gunHeld == 1:
-			object.notUsed()
+			object.drop()
 			object = null
 			Global.gunID = null
-			gunHeld = 2
-			object2.used()
-			$UI/GunSprite.region_rect.position.x = object2.getSprite()
-			$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
-			$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
 		elif gunHeld == 2:
-			object2.notUsed()
+			object2.drop()
 			object2 = null
 			Global.gunID2 = null
-			gunHeld = 1
-			object.used()
-			$UI/GunSprite.region_rect.position.x = object.getSprite()
-			$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-			$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
-	else:
-		if gunHeld == 1:
-			object = null
-			Global.gunID = null
-			gunHeld = 1
-		elif gunHeld == 2:
-			object2 = null
-			Global.gunID2 = null
-			gunHeld = 1
-	freeHand = true
 
 
 func hit(damage, hitBy, knock, type):
 	if alive:
+		#determines damage taken to shield or health
 		if shield > 0 && shield >= damage:
 			shield -= damage
 			$ShieldCharge.start()
@@ -287,25 +265,29 @@ func hit(damage, hitBy, knock, type):
 			shield = 0
 		else:
 			hp -= damage
-			
+		
+		#stops charging shield
 		if shield == 0:
 			$ShieldCharge.stop()
 		
+		#apply knockback
 		if knock:
 			if type == 0:
 				velocity = knockback * hitBy.velocity.normalized()
 			elif type == 1:
 				velocity = knockback * (position - hitBy.position).normalized()
 		
+		#kill
 		if hp <= 0:
 			die()
-		
+	
 	$UI/HealthBar.setHP(hp)
 	$UI/ShieldBar.setShield(shield)
 	$statusText/DisplayHP.getValue(hp)
 	$statusText/DisplayShield.getValue(shield)
-	
-	
+
+
+
 func heal(value):
 	if hp+value < maxHP:
 		hp += value
@@ -313,6 +295,7 @@ func heal(value):
 		hp = maxHP
 	$UI/HealthBar.setHP(hp)
 	$statusText/DisplayHP.getValue(hp)
+
 
 func shield(value):
 	if shield+value < maxShield:
@@ -324,20 +307,15 @@ func shield(value):
 
 
 func pickup():
-	if object != null && Input.is_action_just_pressed("use") && freeHand:
-		object.held(self)
-		freeHand = false
-		$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
-		$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
-
-
-func _on_Area2D_body_entered(body):
-	#fix the pickup method
-	if body.has_method("held") && freeHand:
-		#change the changing of objects to the drop function
-		if object != body && object2 != body:
+	if tempObject != null:
+		if object != tempObject && object2 != tempObject:
+			if object != null && object2 != null:
+				yield(get_tree(), "idle_frame")
+				canSetAmmo = false
+				handFree()
+			
 			if object == null && object2 == null:
-				object = body
+				object = tempObject
 				Global.gunID = object
 				object.held(self)
 				object.used()
@@ -346,31 +324,51 @@ func _on_Area2D_body_entered(body):
 				$UI/GunSprite.visible = true
 				$UI/GunSprite.region_rect.position.x = object.getSprite()
 			elif object != null && object2 == null:
-				object2 = body
+				object2 = tempObject
 				Global.gunID2 = object2
 				object2.held(self)
-				freeHand = false
-				object2.notUsed()
+				if canSetAmmo:
+					object2.notUsed()
+				else:
+					object2.used()
+					$UI/GunSprite.region_rect.position.x = object2.getSprite()
+					$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
+					$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
 			elif object == null && object2 != null:
-				object = body
+				object = tempObject
 				Global.gunID = object
 				object.held(self)
-				freeHand = false
-				object.notUsed()
-		
+				if canSetAmmo:
+					object.notUsed()
+				else:
+					object.used()
+					$UI/GunSprite.region_rect.position.x = object.getSprite()
+					$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
+					$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
+			canSetAmmo = true
+		tempObject = null
+
+
+func _on_Area2D_body_entered(body):
+	#fix the pickup method
+	if body.has_method("held"):
+		tempObject = body
+
 	if body.has_method("magnet"):
 		body.queue_free()
 		Global.money += 1
 	if body.has_method("hasAmmo"):
 		if object != null && gunHeld == 1:
 			object.clipAmmo += object.ammoPerClip
+			body.queue_free()
 		elif object2 != null && gunHeld == 2:
 			object2.clipAmmo += object2.ammoPerClip
-		body.queue_free()
+			body.queue_free()
 
 #Object suddenly becomes null
 func _on_Area2D_body_exited(body):
-	pass
+	if body.has_method("held"):
+		tempObject = null
 
 
 func _on_ShieldCharge_timeout():

@@ -44,11 +44,11 @@ region = Rect2( 490, 0, 70, 70 )
 atlas = ExtResource( 3 )
 region = Rect2( 560, 0, 70, 70 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=12]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
@@ -60,26 +60,26 @@ animations = [ {
 "name": "explosion",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 17 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": true,
 "name": "redCell",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 4.25915, 5.92329 )
 
-[sub_resource type="CircleShape2D" id=13]
+[sub_resource type="CircleShape2D" id=14]
 radius = 40.0
 
-[sub_resource type="Gradient" id=14]
+[sub_resource type="Gradient" id=15]
 offsets = PoolRealArray( 0.287554, 0.686695 )
 colors = PoolColorArray( 1, 0.960938, 0, 1, 1, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=15]
-gradient = SubResource( 14 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 
-[sub_resource type="ParticlesMaterial" id=16]
+[sub_resource type="ParticlesMaterial" id=17]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -87,32 +87,31 @@ gravity = Vector3( 0, -20, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 45.0
-color_ramp = SubResource( 15 )
+color_ramp = SubResource( 16 )
 
 [node name="ExpolosiveBarrel" type="RigidBody2D" groups=[
 "bodies",
 ]]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 35
 mass = 5.0
 script = ExtResource( 2 )
-maxHP = 100
 damage = 400
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
-frames = SubResource( 11 )
+frames = SubResource( 12 )
 speed_scale = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.256931, 0 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 disabled = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -123,6 +122,6 @@ position = Vector2( 0.385731, -3.31661 )
 emitting = false
 amount = 10
 local_coords = false
-process_material = SubResource( 16 )
+process_material = SubResource( 17 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

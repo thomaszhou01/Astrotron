@@ -1,16 +1,15 @@
 extends RigidBody2D
 
 
-export (int) var maxHP
 export (int) var damage
 export (int) var type
-var hp
+var hits
 var primed 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hp = maxHP
+	hits = 0
 	if type == 0:
 		$AnimatedSprite.play("default")
 	elif type == 1:
@@ -21,11 +20,18 @@ func _process(delta):
 		queue_free()
 
 func hit(damage, hitBy, knock, type):
-	hp -= damage
-	if hp <= 0 && !primed:
+	hits += 1
+	if hits == 3 || type == 1:
+		$Timer.stop()
+		$AnimatedSprite.scale.x = ($Area2D/CollisionShape2D.shape.radius * 2)/70
+		$AnimatedSprite.scale.y = $AnimatedSprite.scale.x
+		$Area2D/CollisionShape2D.call_deferred("disabled", false)
+		$AnimatedSprite.play("explosion")
+	elif hits == 2 && !primed:
 		$Timer.start()
 		$Particles2D.emitting = true
 		primed = true
+	
 
 
 func _on_Area2D_body_entered(body):

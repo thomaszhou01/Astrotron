@@ -20,7 +20,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 4.78495, 7.52437 )
 
 [sub_resource type="CircleShape2D" id=5]
@@ -44,7 +44,7 @@ frames = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.476311, 0.416771 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 4.981, -3.468 )
