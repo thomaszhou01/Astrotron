@@ -539,6 +539,8 @@ wait_time = 0.05
 stream = ExtResource( 10 )
 volume_db = 5.0
 
+[node name="effects" type="AudioStreamPlayer2D" parent="."]
+
 [node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="ShieldCharge" to="." method="_on_ShieldCharge_timeout"]
 [connection signal="timeout" from="DropDelay" to="." method="_on_DropDelay_timeout"]

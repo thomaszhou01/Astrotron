@@ -34,6 +34,7 @@ export (int) var maxShield
 export (int) var passiveCharge
 export (int, 0, 200) var inertia
 
+var equip = preload("res://Resources/Audio/Player/equip.wav")
 
 func _ready():
 	init_pos = get_global_transform().origin
@@ -99,6 +100,8 @@ func _input(event):
 	if alive && Input.is_action_just_pressed("use"):
 		yield(get_tree(), "idle_frame")
 		pickup()
+		$effects.set_stream(equip)
+		$effects.play()
 	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null && alive:
 		yield(get_tree(), "idle_frame")
 		switchWeapon()

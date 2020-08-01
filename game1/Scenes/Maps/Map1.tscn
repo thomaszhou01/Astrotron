@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=2]
@@ -21,11 +21,9 @@
 [ext_resource path="res://Resources/TileSets/Props.tres" type="TileSet" id=22]
 [ext_resource path="res://Scenes/Interactables/Chest.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Interactables/elevatorButton.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Weapons/RailGun.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Interactables/movableBox.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scenes/Interactables/ExpolosiveBarrel.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Resources/TileSets/passthrough.tres" type="TileSet" id=28]
-[ext_resource path="res://Scenes/Weapons/PulseCannon.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/Maps/Map2.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/UI/DisplayTextArea.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/Interactables/DoorSignal.tscn" type="PackedScene" id=32]
@@ -431,13 +429,7 @@ position = Vector2( 1637.97, 279.257 )
 position = Vector2( 2101, 725.444 )
 
 [node name="Character" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2407.54, 1515.55 )
+position = Vector2( -124.384, 133.447 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2361.62, 1523.55 )
-
-[node name="RailGun" parent="." instance=ExtResource( 25 )]
-position = Vector2( 2342.18, 1530.66 )
-
-[node name="PulseCannon" parent="." instance=ExtResource( 29 )]
-position = Vector2( 2379.65, 1531.55 )
+position = Vector2( 151.908, 140.849 )
