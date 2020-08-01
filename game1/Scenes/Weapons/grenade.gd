@@ -29,7 +29,8 @@ func shoot():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $AnimatedSprite.get_frame() == 8:
-		queue_free()
+		$AnimatedSprite.visible = false
+		$Area2D/HurtBox.disabled = true
 	$AnimatedSprite.set_rotation(get_linear_velocity().angle()-PI/2)
 
 func _integrate_forces(state):
@@ -49,6 +50,12 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_BodyEntered_body_entered(body):
+	if propell:
+		$audio.play()
 	$AnimatedSprite.play("explosion")
 	$Timer.start()
 	propell = false
+
+
+func _on_audio_finished():
+	queue_free()

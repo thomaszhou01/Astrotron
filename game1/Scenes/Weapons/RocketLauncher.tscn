@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Weapons/RocketLauncher.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Audio/Items/Guns/rocketLauncher.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.27823, 4.26457 )
@@ -39,5 +40,6 @@ one_shot = true
 one_shot = true
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Reload" to="." method="_on_Reload_timeout"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pulseCannon.wav-08ac0d3e192476518493208a4af1ea79.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Items/Guns/pulseCannon.wav"
+dest_files=[ "res://.import/pulseCannon.wav-08ac0d3e192476518493208a4af1ea79.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -28,7 +28,9 @@ func start(dir, dmg, sprite, spd, rotate, mobCollide, playerCollide):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $AnimatedSprite.get_frame() == 8:
-		queue_free()
+		$AnimatedSprite.visible = false
+		$Particles2D.visible = false
+		$Area2D/HurtBox.disabled = true
 	if propell:
 		position += velocity*delta
 	$Particles2D.emitting = true
@@ -38,6 +40,8 @@ func _process(delta):
 
 
 func _on_rocket_body_entered(body):
+	if propell:
+		$audio.play()
 	$Timer.start()
 	$AnimatedSprite.play("explosion")
 	$AnimatedSprite.scale.x = 0.5
@@ -52,3 +56,7 @@ func _on_Area2D_body_entered(body):
 
 func _on_Timer_timeout():
 	$Area2D/HurtBox.disabled = false
+
+
+func _on_audio_finished():
+	queue_free()

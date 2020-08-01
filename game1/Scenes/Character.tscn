@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Resources/Sprites/characters/blue.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Resources/Audio/Player/walking_on_metal.wav" type="AudioStream" id=10]
 [ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Sprites/lights/boarderLight.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.43497, 7.4996 )
@@ -365,7 +366,9 @@ height = 6.75841
 [sub_resource type="CircleShape2D" id=18]
 radius = 20.0
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="CanvasItemMaterial" id=19]
+
+[sub_resource type="DynamicFont" id=20]
 size = 20
 font_data = ExtResource( 9 )
 
@@ -432,57 +435,16 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Magnet"]
 shape = SubResource( 18 )
 
-[node name="statusText" type="CanvasLayer" parent="."]
-scale = Vector2( 0.25, 0.25 )
-transform = Transform2D( 0.25, 0, 0, 0.25, 0, 0 )
-
-[node name="DisplayHP" parent="statusText" instance=ExtResource( 8 )]
-margin_left = 366.37
-margin_top = 24.4387
-margin_right = 530.37
-margin_bottom = 61.4387
-
-[node name="DisplayShield" parent="statusText" instance=ExtResource( 8 )]
-margin_left = 366.37
-margin_top = 71.1108
-margin_right = 530.37
-margin_bottom = 108.111
-
-[node name="DisplayCoin" parent="statusText" instance=ExtResource( 8 )]
-anchor_right = 4.0
-anchor_bottom = 4.0
-margin_left = 600.56
-margin_top = 24.4387
-margin_right = -597.44
-margin_bottom = -677.561
-
-[node name="DeadMessage" type="Label" parent="statusText"]
-anchor_right = 4.0
-anchor_bottom = 4.0
-margin_left = 28.0
-margin_top = 120.0
-margin_right = -988.0
-margin_bottom = -572.0
-custom_fonts/font = SubResource( 19 )
-text = "Press \"X\" to respawn"
-percent_visible = 0.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AmmoBar" parent="statusText" instance=ExtResource( 5 )]
-margin_left = 1225.22
-margin_top = 100.288
-margin_right = 1162.02
-margin_bottom = 100.288
-text = "[0/0]"
-
-[node name="DisplayText" type="Timer" parent="statusText"]
-wait_time = 0.05
-
 [node name="UI" type="CanvasLayer" parent="."]
 offset = Vector2( 5, 5 )
 transform = Transform2D( 1, 0, 0, 1, 5, 5 )
+
+[node name="DamagedTint" type="Sprite" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 19 )
+position = Vector2( 155, 85 )
+scale = Vector2( 0.166667, 0.166667 )
+texture = ExtResource( 12 )
 
 [node name="HealthBar" parent="UI" instance=ExtResource( 2 )]
 anchor_top = -0.000713963
@@ -524,12 +486,64 @@ texture = ExtResource( 11 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
+[node name="statusText" type="CanvasLayer" parent="."]
+layer = 0
+scale = Vector2( 0.25, 0.25 )
+transform = Transform2D( 0.25, 0, 0, 0.25, 0, 0 )
+
+[node name="DisplayHP" parent="statusText" instance=ExtResource( 8 )]
+margin_left = 366.37
+margin_top = 24.4387
+margin_right = 530.37
+margin_bottom = 61.4387
+
+[node name="DisplayShield" parent="statusText" instance=ExtResource( 8 )]
+margin_left = 366.37
+margin_top = 71.1108
+margin_right = 530.37
+margin_bottom = 108.111
+
+[node name="DisplayCoin" parent="statusText" instance=ExtResource( 8 )]
+anchor_right = 4.0
+anchor_bottom = 4.0
+margin_left = 600.56
+margin_top = 24.4387
+margin_right = -597.44
+margin_bottom = -677.561
+
+[node name="DeadMessage" type="Label" parent="statusText"]
+anchor_right = 4.0
+anchor_bottom = 4.0
+margin_left = 28.0
+margin_top = 120.0
+margin_right = -988.0
+margin_bottom = -572.0
+custom_fonts/font = SubResource( 20 )
+text = "Press \"X\" to respawn"
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoBar" parent="statusText" instance=ExtResource( 5 )]
+margin_left = 1225.22
+margin_top = 100.288
+margin_right = 1162.02
+margin_bottom = 100.288
+text = "[0/0]"
+
+[node name="DisplayText" type="Timer" parent="statusText"]
+wait_time = 0.05
+
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 10 )
 volume_db = 5.0
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="ShieldCharge" to="." method="_on_ShieldCharge_timeout"]
 [connection signal="timeout" from="DropDelay" to="." method="_on_DropDelay_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Magnet" to="." method="_on_Magnet_body_entered"]
 [connection signal="timeout" from="statusText/DisplayText" to="." method="_on_DisplayText_timeout"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

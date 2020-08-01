@@ -17,6 +17,6 @@ func _physics_process(delta):
 	$Beam.region_rect.end.x = $End.position.length()
 	if $Laser.is_colliding():
 		if $Laser.get_collider().name == "Character":
-			$Laser.get_collider().hit(50, self, false, 1)
+			$Laser.get_collider().hit(1, self, false, 1)
 		
 	

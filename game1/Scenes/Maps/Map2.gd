@@ -18,6 +18,8 @@ func _ready():
 		newGun.originallyInScene = false
 		newGun.ammo = gun1Ammo
 		newGun.clipAmmo = gun1clipAmmo
+		$Character.tempObject = newGun
+		$Character.pickup()
 	if gun2 != null:
 		gun2 = load(Global.gunID2.filename)
 		var newGun = gun2.instance()
@@ -25,6 +27,8 @@ func _ready():
 		newGun.originallyInScene = false
 		newGun.ammo = gun2Ammo
 		newGun.clipAmmo = gun2clipAmmo
+		$Character.tempObject = newGun
+		$Character.pickup()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

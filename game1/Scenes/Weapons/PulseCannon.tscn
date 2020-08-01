@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Weapons/PulseCannon.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Audio/Items/Guns/pulseCannon.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.28362, 4.19884 )
@@ -17,7 +18,7 @@ bulletSprite = 1
 fireRate = 0.5
 bulletSpeed = 400
 ammoPerClip = 5
-reloadTime = 3
+reloadTime = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.0875955, -0.33189 )
@@ -40,5 +41,7 @@ one_shot = true
 one_shot = true
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 7.0
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Reload" to="." method="_on_Reload_timeout"]

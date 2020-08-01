@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/railGun.wav-73b5c6415dc94078c57a3a1e72db32eb.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Items/Guns/railGun.wav"
+dest_files=[ "res://.import/railGun.wav-73b5c6415dc94078c57a3a1e72db32eb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

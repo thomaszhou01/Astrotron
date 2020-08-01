@@ -18,6 +18,7 @@ var object2 = null
 var tempObject = null
 var can_fire = true 
 var onLadder = false
+var damageTaken = 0
 var alive
 var direction = 1
 var gun
@@ -72,10 +73,10 @@ func _process(delta):
 	$statusText/DisplayCoin.setCoin()
 	if alive:
 		if (object != null || object2 != null) && canSetAmmo:
-			if gunHeld == 1:
+			if gunHeld == 1 && object != null:
 				$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 				$UI/ReloadTimer.setReload(object.reloadTime-object.getReloadDuration())
-			elif gunHeld == 2:
+			elif gunHeld == 2 && object2 != null:
 				$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
 				$UI/ReloadTimer.setReload(object2.reloadTime-object2.getReloadDuration())
 		else:
@@ -96,6 +97,7 @@ func mousePlace():
 
 func _input(event):
 	if alive && Input.is_action_just_pressed("use"):
+		yield(get_tree(), "idle_frame")
 		pickup()
 	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null && alive:
 		yield(get_tree(), "idle_frame")
@@ -115,6 +117,7 @@ func _input(event):
 		set_collision_layer_bit(0, true)
 		set_collision_layer_bit(1, false)
 		alive = true
+		damageTaken = 0
 
 func switchWeapon():
 	if gunHeld == 1:
@@ -242,7 +245,6 @@ func die():
 		Global.money = 0
 
 func handFree():
-	#fixed with yield in gunphysics 
 	if object != null && object2 != null:
 		if gunHeld == 1:
 			object.drop()
@@ -263,8 +265,15 @@ func hit(damage, hitBy, knock, type):
 		elif shield > 0 && shield <= damage:
 			hp -= (damage-shield)
 			shield = 0
+			damageTaken += (damage-shield)
 		else:
 			hp -= damage
+			damageTaken += damage
+		
+		if $Tween.is_active():
+			$Tween.stop($UI/DamagedTint, "modulate")
+		$Tween.interpolate_property($UI/DamagedTint, "modulate", Color(1,1,1,(float(damageTaken)/maxHP)), Color(1,1,1,0), 2, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+		$Tween.start()
 		
 		#stops charging shield
 		if shield == 0:
@@ -310,11 +319,10 @@ func pickup():
 	if tempObject != null:
 		if object != tempObject && object2 != tempObject:
 			if object != null && object2 != null:
-				yield(get_tree(), "idle_frame")
 				canSetAmmo = false
 				handFree()
 			
-			if object == null && object2 == null:
+			if object == null && object2 == null && tempObject != null:
 				object = tempObject
 				Global.gunID = object
 				object.held(self)
@@ -323,7 +331,7 @@ func pickup():
 				$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
 				$UI/GunSprite.visible = true
 				$UI/GunSprite.region_rect.position.x = object.getSprite()
-			elif object != null && object2 == null:
+			elif object != null && object2 == null && tempObject != null:
 				object2 = tempObject
 				Global.gunID2 = object2
 				object2.held(self)
@@ -334,7 +342,7 @@ func pickup():
 					$UI/GunSprite.region_rect.position.x = object2.getSprite()
 					$statusText/AmmoBar.getMaxAmmo(object2.clipAmmo, object2.ammo)
 					$UI/ReloadTimer.getMaxReloadTime(object2.reloadTime)
-			elif object == null && object2 != null:
+			elif object == null && object2 != null && tempObject != null:
 				object = tempObject
 				Global.gunID = object
 				object.held(self)
@@ -352,6 +360,7 @@ func pickup():
 func _on_Area2D_body_entered(body):
 	#fix the pickup method
 	if body.has_method("held"):
+		yield(get_tree(), "idle_frame")
 		tempObject = body
 
 	if body.has_method("magnet"):
@@ -367,7 +376,7 @@ func _on_Area2D_body_entered(body):
 
 #Object suddenly becomes null
 func _on_Area2D_body_exited(body):
-	if body.has_method("held"):
+	if body.has_method("held") && body == tempObject:
 		tempObject = null
 
 
@@ -388,3 +397,8 @@ func _on_DisplayText_timeout():
 func _on_Magnet_body_entered(body):
 	if body.has_method("magnet"):
 		body.magnet(self)
+
+
+func _on_Tween_tween_completed(object, key):
+	if object == $UI/DamagedTint:
+		damageTaken = 0

@@ -79,6 +79,7 @@ func _process(delta):
 			canShoot = false
 			ammo -= 1
 			$Timer.start()
+			$audio.play()
 		elif (Input.is_action_pressed("fire") && held) && canShoot && bulletType == 2:
 			var rocket_instance = rocket.instance()
 			var direction = Vector2(1,0).rotated(self.global_rotation)
@@ -89,7 +90,7 @@ func _process(delta):
 			canShoot = false
 			ammo -= 1
 			$Timer.start()
-		
+			$audio.play()
 		
 		
 	elif held && !parent.alive && reloading:
