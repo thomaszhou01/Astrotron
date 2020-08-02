@@ -38,12 +38,14 @@ func dead():
 	
 	$audio.set_stream(dieAudio)
 	$audio.play()
+	$fire.visible = true
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$DetectBox/CollisionShape2D.call_deferred("set_disabled", true)
 	$AnimationDuration.stop()
 	$Tween.interpolate_property($Body, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Arm, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($HealthBar, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($fire, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 

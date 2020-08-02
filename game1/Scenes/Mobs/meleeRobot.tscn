@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Mobs/meleeRobot.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/characters/meleeRobo.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Sprites/lights/light.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Audio/Mobs/Robots/hit.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Misc/fire.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.12211, 7.9544 )
@@ -810,6 +811,7 @@ anims/RunLeft = SubResource( 9 )
 anims/RunRight = SubResource( 10 )
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="AnimationDuration" type="Timer" parent="."]
 
@@ -817,6 +819,10 @@ anims/RunRight = SubResource( 10 )
 visible = false
 process_parent = true
 physics_process_parent = true
+
+[node name="fire" parent="." instance=ExtResource( 6 )]
+visible = false
+z_index = 2
 
 [node name="Tween" type="Tween" parent="."]
 

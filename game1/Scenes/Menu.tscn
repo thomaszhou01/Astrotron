@@ -40,12 +40,12 @@ __meta__ = {
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 110.458
-margin_top = 60.9393
-margin_right = -91.5424
-margin_bottom = -101.061
+margin_left = 103.5
+margin_top = 60.5
+margin_right = -102.5
+margin_bottom = -101.5
 custom_fonts/font = SubResource( 1 )
-text = "AstroTron"
+text = "Astrotron"
 __meta__ = {
 "_edit_use_anchors_": false
 }

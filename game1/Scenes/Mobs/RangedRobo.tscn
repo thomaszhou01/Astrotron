@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Mobs/RangedRobo.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/characters/tank.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Audio/Mobs/Robots/hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/Misc/fire.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.32021, 6.69814 )
@@ -42,6 +43,7 @@ collision_mask = 34
 [node name="FireRate" type="Timer" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="DetectPlayer" type="Area2D" parent="."]
 visible = false
@@ -65,6 +67,9 @@ margin_top = -11.9651
 margin_right = -11.815
 margin_bottom = -11.9651
 rect_scale = Vector2( 0.2, 0.1 )
+
+[node name="fire" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
