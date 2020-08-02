@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MachinePowerOff.wav-e4e7ad00539e3bc1293c77e08f35c203.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Mobs/Robots/MachinePowerOff.wav"
+dest_files=[ "res://.import/MachinePowerOff.wav-e4e7ad00539e3bc1293c77e08f35c203.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

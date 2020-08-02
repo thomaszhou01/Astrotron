@@ -10,16 +10,20 @@ var paused
 var hitPos
 var object
 
+var dieAudio = preload("res://Resources/Audio/Mobs/Slime/slimeDie.wav")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$HealthBar.getMaxHP(hp)
 	stop = false
 	paused = false
 	initPos = position.x
+	
 
 func hit(damage, pos, knock, type):
 	hp -= damage
 	$HealthBar.setHP(hp)
+	$audio.play()
 	if hp <=0:
 		dead()
 
@@ -33,11 +37,16 @@ func dead():
 	dropAmmo(4)
 	is_dead = true
 	velocity = Vector2(0,0)
+	$audio.set_stream(dieAudio)
+	$audio.play()
+	$Particles2D.visible = true
+	$Particles2D.emitting = true
 	$AnimatedSprite.play("dead")
 	$Timer.start()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$BodyDetector/CollisionShape2D.call_deferred("set_disabled", true)
 	$Tween.interpolate_property($AnimatedSprite, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($HealthBar, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 #make blob stop if going off edge

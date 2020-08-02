@@ -35,6 +35,8 @@ export (int) var passiveCharge
 export (int, 0, 200) var inertia
 
 var equip = preload("res://Resources/Audio/Player/equip.wav")
+var clipPickup = preload("res://Resources/Audio/Player/weapload.wav")
+var coinPickup = preload("res://Resources/Audio/Player/ring_inventory.wav")
 
 func _ready():
 	init_pos = get_global_transform().origin
@@ -100,8 +102,6 @@ func _input(event):
 	if alive && Input.is_action_just_pressed("use"):
 		yield(get_tree(), "idle_frame")
 		pickup()
-		$effects.set_stream(equip)
-		$effects.play()
 	if Input.is_action_just_pressed("switchWeapon") && object != null && object2 != null && alive:
 		yield(get_tree(), "idle_frame")
 		switchWeapon()
@@ -321,6 +321,8 @@ func shield(value):
 func pickup():
 	if tempObject != null:
 		if object != tempObject && object2 != tempObject:
+			$effects.set_stream(equip)
+			$effects.play()
 			if object != null && object2 != null:
 				canSetAmmo = false
 				handFree()
@@ -369,13 +371,19 @@ func _on_Area2D_body_entered(body):
 	if body.has_method("magnet"):
 		body.queue_free()
 		Global.money += 1
+		$effects.set_stream(coinPickup)
+		$effects.play()
 	if body.has_method("hasAmmo"):
 		if object != null && gunHeld == 1:
 			object.clipAmmo += object.ammoPerClip
 			body.queue_free()
+			$effects.set_stream(clipPickup)
+			$effects.play()
 		elif object2 != null && gunHeld == 2:
 			object2.clipAmmo += object2.ammoPerClip
 			body.queue_free()
+			$effects.set_stream(clipPickup)
+			$effects.play()
 
 #Object suddenly becomes null
 func _on_Area2D_body_exited(body):

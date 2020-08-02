@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/slime1.wav-4e44283717b227a4b6ae02a4a6f464d6.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Mobs/Slime/slime1.wav"
+dest_files=[ "res://.import/slime1.wav-4e44283717b227a4b6ae02a4a6f464d6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

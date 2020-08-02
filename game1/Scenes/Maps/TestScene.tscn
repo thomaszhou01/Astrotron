@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Mobs/RedBlob.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Scenes/Interactables/doorKey.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/Interactables/doorSwitch.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Misc/DeathBox.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/Interactables/elevator.tscn" type="PackedScene" id=27]
 
 [sub_resource type="TileSet" id=1]
 0/name = "props.png 0"
@@ -147,10 +148,13 @@ scale = Vector2( 5.21091, -1.2596 )
 position = Vector2( 1051.3, 66.4415 )
 scale = Vector2( 5.21091, -1.2596 )
 
+[node name="elevator" parent="Environment" instance=ExtResource( 27 )]
+position = Vector2( 141.321, -31.6414 )
+
 [node name="Mobs" type="Node" parent="."]
 
 [node name="Blob" parent="Mobs" instance=ExtResource( 3 )]
-position = Vector2( -556.628, -8.00902 )
+position = Vector2( -549.501, 5.57718 )
 
 [node name="RedBlob" parent="Mobs" instance=ExtResource( 2 )]
 position = Vector2( -404.456, -12.681 )
@@ -173,11 +177,11 @@ position = Vector2( 453.949, 5.43863 )
 position = Vector2( 438.319, 6.29641 )
 
 [node name="Character" parent="." instance=ExtResource( 12 )]
-position = Vector2( 137.556, 2.5 )
+position = Vector2( -596.564, -60.5409 )
 maxHP = 2000
 
 [node name="RailGun" parent="." instance=ExtResource( 7 )]
-position = Vector2( 212.318, 12.8749 )
+position = Vector2( -600.789, -55.5859 )
 
 [node name="Gun" parent="." instance=ExtResource( 13 )]
 position = Vector2( 173.729, 9.21424 )

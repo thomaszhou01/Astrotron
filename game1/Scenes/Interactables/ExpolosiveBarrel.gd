@@ -17,12 +17,14 @@ func _ready():
 
 func _process(delta):
 	if $AnimatedSprite.get_frame() == 8:
-		queue_free()
+		$AnimatedSprite.visible = false
+		$Particles2D.visible = false
 
 func hit(damage, hitBy, knock, type):
 	hits += 1
 	if hits == 3 || type == 1:
 		$Timer.stop()
+		$audio.play()
 		$AnimatedSprite.scale.x = ($Area2D/CollisionShape2D.shape.radius * 2)/70
 		$AnimatedSprite.scale.y = $AnimatedSprite.scale.x
 		$Area2D/CollisionShape2D.call_deferred("disabled", false)
@@ -40,8 +42,13 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Timer_timeout():
+	$audio.play()
 	$AnimatedSprite.scale.x = ($Area2D/CollisionShape2D.shape.radius * 2)/70
 	$AnimatedSprite.scale.y = $AnimatedSprite.scale.x
 	$Area2D/CollisionShape2D.disabled = false
 	$AnimatedSprite.play("explosion")
 
+
+
+func _on_audio_finished():
+	queue_free()

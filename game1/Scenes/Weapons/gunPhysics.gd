@@ -23,6 +23,8 @@ export (int) var bulletType
 export (int) var ammoPerClip
 export (int) var reloadTime
 
+var reload = preload("res://Resources/Audio/Items/Guns/reload.wav")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Timer.set_wait_time(fireRate)
@@ -54,6 +56,8 @@ func _process(delta):
 		if (Input.is_action_just_pressed("reload") || (Input.is_action_pressed("fire") && ammo == 0)) && held && ammo != ammoPerClip && $Reload.get_time_left() == 0 && clipAmmo != 0:
 			reloading = true
 			$Reload.start()
+			$effects.set_stream(reload)
+			$effects.play()
 		
 		if reloading || ammo == 0:
 			pass

@@ -16,7 +16,7 @@ export (float) var turretTurn
 export (float) var fireRate 
 export (int) var bulletSpeed 
 
-
+var dieAudio = preload("res://Resources/Audio/Mobs/Slime/slimeDie.wav")
 
 func _ready():
 	bulletSprite = 2
@@ -30,6 +30,7 @@ func _ready():
 func hit(dmg, pos, knock, type):
 	hp -= dmg
 	$HealthBar.setHP(hp)
+	$audio.play()
 	if hp <=0:
 		dead()
 
@@ -44,11 +45,16 @@ func dead():
 	canShoot = false 
 	stop = false 
 	turretTurn = 10
+	$audio.set_stream(dieAudio)
+	$audio.play()
+	$Particles2D.visible = true
+	$Particles2D.emitting = true
 	$Timer.start()
 	$FireRate.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Tween.interpolate_property($AnimatedSprite, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Turret, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($HealthBar, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 

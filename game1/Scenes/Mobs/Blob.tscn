@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Resources/Sprites/characters/blob.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Mobs/Blob.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Sprites/characters/dedblob.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Resources/Audio/Mobs/Slime/slime1.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -39,6 +40,25 @@ extents = Vector2( 7.66513, 4.75284 )
 [sub_resource type="CircleShape2D" id=7]
 radius = 90.0
 
+[sub_resource type="ParticlesMaterial" id=8]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 90.0
+gravity = Vector3( 0, 25, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 1.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 380.6
+angle_random = 1.0
+scale = 2.0
+scale_random = 1.0
+color = Color( 0.00784314, 0.854902, 0.215686, 1 )
+
 [node name="Blob" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 43
@@ -54,6 +74,7 @@ frames = SubResource( 4 )
 animation = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 5 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -72,6 +93,7 @@ wait_time = 2.0
 wait_time = 0.5
 
 [node name="BodyDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyDetector"]
@@ -92,12 +114,26 @@ margin_bottom = -3.95256
 rect_scale = Vector2( 0.15, 0.1 )
 barColour = Color( 0.105882, 0.878431, 0.0980392, 1 )
 
+[node name="Particles2D" type="Particles2D" parent="."]
+visible = false
+show_behind_parent = true
+position = Vector2( 0.117981, 2.02928 )
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 8 )
+
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
 process_parent = true
 physics_process_parent = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+max_distance = 400.0
 [connection signal="timeout" from="Pause" to="." method="_on_Pause_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="DamageTick" to="." method="_on_DamageTick_timeout"]

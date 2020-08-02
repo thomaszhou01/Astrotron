@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Mobs/RangedRobo.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/characters/tank.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/Audio/Mobs/Robots/hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.32021, 6.69814 )
@@ -71,6 +72,9 @@ process_parent = true
 physics_process_parent = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]

@@ -17,7 +17,7 @@ export (float) var turretTurn
 export (float) var fireRate 
 export (int) var bulletSpeed 
 
-
+var dieAudio = preload("res://Resources/Audio/Mobs/Robots/MachinePowerOff.wav")
 
 func _ready():
 	bulletSprite = 0
@@ -30,6 +30,7 @@ func _ready():
 func hit(dmg, pos, knock, type):
 	hp -= dmg
 	$HealthBar.setHP(hp)
+	$audio.play()
 	if hp <=0:
 		dead()
 
@@ -43,12 +44,14 @@ func dead():
 	velocity = Vector2(0,0)
 	canShoot = false 
 	stop = false 
-	turretTurn = 10
+	$audio.set_stream(dieAudio)
+	$audio.play()
 	$Timer.start()
 	$FireRate.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Tween.interpolate_property($Sprite, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Turret, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($HealthBar, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 
@@ -91,6 +94,10 @@ func _process(delta):
 		aim()
 	else:
 		speed = maxSpeed
+	
+	if is_dead:
+		current_dir = Vector2(1,0).rotated($Turret.global_rotation)
+		$Turret.global_rotation = current_dir.linear_interpolate(Vector2(0,1), delta * turretTurn).angle()
 
 func aim():
 	var space_state = get_world_2d().direct_space_state

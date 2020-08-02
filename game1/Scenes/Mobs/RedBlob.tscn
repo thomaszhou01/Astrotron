@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/mobs/RedBlob.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Sprites/characters/redBlob.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Audio/Mobs/Slime/slime2.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -26,6 +27,25 @@ extents = Vector2( 4.78495, 7.52437 )
 [sub_resource type="CircleShape2D" id=5]
 radius = 160.0
 
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_box_extents = Vector3( 3, 4, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 90.0
+gravity = Vector3( 0, 25, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 1.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 394.1
+angle_random = 1.0
+scale = 2.0
+scale_random = 1.0
+color = Color( 0.772549, 0.290196, 0.00784314, 1 )
+
 [node name="RedBlob" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 43
@@ -43,6 +63,7 @@ bulletSpeed = 200
 frames = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.476311, 0.416771 )
 shape = SubResource( 4 )
 
@@ -84,7 +105,19 @@ visible = false
 process_parent = true
 physics_process_parent = true
 
+[node name="Particles2D" type="Particles2D" parent="."]
+visible = false
+show_behind_parent = true
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 6 )
+
 [node name="Tween" type="Tween" parent="."]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
 [connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]

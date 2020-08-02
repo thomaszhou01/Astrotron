@@ -5,6 +5,7 @@ var direction = 1
 var is_dead = false 
 var moving
 
+var dieAudio = preload("res://Resources/Audio/Mobs/Robots/MachinePowerOff.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,6 +17,7 @@ func _ready():
 func hit(damage, pos, knock, type):
 	hp -= damage
 	$HealthBar.setHP(hp)
+	$audio.play()
 	if hp <=0:
 		dead()
 
@@ -34,11 +36,14 @@ func dead():
 	else:
 		$AnimationPlayer.play("DeathLeft")
 	
+	$audio.set_stream(dieAudio)
+	$audio.play()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$DetectBox/CollisionShape2D.call_deferred("set_disabled", true)
 	$AnimationDuration.stop()
 	$Tween.interpolate_property($Body, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Arm, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($HealthBar, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 

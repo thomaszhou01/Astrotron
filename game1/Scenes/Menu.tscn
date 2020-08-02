@@ -15,7 +15,7 @@ font_data = ExtResource( 5 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 130, 90 )
+position = Vector2( 130.561, 90 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 3 )
 __meta__ = {
@@ -40,12 +40,12 @@ __meta__ = {
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 49.5874
-margin_top = 61.5874
-margin_right = -40.4126
-margin_bottom = -100.413
+margin_left = 110.458
+margin_top = 60.9393
+margin_right = -91.5424
+margin_bottom = -101.061
 custom_fonts/font = SubResource( 1 )
-text = "[Insert Game Name]"
+text = "AstroTron"
 __meta__ = {
 "_edit_use_anchors_": false
 }

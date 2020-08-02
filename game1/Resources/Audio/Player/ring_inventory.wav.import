@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ring_inventory.wav-2b8dd1d430612a9513c190d8d4a653cf.sample"
+
+[deps]
+
+source_file="res://Resources/Audio/Player/ring_inventory.wav"
+dest_files=[ "res://.import/ring_inventory.wav-2b8dd1d430612a9513c190d8d4a653cf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
