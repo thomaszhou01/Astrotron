@@ -7,27 +7,27 @@
 [ext_resource path="res://Resources/Audio/Mobs/Slime/slime1.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 16, 16, 16 )
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "dead",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "dead",
 "speed": 5.0
 } ]
 
@@ -74,11 +74,10 @@ frames = SubResource( 4 )
 animation = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 5 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 2.20435, 6.56907 )
+position = Vector2( 3.38123, 6.37343 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 34
@@ -93,7 +92,6 @@ wait_time = 2.0
 wait_time = 0.5
 
 [node name="BodyDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyDetector"]
