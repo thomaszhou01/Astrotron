@@ -106,6 +106,7 @@ process_parent = true
 physics_process_parent = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
+visible = false
 show_behind_parent = true
 emitting = false
 amount = 40
