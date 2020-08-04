@@ -8,7 +8,6 @@ var canShoot = false
 var fire = true
 var is_dead = false 
 var stop
-var right
 var target_dir
 var current_dir
 var maxSpeed
@@ -21,7 +20,6 @@ var dieAudio = preload("res://Resources/Audio/Mobs/Robots/MachinePowerOff.wav")
 
 func _ready():
 	bulletSprite = 0
-	right = true
 	$FireRate.set_wait_time(fireRate)
 	$HealthBar.getMaxHP(hp)
 	maxSpeed = speed
@@ -59,11 +57,13 @@ func dead():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if direction == 1 || right:
+	if direction == 1:
 		$Sprite.flip_h = false
-	elif direction == -1 || !right:
+		$RayCast2D.position.x = abs($RayCast2D.position.x)
+	elif direction == -1:
 		$Sprite.flip_h = true
-	
+		$RayCast2D.position.x = -abs($RayCast2D.position.x)
+
 	if !is_dead:
 		
 		patrol()
@@ -128,10 +128,6 @@ func shoot():
 	get_parent().add_child(bullet_instance)
 	$FireRate.start()
 	fire = false
-	if target_dir.x >= 0:
-		right = true
-	else:
-		right = false
 
 
 func patrol():

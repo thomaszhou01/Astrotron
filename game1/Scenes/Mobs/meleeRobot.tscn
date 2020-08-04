@@ -15,12 +15,11 @@ radius = 3.03252
 height = 13.9018
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 20.8115
-height = 4.56767
+radius = 16.6306
+height = 5.98008
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 20.2199
-height = 120.0
+[sub_resource type="CircleShape2D" id=11]
+radius = 130.0
 
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
@@ -99,7 +98,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-length = 0.8
+length = 1.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Arm:rotation_degrees")
 tracks/0/interp = 1
@@ -107,7 +106,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 0.8 ),
+"times": PoolRealArray( 0, 1, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 110.0, 0.0 ]
@@ -119,7 +118,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 0.6, 0.8 ),
+"times": PoolRealArray( 0, 1, 1.2, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ -14.0, -14.0, -130.0, -14.0 ]
@@ -131,7 +130,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 0.8 ),
+"times": PoolRealArray( 0, 1, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -191,7 +190,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
+"times": PoolRealArray( 0, 0.9, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 15, 17, 15 ]
@@ -251,7 +250,7 @@ tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"times": PoolRealArray( 0.4, 0.8 ),
+"times": PoolRealArray( 0.9, 1.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Color( 1, 0, 0, 1 ), Color( 0, 0.788235, 1, 1 ) ]
@@ -282,7 +281,7 @@ tracks/14/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-length = 0.8
+length = 1.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Arm:rotation_degrees")
 tracks/0/interp = 1
@@ -290,7 +289,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 0.8 ),
+"times": PoolRealArray( 0, 1, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, -110.0, 0.0 ]
@@ -314,7 +313,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 0.6, 0.8 ),
+"times": PoolRealArray( 0, 1, 1.2, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 14.0, 14.0, 130.0, 14.0 ]
@@ -326,7 +325,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5, 0.8 ),
+"times": PoolRealArray( 0, 1, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -386,7 +385,7 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
+"times": PoolRealArray( 0, 0.9, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 14, 16, 14 ]
@@ -434,7 +433,7 @@ tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"times": PoolRealArray( 0.4, 0.8 ),
+"times": PoolRealArray( 0.9, 1.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 0, 0, 1 ), Color( 0, 0.788235, 1, 1 ) ]
@@ -716,11 +715,12 @@ tracks/9/keys = {
 collision_layer = 8
 collision_mask = 2147483691
 script = ExtResource( 1 )
-damage = 75
-hp = 300
+damage = 40
+hp = 200
 speed = 30
 patrolRange = 50
 coinsDropped = 3
+fastSpeed = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -736,30 +736,28 @@ rect_scale = Vector2( 0.2, 0.1 )
 z_index = 2
 texture = ExtResource( 2 )
 hframes = 20
-frame = 6
 
 [node name="Arm" type="Sprite" parent="."]
-position = Vector2( 3.6, -1.7 )
+position = Vector2( -3.6, -1.7 )
 z_index = 3
 texture = ExtResource( 2 )
-offset = Vector2( -2, 3 )
+offset = Vector2( 2, 3 )
 hframes = 20
-frame = 13
+frame = 12
 
 [node name="Sword" type="Sprite" parent="Arm"]
-position = Vector2( -1.5, 6.2 )
-rotation = -0.244346
+position = Vector2( 1.5, 6.2 )
+rotation = 0.244346
 z_index = -1
 texture = ExtResource( 2 )
-offset = Vector2( -6, -6 )
+offset = Vector2( 6, -6 )
 hframes = 20
-frame = 15
+frame = 14
 
 [node name="Light2D" type="Light2D" parent="Arm/Sword"]
-position = Vector2( -8.2563, -8.43628 )
-rotation = 3.92817
+position = Vector2( 9.75269, -9.57863 )
+rotation = 5.49936
 scale = Vector2( 0.1, 0.05 )
-enabled = false
 texture = ExtResource( 4 )
 color = Color( 0, 0.788235, 1, 1 )
 energy = 2.0
@@ -772,31 +770,30 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Sword/HurtBox"]
-position = Vector2( -14.8549, -3.12741 )
-rotation = -0.785398
+position = Vector2( 3.704, -3.7 )
+rotation = 0.785398
 shape = SubResource( 2 )
 disabled = true
 
 [node name="DetectBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox"]
-position = Vector2( 0, -11.763 )
+visible = false
+position = Vector2( 0.794601, -5.14136 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
-position = Vector2( -0.458603, -11.7346 )
+visible = false
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 11 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 6.68585, -3.76694 )
+position = Vector2( 6.37051, 2.53978 )
 enabled = true
 cast_to = Vector2( 0, 20 )
 collision_mask = 34
@@ -814,6 +811,7 @@ anims/RunRight = SubResource( 10 )
 wait_time = 3.0
 
 [node name="AnimationDuration" type="Timer" parent="."]
+one_shot = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
@@ -830,6 +828,7 @@ z_index = 2
 stream = ExtResource( 5 )
 [connection signal="body_entered" from="Arm/Sword/HurtBox" to="." method="_on_HurtBox_body_entered"]
 [connection signal="body_entered" from="DetectBox" to="." method="_on_DetectBox_body_entered"]
+[connection signal="body_exited" from="DetectBox" to="." method="_on_DetectBox_body_exited"]
 [connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]
 [connection signal="body_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

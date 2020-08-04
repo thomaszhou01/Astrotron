@@ -91,7 +91,7 @@ func _physics_process(delta):
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 	
-	if $RayCast2D.is_colliding() == false && !detected:
+	if $RayCast2D.is_colliding() == false:
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 
