@@ -43,9 +43,9 @@ func _on_rocket_body_entered(body):
 	if propell:
 		$audio.play()
 	$Timer.start()
-	$AnimatedSprite.play("explosion")
-	$AnimatedSprite.scale.x = 0.5
-	$AnimatedSprite.scale.y = 0.5
+	$Explosion.explode()
+	$AnimatedSprite.visible = false
+	$Particles2D.visible = false
 	propell = false
 
 

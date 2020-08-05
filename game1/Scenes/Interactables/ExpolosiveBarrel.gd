@@ -25,10 +25,9 @@ func hit(damage, hitBy, knock, type):
 	if hits == 3 || type == 1:
 		$Timer.stop()
 		$audio.play()
-		$AnimatedSprite.scale.x = ($Area2D/CollisionShape2D.shape.radius * 2)/70
-		$AnimatedSprite.scale.y = $AnimatedSprite.scale.x
+		$AnimatedSprite.visible = false
+		$Explosion.emitting = true
 		$Area2D/CollisionShape2D.call_deferred("disabled", false)
-		$AnimatedSprite.play("explosion")
 	elif hits == 2 && !primed:
 		$Timer.start()
 		$Particles2D.emitting = true

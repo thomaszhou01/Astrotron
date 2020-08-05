@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Resources/Sprites/interactables/barrels.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Interactables/ExpolosiveBarrel.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Sprites/explosion.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Audio/Items/explode.wav" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/Misc/Explosion.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -127,6 +128,8 @@ process_material = SubResource( 17 )
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+
+[node name="Explosion" parent="." instance=ExtResource( 5 )]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="finished" from="audio" to="." method="_on_audio_finished"]

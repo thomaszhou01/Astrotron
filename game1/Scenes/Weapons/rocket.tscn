@@ -1,63 +1,64 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Resources/Sprites/projectiles.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Weapons/rocket.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Sprites/explosion.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Audio/Items/explode.wav" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/Misc/Explosion.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.84202, 2.13788 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
-region = Rect2( 70, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
-region = Rect2( 140, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
-region = Rect2( 210, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
-region = Rect2( 280, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
-region = Rect2( 350, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 420, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
-region = Rect2( 490, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 3 )
-region = Rect2( 560, 0, 70, 70 )
-
-[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 70, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 140, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 210, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 280, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 350, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 420, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 490, 0, 70, 70 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 560, 0, 70, 70 )
+
 [sub_resource type="SpriteFrames" id=12]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "explosion",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "rocket",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "explosion",
 "speed": 5.0
 } ]
 
@@ -96,7 +97,6 @@ animation = "rocket"
 speed_scale = 15.0
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 11
 
@@ -120,6 +120,9 @@ one_shot = true
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 max_distance = 400.0
+
+[node name="Explosion" parent="." instance=ExtResource( 5 )]
+scale = Vector2( 0.5, 0.5 )
 [connection signal="body_entered" from="." to="." method="_on_rocket_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

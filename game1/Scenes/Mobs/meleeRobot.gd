@@ -84,6 +84,8 @@ func _physics_process(_delta):
 			if collision.collider.is_in_group("bodies"):
 				collision.collider.apply_central_impulse(-collision.normal * inertia)
 	
+	
+	
 	if !is_dead && attacking && target != null:
 		attack()
 	
@@ -92,7 +94,7 @@ func _physics_process(_delta):
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 	
-	if $RayCast2D.is_colliding() == false:
+	if $RayCast2D.is_colliding() == false && is_on_floor():
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 
@@ -133,6 +135,7 @@ func patrol():
 
 
 func attack():
+	moving = false
 	if target.global_position.x < global_position.x:
 		$AnimationPlayer.play("HitLeft")
 	else:
@@ -153,10 +156,10 @@ func _on_HurtBox_body_entered(body):
 
 func _on_AnimationDuration_timeout():
 	moving = true
+	print("d")
 
 
 func _on_DetectBox_body_entered(body):
-	moving = false
 	attacking = true
 
 func _on_DetectBox_body_exited(body):

@@ -18,7 +18,7 @@ height = 13.9018
 radius = 16.6306
 height = 5.98008
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=4]
 radius = 130.0
 
 [sub_resource type="Animation" id=5]
@@ -790,7 +790,7 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
 visible = false
 rotation = 1.5708
-shape = SubResource( 11 )
+shape = SubResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 6.37051, 2.53978 )
