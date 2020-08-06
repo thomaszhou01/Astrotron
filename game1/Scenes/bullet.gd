@@ -30,9 +30,6 @@ func _process(delta):
 	if spin:
 		$Sprite.rotate(1)
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
 
 func _on_bullet_body_entered(body):
 	if body.has_method("hit"):

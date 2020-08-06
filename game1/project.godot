@@ -26,6 +26,10 @@ boot_splash/bg_color=Color( 0.231373, 0.231373, 0.231373, 1 )
 Global="*res://Scenes/Global.gd"
 SceneTransition="*res://Scenes/SceneTransition.tscn"
 
+[debug]
+
+shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.501961 )
+
 [display]
 
 window/size/width=320
@@ -130,5 +134,5 @@ switchWeapon={
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.313726, 0.313726, 0.313726, 1 )
+environment/default_clear_color=Color( 0.0627451, 0.0901961, 0.188235, 1 )
 environment/default_environment="res://default_env.tres"

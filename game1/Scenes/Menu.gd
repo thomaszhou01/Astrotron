@@ -12,6 +12,10 @@ func _ready():
 
 
 func _on_TextureButton_pressed():
+	$AnimationPlayer.play("ToMapSelect")
+
+
+func _on_map1_pressed():
 	$Tween.interpolate_property($MenuMusic, "volume_db", -5, -20, 1, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	$Tween.start()
 	if devMode:
@@ -22,5 +26,4 @@ func _on_TextureButton_pressed():
 	yield(get_tree().create_timer(1), "timeout")
 	get_parent().get_node("Worlds").add_child(x)
 	queue_free()
-	get_parent().remove_child(self)
 	SceneTransition.fadeOut()

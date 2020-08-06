@@ -22,6 +22,7 @@ func _on_Resume_pressed():
 	var pauseState =  not get_tree().paused 
 	get_tree().paused = pauseState
 	visible = pauseState
+	paused = !paused
 
 
 func _on_Quit_pressed():

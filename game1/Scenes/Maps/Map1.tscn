@@ -315,6 +315,9 @@ position = Vector2( 1956.89, 1048.28 )
 [node name="Blob22" parent="Mobs" instance=ExtResource( 4 )]
 position = Vector2( 1679.7, 1140.2 )
 
+[node name="Blob26" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( 1597.55, 1157.26 )
+
 [node name="Blob24" parent="Mobs" instance=ExtResource( 4 )]
 position = Vector2( 1575.84, 1271.12 )
 
@@ -329,6 +332,9 @@ position = Vector2( 2304.09, 613.926 )
 
 [node name="Blob4" parent="Mobs" instance=ExtResource( 4 )]
 position = Vector2( 1039.43, 163.636 )
+
+[node name="Blob27" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( 1181.97, 165.665 )
 
 [node name="Blob5" parent="Mobs" instance=ExtResource( 4 )]
 position = Vector2( 510.564, 136.921 )

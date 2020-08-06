@@ -31,21 +31,23 @@ func hit(damage, pos, knock, type):
 
 func dead():
 	#add coins
+	hitEnemy = true
 	for i in range(0, coinsDropped):
 		coin_instance = coin.instance()
 		get_parent().get_parent().get_parent().call_deferred("add_child", coin_instance)
 		coin_instance.position = position
-	dropAmmo(3)
+	dropAmmo(7)
 	is_dead = true
 	velocity = Vector2(0,0)
 	$audio.set_stream(dieAudio)
 	$audio.play()
-	$Particles2D.visible = true
-	$Particles2D.emitting = true
+	$DeadParticles.visible = true
+	$DeadParticles.emitting = true
 	$Timer.start()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Tween.interpolate_property($AnimatedSprite, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($HealthBar, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Particles2D, "modulate", Color(1,1,1,1), Color(1,1,1,0), $Timer.wait_time, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	$Tween.start()
 
 #make blob stop if going off edge
@@ -134,4 +136,3 @@ func _on_Area2D_body_entered(body):
 	if !hitEnemy && body.name == "Character":
 		body.hit(damage, self, true, 2)
 		dead()
-		hitEnemy = true

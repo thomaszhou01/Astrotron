@@ -22,6 +22,7 @@ export (int) var bulletSpeed
 export (int) var bulletType
 export (int) var ammoPerClip
 export (int) var reloadTime
+export (int) var spawnedClips
 
 var reload = preload("res://Resources/Audio/Items/Guns/reload.wav")
 
@@ -31,7 +32,7 @@ func _ready():
 	$Reload.set_wait_time(reloadTime)
 	if originallyInScene:
 		ammo = ammoPerClip
-		clipAmmo = ammoPerClip * 3
+		clipAmmo = ammoPerClip * spawnedClips
 	reloading = false
 	used = false
 

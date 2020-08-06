@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Pause.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/resume2.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/mainScript.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Global.gd" type="Script" id=3]
 [ext_resource path="res://Resources/Sprites/Buttons/resume1.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Sprites/Buttons/quit2.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Sprites/Buttons/quit1.png" type="Texture" id=6]
@@ -12,7 +12,6 @@
 script = ExtResource( 3 )
 
 [node name="Menu" parent="." instance=ExtResource( 9 )]
-devMode = true
 
 [node name="Worlds" type="Node" parent="."]
 

@@ -34,7 +34,7 @@ func dead():
 		coin_instance = coin.instance()
 		get_parent().get_parent().get_parent().call_deferred("add_child", coin_instance)
 		coin_instance.position = position
-	dropAmmo(3)
+	dropAmmo(7)
 	is_dead = true
 	velocity = Vector2(0,0)
 	$audio.set_stream(dieAudio)

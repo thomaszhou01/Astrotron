@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/play1.png" type="Texture" id=2]
@@ -6,54 +6,230 @@
 [ext_resource path="res://Resources/Sprites/Buttons/play2.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Resources/Audio/Ambiant/dark fallout.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Resources/Sprites/spaceStation.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Misc/fire.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Resources/Sprites/Buttons/1.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Sprites/Buttons/1d.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Sprites/Buttons/3d.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Sprites/Buttons/3.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Sprites/Buttons/2d.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Sprites/Buttons/2.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Sprites/Misc/arrow.png" type="Texture" id=15]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+    COLOR = texture(TEXTURE, UV);
+    COLOR.a = UV.x;
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 20
 font_data = ExtResource( 5 )
 
+[sub_resource type="Animation" id=4]
+resource_name = "ToMapSelect"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/OpeningScene:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/MapSelect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasLayer/MapSelect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CanvasLayer/OpeningScene:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [node name="Menu" type="Node"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 130.561, 90 )
-scale = Vector2( 0.4, 0.4 )
+[node name="NodeBase" type="Node2D" parent="."]
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="NodeBase"]
+material = SubResource( 2 )
+position = Vector2( 160.551, 90 )
+scale = Vector2( 0.251448, 0.4 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
 
+[node name="Sprite2" type="Sprite" parent="NodeBase"]
+position = Vector2( 258.568, 133.995 )
+rotation = 0.248624
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 7 )
+
+[node name="fire" parent="NodeBase/Sprite2" instance=ExtResource( 8 )]
+show_behind_parent = true
+position = Vector2( 732.598, -321.276 )
+rotation = 0.0229201
+scale = Vector2( 20, 20 )
+
+[node name="fire2" parent="NodeBase/Sprite2" instance=ExtResource( 8 )]
+show_behind_parent = true
+position = Vector2( -162.157, -301.289 )
+rotation = 0.0229201
+scale = Vector2( 20, 20 )
+
+[node name="fire3" parent="NodeBase/Sprite2" instance=ExtResource( 8 )]
+position = Vector2( -638.206, 71.4224 )
+rotation = 0.0229201
+scale = Vector2( 20, 20 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+[node name="OpeningScene" type="Node2D" parent="CanvasLayer"]
+position = Vector2( 0, -2 )
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/OpeningScene"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 134.022
-margin_top = 132.0
-margin_right = -133.978
-margin_bottom = -33.0
+margin_left = 9.6954
+margin_top = 78.4427
+margin_right = 61.6954
+margin_bottom = 93.4427
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 103.5
-margin_top = 60.5
-margin_right = -102.5
-margin_bottom = -101.5
-custom_fonts/font = SubResource( 1 )
+[node name="Label" type="Label" parent="CanvasLayer/OpeningScene"]
+margin_left = -0.0415497
+margin_top = 23.8114
+margin_right = 227.958
+margin_bottom = 60.8114
+custom_fonts/font = SubResource( 3 )
 text = "Astrotron"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MapSelect" type="Control" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 0.744
+anchor_bottom = 0.875
+margin_right = -238.08
+margin_bottom = -157.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/MapSelect"]
+margin_left = 4.97161
+margin_top = 37.368
+margin_right = 150.972
+margin_bottom = 55.368
+custom_fonts/font = SubResource( 5 )
+text = "Level Select"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="map1" type="TextureButton" parent="CanvasLayer/MapSelect"]
+margin_left = 9.6954
+margin_top = 82.4442
+margin_right = 33.6954
+margin_bottom = 106.444
+texture_normal = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="map2" type="TextureButton" parent="CanvasLayer/MapSelect"]
+margin_left = 54.2697
+margin_top = 81.585
+margin_right = 78.2697
+margin_bottom = 105.585
+texture_normal = ExtResource( 14 )
+texture_hover = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="map3" type="TextureButton" parent="CanvasLayer/MapSelect"]
+margin_left = 100.188
+margin_top = 81.585
+margin_right = 124.188
+margin_bottom = 105.585
+texture_normal = ExtResource( 12 )
+texture_hover = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/MapSelect"]
+position = Vector2( 43.5866, 93.8188 )
+texture = ExtResource( 15 )
+
+[node name="Sprite2" type="Sprite" parent="CanvasLayer/MapSelect"]
+position = Vector2( 88.1885, 93.9757 )
+texture = ExtResource( 15 )
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -3.0
 autoplay = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ToMapSelect = SubResource( 4 )
+
 [node name="Tween" type="Tween" parent="."]
-[connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/OpeningScene/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/MapSelect/map1" to="." method="_on_map1_pressed"]

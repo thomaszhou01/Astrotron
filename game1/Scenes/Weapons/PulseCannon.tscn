@@ -19,6 +19,7 @@ fireRate = 0.5
 bulletSpeed = 400
 ammoPerClip = 5
 reloadTime = 2
+spawnedClips = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.0875955, -0.33189 )

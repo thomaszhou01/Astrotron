@@ -34,7 +34,7 @@ func dead():
 		coin_instance = coin.instance()
 		get_parent().get_parent().get_parent().call_deferred("add_child", coin_instance)
 		coin_instance.position = position
-	dropAmmo(1)
+	dropAmmo(4)
 	is_dead = true
 	velocity = Vector2(0,0)
 	$Timer.start()

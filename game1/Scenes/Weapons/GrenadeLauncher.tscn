@@ -18,6 +18,7 @@ bulletSpeed = 400
 bulletType = 1
 ammoPerClip = 4
 reloadTime = 2
+spawnedClips = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

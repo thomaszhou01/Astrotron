@@ -22,7 +22,7 @@ func _input(_event):
 			yield(get_tree().create_timer(0.1), "timeout")
 		
 		rng.randomize()
-		for _i in range(0, rng.randi_range(1, 3)):
+		for _i in range(0, rng.randi_range(2, 3)):
 			ammo_instance = ammo.instance()
 			get_parent().call_deferred("add_child", ammo_instance)
 			ammo_instance.position = position
