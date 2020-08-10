@@ -160,8 +160,6 @@ scale = Vector2( 20, 20 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="OpeningScene" type="Node2D" parent="CanvasLayer"]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -2 )
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/OpeningScene"]
@@ -189,6 +187,7 @@ __meta__ = {
 }
 
 [node name="MapSelect" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 0.744
 anchor_bottom = 0.875
 margin_right = -238.08
