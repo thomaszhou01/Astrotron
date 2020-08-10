@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scenes/Tilesets/Floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Resources/Audio/Ambiant/OutThere.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/Mobs/RangedRobo.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Resources/Sprites/Misc/labels.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Weapons/PulseCannon.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://Scenes/Mobs/meleeRobot.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=16]
@@ -147,6 +148,7 @@ position = Vector2( -74.9948, 32.0164 )
 [node name="nextLevelZone" parent="Environment" instance=ExtResource( 35 )]
 position = Vector2( 2448.6, 1716.76 )
 maps = ExtResource( 30 )
+nextLevel = 2
 
 [node name="Text" type="Node" parent="."]
 
@@ -428,7 +430,10 @@ position = Vector2( 1637.97, 279.257 )
 position = Vector2( 2101, 725.444 )
 
 [node name="Character" parent="." instance=ExtResource( 2 )]
-position = Vector2( -124.384, 133.447 )
+position = Vector2( 2377.62, 1519.75 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
-position = Vector2( 151.908, 140.849 )
+position = Vector2( 2399.54, 1528.9 )
+
+[node name="PulseCannon" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2415.45, 1523 )

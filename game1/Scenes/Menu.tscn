@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/play1.png" type="Texture" id=2]
@@ -32,12 +32,11 @@ shader = SubResource( 1 )
 size = 40
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "ToMapSelect"
+[sub_resource type="Animation" id=5]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/OpeningScene:modulate")
@@ -70,10 +69,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false, true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CanvasLayer/OpeningScene:visible")
@@ -86,6 +85,33 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "mapSelect"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/OpeningScene:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/MapSelect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [node name="Menu" type="Node"]
@@ -134,6 +160,8 @@ scale = Vector2( 20, 20 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="OpeningScene" type="Node2D" parent="CanvasLayer"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -2 )
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/OpeningScene"]
@@ -161,7 +189,6 @@ __meta__ = {
 }
 
 [node name="MapSelect" type="Control" parent="CanvasLayer"]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 0.744
 anchor_bottom = 0.875
 margin_right = -238.08
@@ -175,7 +202,7 @@ margin_left = 4.97161
 margin_top = 37.368
 margin_right = 150.972
 margin_bottom = 55.368
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Level Select"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -197,8 +224,10 @@ margin_left = 54.2697
 margin_top = 81.585
 margin_right = 78.2697
 margin_bottom = 105.585
+disabled = true
 texture_normal = ExtResource( 14 )
 texture_hover = ExtResource( 13 )
+texture_disabled = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -208,8 +237,10 @@ margin_left = 100.188
 margin_top = 81.585
 margin_right = 124.188
 margin_bottom = 105.585
+disabled = true
 texture_normal = ExtResource( 12 )
 texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -228,8 +259,11 @@ volume_db = -3.0
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/ToMapSelect = SubResource( 4 )
+anims/ToMapSelect = SubResource( 5 )
+anims/mapSelect = SubResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="CanvasLayer/OpeningScene/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/MapSelect/map1" to="." method="_on_map1_pressed"]
+[connection signal="pressed" from="CanvasLayer/MapSelect/map2" to="." method="_on_map2_pressed"]
+[connection signal="pressed" from="CanvasLayer/MapSelect/map3" to="." method="_on_map3_pressed"]

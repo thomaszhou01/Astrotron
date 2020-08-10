@@ -6,9 +6,13 @@ var initialMobCount
 var mobCount
 var kills
 var hasKey = false
+var globalGunIDs = []
+var globalGunAmmos = []
+var globalGunClips = []
 var gunID
 var gunID2
 var money = 0
+var onLevel = 1
 
 
 func save_game():

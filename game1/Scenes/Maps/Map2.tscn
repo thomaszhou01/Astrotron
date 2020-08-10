@@ -256,6 +256,7 @@ shape = SubResource( 1 )
 [node name="nextLevelDoor" parent="Environment" instance=ExtResource( 29 )]
 position = Vector2( 3494.85, -94.7226 )
 maps = ExtResource( 30 )
+nextLevel = 3
 
 [node name="Mobs" type="Node" parent="."]
 
@@ -512,6 +513,6 @@ position = Vector2( 1975.67, 24.0901 )
 position = Vector2( 1721.4, 648.12 )
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2340.33, 280 )
+position = Vector2( 3452.78, -97.2373 )
 [connection signal="body_entered" from="Environment/RespawnPointSet" to="Environment/RespawnPointSet" method="_on_RespawnPointSet_body_entered"]
 [connection signal="body_entered" from="Environment/RespawnPointSet2" to="Environment/RespawnPointSet2" method="_on_RespawnPointSet_body_entered"]

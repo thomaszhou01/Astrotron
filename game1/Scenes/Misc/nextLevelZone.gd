@@ -2,11 +2,13 @@ extends Area2D
 
 
 export (Resource) var maps
+export (int) var nextLevel
 var gun
+var gunIndex
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	gunIndex = (nextLevel-1)*2-1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,17 +18,28 @@ func _ready():
 
 func _on_nextLevelZone_body_entered(body):
 	if body.name == "Character":
-		var map = maps.instance()
+		var map = load("res://Scenes/Menu.tscn").instance()
+		if Global.onLevel < nextLevel:
+			Global.onLevel += 1
 		if Global.gunID != null:
-			map.gun1 = load(Global.gunID.filename)
-			map.gun1Ammo = body.object.ammo
-			map.gun1clipAmmo = body.object.clipAmmo
+			Global.globalGunIDs.append(Global.gunID.filename)
+			Global.globalGunAmmos.append(Global.gunID.ammo)
+			Global.globalGunClips.append(Global.gunID.clipAmmo)
+		else:
+			Global.globalGunIDs.append(null)
+			Global.globalGunAmmos.append(0)
+			Global.globalGunClips.append(0)
 		if Global.gunID2 != null:
-			map.gun2 = load(Global.gunID2.filename)
-			map.gun2Ammo = body.object2.ammo
-			map.gun2clipAmmo = body.object2.clipAmmo
+			Global.globalGunIDs.append(Global.gunID2.filename)
+			Global.globalGunAmmos.append(Global.gunID2.ammo)
+			Global.globalGunClips.append(Global.gunID2.clipAmmo)
+		else:
+			Global.globalGunIDs.append(null)
+			Global.globalGunAmmos.append(0)
+			Global.globalGunClips.append(0)
 		SceneTransition.fadeIn()
 		yield(get_tree().create_timer(1), "timeout")
 		get_parent().get_parent().queue_free()
-		get_parent().get_parent().get_parent().add_child(map)
+		get_parent().get_parent().get_parent().get_parent().add_child(map)
+		map.get_node("AnimationPlayer").play("mapSelect")
 		SceneTransition.fadeOut()

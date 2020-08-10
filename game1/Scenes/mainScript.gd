@@ -6,6 +6,7 @@ extends Node
 # var b = "text"
 var map1 = preload("res://Scenes/Maps/Map1.tscn")
 var map2 = preload("res://Scenes/Maps/Map2.tscn")
+var map3 = preload("res://Scenes/Maps/Map3.tscn")
 var test = preload("res://Scenes/Maps/TestScene.tscn")
 
 # Called when the node enters the scene tree for the first time.
