@@ -1,10 +1,10 @@
 extends Node2D
 
 export (float) var dist
+export (int) var speed
 export (int) var idle
 var moveTo
 var duration 
-var speed = 7
 var currentPos
 var follow = Vector2.ZERO
 

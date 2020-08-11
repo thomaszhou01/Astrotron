@@ -64,11 +64,11 @@ func _physics_process(_delta):
 		else:
 			detected = false
 		patrol()
-		if $RayCast2D.is_colliding() == false && detected:
-			stop = true
+		
+		if detected:
+			$RayCast2D.enabled = false
 		else:
-			stop = false
-	
+			$RayCast2D.enabled = true
 		if !stop:
 			$AnimatedSprite.play("walk")
 			velocity.x = speed*direction
@@ -86,7 +86,7 @@ func _physics_process(_delta):
 			if is_on_wall():
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
-			if $RayCast2D.is_colliding() == false:
+			if $RayCast2D.enabled && $RayCast2D.is_colliding() == false:
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
 

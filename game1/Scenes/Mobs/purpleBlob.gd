@@ -118,7 +118,6 @@ func _on_Timer_timeout():
 	get_parent().remove_child(self)
 	Global.mobCount -= 1
 	queue_free()
-	print("k")
 
 
 

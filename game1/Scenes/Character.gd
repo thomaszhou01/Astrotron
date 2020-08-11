@@ -321,8 +321,6 @@ func shield(value):
 func pickup():
 	if tempObject != null:
 		if object != tempObject && object2 != tempObject:
-			$effects.set_stream(equip)
-			$effects.play()
 			if object != null && object2 != null:
 				canSetAmmo = false
 				handFree()
@@ -359,6 +357,19 @@ func pickup():
 					$statusText/AmmoBar.getMaxAmmo(object.clipAmmo, object.ammo)
 					$UI/ReloadTimer.getMaxReloadTime(object.reloadTime)
 			canSetAmmo = true
+			
+			if object != null && object.originallyInScene:
+				$effects.set_stream(equip)
+				$effects.play()
+			elif object != null && !object.originallyInScene:
+				object.originallyInScene = true
+			
+			if object2 != null && object2.originallyInScene:
+				$effects.set_stream(equip)
+				$effects.play()
+			elif object2 != null && !object2.originallyInScene:
+				object2.originallyInScene = true
+		
 		tempObject = null
 
 

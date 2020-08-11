@@ -34,7 +34,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 3.36285, 2.86377 )
+extents = Vector2( 3.42612, 3.32097 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 14.4842, 3.03231 )
@@ -96,7 +96,7 @@ shape = SubResource( 7 )
 
 [node name="Particles2D" type="Particles2D" parent="platform"]
 show_behind_parent = true
-position = Vector2( -0.5, 5.977 )
+position = Vector2( -0.5, 7.20337 )
 z_index = -5
 amount = 10
 lifetime = 0.3

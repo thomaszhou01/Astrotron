@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Pause.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/resume2.png" type="Texture" id=2]
@@ -6,7 +6,12 @@
 [ext_resource path="res://Resources/Sprites/Buttons/resume1.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Sprites/Buttons/quit2.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Sprites/Buttons/quit1.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Scenes/Menu.tscn" type="PackedScene" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 7 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
@@ -59,11 +64,12 @@ texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 5 )
 
 [node name="CheckButton" type="CheckButton" parent="PauseTab/Pause"]
-margin_left = 129.547
-margin_top = 118.384
-margin_right = 246.547
-margin_bottom = 158.384
+margin_left = 123.0
+margin_top = 118.0
+margin_right = 265.0
+margin_bottom = 158.0
 rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 1 )
 pressed = true
 text = "Audio"
 __meta__ = {

@@ -156,7 +156,6 @@ func _on_HurtBox_body_entered(body):
 
 func _on_AnimationDuration_timeout():
 	moving = true
-	print("d")
 
 
 func _on_DetectBox_body_entered(body):

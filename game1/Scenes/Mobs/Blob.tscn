@@ -63,7 +63,7 @@ color = Color( 0.00784314, 0.854902, 0.215686, 1 )
 collision_layer = 8
 collision_mask = 43
 script = ExtResource( 2 )
-damage = 25
+damage = 20
 hp = 100
 speed = 60
 patrolRange = 200
@@ -79,7 +79,7 @@ shape = SubResource( 5 )
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 3.38123, 6.37343 )
 enabled = true
-cast_to = Vector2( 0, 16 )
+cast_to = Vector2( 0, 20 )
 collision_mask = 34
 
 [node name="Pause" type="Timer" parent="."]
@@ -89,7 +89,6 @@ one_shot = true
 wait_time = 2.0
 
 [node name="DamageTick" type="Timer" parent="."]
-wait_time = 0.5
 
 [node name="BodyDetector" type="Area2D" parent="."]
 collision_layer = 16
