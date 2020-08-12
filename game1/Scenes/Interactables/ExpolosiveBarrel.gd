@@ -25,9 +25,11 @@ func hit(damage, hitBy, knock, type):
 	if hits == 3 || type == 1:
 		$Timer.stop()
 		$audio.play()
-		$AnimatedSprite.visible = false
 		$Explosion.explode()
-		$Area2D/CollisionShape2D.call_deferred("disabled", false)
+		$AnimatedSprite.visible = false
+		$Particles2D.visible = false
+		yield(get_tree(), "idle_frame")
+		$Area2D/CollisionShape2D.disabled = false
 	elif hits == 2 && !primed:
 		$Timer.start()
 		$Particles2D.emitting = true
@@ -44,10 +46,8 @@ func _on_Timer_timeout():
 	$audio.play()
 	$Explosion.explode()
 	$AnimatedSprite.visible = false
+	$Particles2D.visible = false
 	$Area2D/CollisionShape2D.disabled = false
-
-	
-
 
 
 func _on_audio_finished():

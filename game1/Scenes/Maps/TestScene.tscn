@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Mobs/RedBlob.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Scenes/Interactables/elevator.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Mobs/purpleBlob.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Mobs/flyingDrone.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Structures/bridge.tscn" type="PackedScene" id=30]
 
 [sub_resource type="TileSet" id=1]
 0/name = "props.png 0"
@@ -124,7 +125,7 @@ position = Vector2( 597.901, -8.24642 )
 position = Vector2( 611.573, -6.18624 )
 
 [node name="movableBox5" parent="Environment" instance=ExtResource( 21 )]
-position = Vector2( 624.87, 7.86039 )
+position = Vector2( 624.712, 7.84647 )
 
 [node name="movableBox6" parent="Environment" instance=ExtResource( 21 )]
 position = Vector2( 581.981, 7.11123 )
@@ -133,7 +134,7 @@ position = Vector2( 581.981, 7.11123 )
 position = Vector2( 606.142, -23.0422 )
 
 [node name="ExpolosiveBarrel" parent="Environment" instance=ExtResource( 22 )]
-position = Vector2( 667.825, 3.31922 )
+position = Vector2( 670.817, 9.46134 )
 
 [node name="doorKey" parent="Environment" instance=ExtResource( 24 )]
 position = Vector2( -56.9527, -66.2331 )
@@ -152,6 +153,10 @@ scale = Vector2( 5.21091, -1.2596 )
 
 [node name="elevator" parent="Environment" instance=ExtResource( 27 )]
 position = Vector2( 141.321, -32.3088 )
+
+[node name="bridge" parent="Environment" instance=ExtResource( 30 )]
+position = Vector2( 7.97009, -52.9326 )
+pieces = 3
 
 [node name="Mobs" type="Node" parent="."]
 
@@ -185,11 +190,10 @@ position = Vector2( 453.949, 5.43863 )
 position = Vector2( 438.319, 6.29641 )
 
 [node name="Character" parent="." instance=ExtResource( 12 )]
-position = Vector2( -763.561, -126.139 )
-maxHP = 2000
+position = Vector2( -18.7797, -59.1966 )
 
 [node name="RailGun" parent="." instance=ExtResource( 7 )]
-position = Vector2( 222.828, 5.66214 )
+position = Vector2( 485.837, 9.4419 )
 
 [node name="Gun" parent="." instance=ExtResource( 13 )]
 position = Vector2( 173.729, 9.21424 )

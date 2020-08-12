@@ -110,10 +110,10 @@ position = Vector2( 2012.23, 426.828 )
 position = Vector2( 2278.15, 504.225 )
 
 [node name="movableBox2" parent="Environment" instance=ExtResource( 26 )]
-position = Vector2( 2060.09, 454.976 )
+position = Vector2( 2060.09, 461.767 )
 
 [node name="movableBox4" parent="Environment" instance=ExtResource( 26 )]
-position = Vector2( 2060.09, 472 )
+position = Vector2( 2060.09, 473.98 )
 
 [node name="movableBox3" parent="Environment" instance=ExtResource( 26 )]
 position = Vector2( 2018.53, 569.224 )
@@ -438,4 +438,4 @@ position = Vector2( 1637.97, 276.932 )
 position = Vector2( 2101, 725.444 )
 
 [node name="Character" parent="." instance=ExtResource( 2 )]
-position = Vector2( -126.01, 136 )
+position = Vector2( -125.09, 134.368 )

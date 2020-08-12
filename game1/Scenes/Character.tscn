@@ -13,8 +13,9 @@
 [ext_resource path="res://Resources/Sprites/Items/guns.png" type="Texture" id=11]
 [ext_resource path="res://Resources/Sprites/lights/boarderLight.png" type="Texture" id=12]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.43497, 7.4996 )
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 5.57891
+height = 4.59871
 
 [sub_resource type="Animation" id=2]
 resource_name = "Climb"
@@ -388,10 +389,11 @@ frame = 44
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.470533 )
-shape = SubResource( 1 )
+shape = SubResource( 21 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.2, 1.2 )
 editor_draw_drag_margin = true
 
 [node name="holdPoint" type="Position2D" parent="."]

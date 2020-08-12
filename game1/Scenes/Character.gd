@@ -66,6 +66,8 @@ func _physics_process(_delta):
 		var collision = get_slide_collision(index)
 		if collision.collider.is_in_group("bodies"):
 			collision.collider.apply_central_impulse(-collision.normal * inertia)
+		if collision.collider.is_in_group("bridge"):
+			collision.collider.apply_central_impulse(-collision.normal * inertia/10)
 	
 	
 	#dropdown make work
