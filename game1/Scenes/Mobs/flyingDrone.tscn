@@ -8,26 +8,26 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=2]
 radius = 100.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 8.93837
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.738318 )
 colors = PoolColorArray( 1, 1, 0.823529, 1, 1, 1, 0, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0.0253165, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.202532, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.995781, 0 ), -0.957576, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 1
 emission_sphere_radius = 0.5
 flag_disable_z = true
@@ -37,8 +37,8 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 45.0
 scale = 2.0
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
 [node name="flyingDrone" type="KinematicBody2D"]
 collision_layer = 8
@@ -49,7 +49,7 @@ hp = 50
 speed = 40
 patrolRange = 200
 coinsDropped = 2
-fastSpeed = 55
+fastSpeed = 65
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -62,7 +62,7 @@ shape = SubResource( 1 )
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -84,7 +84,7 @@ amount = 12
 lifetime = 0.3
 preprocess = 200.0
 speed_scale = 3.0
-process_material = SubResource( 10 )
+process_material = SubResource( 8 )
 
 [node name="Explosion" parent="." instance=ExtResource( 4 )]
 scale = Vector2( 0.5, 0.5 )

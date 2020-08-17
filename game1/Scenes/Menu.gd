@@ -7,6 +7,7 @@ var x
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.play("Default")
 	if Global.onLevel == 2:
 		$CanvasLayer/MapSelect/map2.disabled = false
 	if Global.onLevel == 3:

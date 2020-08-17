@@ -17,7 +17,6 @@ font_data = ExtResource( 7 )
 script = ExtResource( 3 )
 
 [node name="Menu" parent="." instance=ExtResource( 9 )]
-devMode = true
 
 [node name="Worlds" type="Node" parent="."]
 

@@ -251,7 +251,7 @@ message = "An unknown alien force has overrun the station"
 
 [node name="DisplayTextArea6" parent="Text" instance=ExtResource( 31 )]
 position = Vector2( 115.094, 134.368 )
-message = "Go to the reactor to stabalize the station's orbit"
+message = "Get to the the escape ship to leave the station"
 
 [node name="DisplayTextArea2" parent="Text" instance=ExtResource( 31 )]
 position = Vector2( 1472.4, 370 )
@@ -438,4 +438,4 @@ position = Vector2( 1637.97, 276.932 )
 position = Vector2( 2101, 725.444 )
 
 [node name="Character" parent="." instance=ExtResource( 2 )]
-position = Vector2( -125.09, 134.368 )
+position = Vector2( -125.837, 133.447 )

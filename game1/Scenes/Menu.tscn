@@ -293,7 +293,6 @@ volume_db = -3.0
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Default"
 anims/Default = SubResource( 5 )
 anims/ToMapSelect = SubResource( 6 )
 anims/mapSelect = SubResource( 7 )

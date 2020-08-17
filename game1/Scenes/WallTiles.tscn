@@ -5,7 +5,7 @@
 [node name="WallTiles" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1.88988, 1.73239 )
+position = Vector2( 2.72415, -0.436725 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
@@ -21,6 +21,24 @@ position = Vector2( -4.5021, 16.8948 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 128, 0, 16, 16 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 15.5431, 16.4494 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 16, 16 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 34.3634, 16.338 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( 53.8518, 20.6811 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
 
 [node name="Sprite16" type="Sprite" parent="."]
 position = Vector2( -49.563, 86.696 )

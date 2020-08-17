@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Resources/TileSets/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Resources/TileSets/passthrough.tres" type="TileSet" id=2]
@@ -31,7 +31,9 @@
 [ext_resource path="res://Scenes/Interactables/nextLevelDoor.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Scenes/Maps/Map3.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Resources/Audio/Ambiant/OutThere.ogg" type="AudioStream" id=31]
+[ext_resource path="res://Scenes/Structures/bridge.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/Mobs/purpleBlob.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Scenes/Misc/RespawnPointSet.tscn" type="PackedScene" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 14 )
@@ -239,13 +241,7 @@ position = Vector2( 2292.14, 656.66 )
 [node name="movableBox16" parent="Environment" instance=ExtResource( 25 )]
 position = Vector2( 2292.1, 684.148 )
 
-[node name="RespawnPointSet" type="Area2D" parent="Environment"]
-position = Vector2( 1128, 210 )
-script = ExtResource( 26 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/RespawnPointSet"]
-position = Vector2( 0, -2 )
-shape = SubResource( 1 )
+[node name="RespawnPointSet" parent="Environment" instance=ExtResource( 34 )]
 
 [node name="RespawnPointSet2" type="Area2D" parent="Environment"]
 position = Vector2( 591.869, 206.48 )
@@ -259,6 +255,14 @@ shape = SubResource( 1 )
 position = Vector2( 3494.85, -94.7226 )
 maps = ExtResource( 30 )
 nextLevel = 3
+
+[node name="bridge" parent="Environment" instance=ExtResource( 32 )]
+position = Vector2( 2328, 219 )
+pieces = 3
+
+[node name="bridge2" parent="Environment" instance=ExtResource( 32 )]
+position = Vector2( 2376, 507.027 )
+pieces = 1
 
 [node name="Mobs" type="Node" parent="."]
 
@@ -303,6 +307,9 @@ position = Vector2( 2163.31, 502.676 )
 
 [node name="RedBlob15" parent="Mobs" instance=ExtResource( 15 )]
 position = Vector2( 2282.85, 214.498 )
+
+[node name="RedBlob18" parent="Mobs" instance=ExtResource( 15 )]
+position = Vector2( 2287.83, 279 )
 
 [node name="RedBlob16" parent="Mobs" instance=ExtResource( 15 )]
 position = Vector2( 2820.83, 115.594 )
@@ -447,10 +454,10 @@ position = Vector2( 1308, 332 )
 [node name="Traps" type="Node" parent="."]
 
 [node name="laserBeam" parent="Traps" instance=ExtResource( 5 )]
-position = Vector2( 640.019, 262.816 )
+position = Vector2( 641, 263 )
 
 [node name="laserBeam2" parent="Traps" instance=ExtResource( 5 )]
-position = Vector2( 640.31, 136.815 )
+position = Vector2( 641, 137 )
 
 [node name="Interactables" type="Node" parent="."]
 
@@ -474,6 +481,9 @@ position = Vector2( 1168, 24 )
 
 [node name="Chest4" parent="Interactables" instance=ExtResource( 14 )]
 position = Vector2( 2010.17, 502.841 )
+
+[node name="Chest6" parent="Interactables" instance=ExtResource( 14 )]
+position = Vector2( 2248, 280 )
 
 [node name="Chest5" parent="Interactables" instance=ExtResource( 14 )]
 position = Vector2( 1884.93, -282.164 )
@@ -533,5 +543,4 @@ position = Vector2( 1975.67, 24.0901 )
 position = Vector2( 1721.4, 648.12 )
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
-[connection signal="body_entered" from="Environment/RespawnPointSet" to="Environment/RespawnPointSet" method="_on_RespawnPointSet_body_entered"]
 [connection signal="body_entered" from="Environment/RespawnPointSet2" to="Environment/RespawnPointSet2" method="_on_RespawnPointSet_body_entered"]

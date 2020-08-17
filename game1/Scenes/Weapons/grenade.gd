@@ -16,6 +16,7 @@ func _ready():
 func start(dir, dmg, sprite, spd, rotate):
 	damage = dmg
 	direction = dir 
+	$AnimatedSprite.rotation = dir.angle()
 	speed = spd
 	velocity = dir * speed
 	$AnimatedSprite.play("bomb")

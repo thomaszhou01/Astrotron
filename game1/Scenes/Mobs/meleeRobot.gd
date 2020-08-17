@@ -58,23 +58,25 @@ func dead():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	if !is_dead && moving:
-		patrol()
-		if target:
-			detect()
+	if !is_dead:
+		if moving:
+			patrol()
+			if target:
+				detect()
+			else:
+				detected = false
+			
+			if direction == 1:
+				$RayCast2D.position.x = abs($RayCast2D.position.x)
+				$AnimationPlayer.play("RunRight")
+			else:
+				$AnimationPlayer.play("RunLeft")
+				$RayCast2D.position.x = -abs($RayCast2D.position.x)
+			
+			velocity.x = speed*direction
 		else:
-			detected = false
+			velocity.x = 0
 		
-		
-		if direction == 1:
-			$RayCast2D.position.x = abs($RayCast2D.position.x)
-			$AnimationPlayer.play("RunRight")
-		else:
-			$AnimationPlayer.play("RunLeft")
-			$RayCast2D.position.x = -abs($RayCast2D.position.x)
-		
-		
-		velocity.x = speed*direction
 		velocity.y += gravity
 		velocity = move_and_slide(velocity, FLOOR, true, 4 , PI/4, false)
 		

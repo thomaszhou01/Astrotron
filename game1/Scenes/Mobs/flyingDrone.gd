@@ -66,12 +66,12 @@ func _physics_process(_delta):
 				velocity.y -= 1
 			else:
 				velocity.y = 0
-			velocity.x = speed*direction
 			detected = false
 		
 		patrol()
 		
 		
+		velocity.x = speed*direction
 		velocity = move_and_slide(velocity, FLOOR, true, 4 , PI/4, false)
 			
 		for index in get_slide_count():

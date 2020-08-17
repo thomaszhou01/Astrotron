@@ -114,6 +114,7 @@ position = Vector2( -0.5, -12.879 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform/DieZone"]
 position = Vector2( -0.445953, 4.45953 )
 shape = SubResource( 13 )
+disabled = true
 
 [node name="Move" type="Tween" parent="."]
 playback_process_mode = 0

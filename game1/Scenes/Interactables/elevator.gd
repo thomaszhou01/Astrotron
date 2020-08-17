@@ -57,8 +57,10 @@ func _process(delta):
 		$platform/AnimatedSprite.play("idle")
 		useButton = true
 		$platform/usePrompt.show()
+		$platform/DieZone/CollisionShape2D.disabled = true
 	else:
 		$platform/AnimatedSprite.play("moving")
+		$platform/DieZone/CollisionShape2D.disabled = false
 		useButton = false
 		$platform/usePrompt.hide()
 		if sign(dist) == 1:

@@ -23,7 +23,7 @@ region_rect = Rect2( 0, 0, 100, 300 )
 [node name="Emitter" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 centered = false
-offset = Vector2( 0, -8 )
+offset = Vector2( -1, -8 )
 
 [node name="Laser" type="RayCast2D" parent="."]
 enabled = true
@@ -32,3 +32,6 @@ collision_mask = 3
 
 [node name="End" type="Position2D" parent="."]
 position = Vector2( 100, 0 )
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

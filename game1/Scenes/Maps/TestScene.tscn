@@ -152,11 +152,12 @@ position = Vector2( 1051.3, 66.4415 )
 scale = Vector2( 5.21091, -1.2596 )
 
 [node name="elevator" parent="Environment" instance=ExtResource( 27 )]
-position = Vector2( 141.321, -32.3088 )
+position = Vector2( 256, -24 )
+dist = 100.0
 
 [node name="bridge" parent="Environment" instance=ExtResource( 30 )]
-position = Vector2( 7.97009, -52.9326 )
-pieces = 3
+position = Vector2( 8, -120 )
+pieces = 20
 
 [node name="Mobs" type="Node" parent="."]
 
@@ -173,7 +174,7 @@ position = Vector2( -249.615, -2.00226 )
 position = Vector2( -99.4456, 6.49018 )
 
 [node name="purpleBlob" parent="Mobs" instance=ExtResource( 28 )]
-position = Vector2( 90.9457, -109.017 )
+position = Vector2( -640, -160 )
 
 [node name="flyingDrone" parent="Mobs" instance=ExtResource( 29 )]
 position = Vector2( -811.585, -188.331 )
@@ -190,7 +191,7 @@ position = Vector2( 453.949, 5.43863 )
 position = Vector2( 438.319, 6.29641 )
 
 [node name="Character" parent="." instance=ExtResource( 12 )]
-position = Vector2( -18.7797, -59.1966 )
+position = Vector2( 8, -128 )
 
 [node name="RailGun" parent="." instance=ExtResource( 7 )]
 position = Vector2( 485.837, 9.4419 )
@@ -202,7 +203,7 @@ position = Vector2( 173.729, 9.21424 )
 position = Vector2( 406.086, 12.2933 )
 
 [node name="PulseCannon" parent="." instance=ExtResource( 11 )]
-position = Vector2( 262.899, 11.7538 )
+position = Vector2( 8, -128 )
 
 [node name="RocketLauncher" parent="." instance=ExtResource( 9 )]
 position = Vector2( 360.776, 6.17728 )

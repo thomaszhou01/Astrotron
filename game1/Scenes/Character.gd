@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var gravity = 7
-const jump = -170
+const jump = -200
 const acceleration = 10
 const stop = 10
 const FLOOR = Vector2.UP
@@ -284,16 +284,19 @@ func hit(damage, hitBy, knock, type):
 		if shield == 0:
 			$ShieldCharge.stop()
 		
+		#kill
+		if hp <= 0:
+			die()
+			alive = false
+		
 		#apply knockback
-		if knock:
+		if knock && alive:
 			if type == 0:
 				velocity = knockback * hitBy.velocity.normalized()
 			elif type == 1:
 				velocity = knockback * (position - hitBy.position).normalized()
 		
-		#kill
-		if hp <= 0:
-			die()
+		
 	
 	$UI/HealthBar.setHP(hp)
 	$UI/ShieldBar.setShield(shield)
