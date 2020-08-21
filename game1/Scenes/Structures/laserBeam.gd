@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAX_LENGTH = 500
+const MAX_LENGTH = 600
 export (bool) var pulse
 export (int) var displayLength
 export (int) var offsetTime

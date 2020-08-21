@@ -764,9 +764,9 @@ collision_layer = 8
 collision_mask = 2147483691
 script = ExtResource( 1 )
 damage = 40
-hp = 200
+hp = 400
 speed = 30
-patrolRange = 50
+patrolRange = 75
 coinsDropped = 3
 fastSpeed = 70
 
@@ -784,28 +784,27 @@ rect_scale = Vector2( 0.2, 0.1 )
 z_index = 2
 texture = ExtResource( 2 )
 hframes = 20
-frame = 6
 
 [node name="Arm" type="Sprite" parent="."]
-position = Vector2( 3.6, -1.7 )
+position = Vector2( -3.6, -1.7 )
 z_index = 3
 texture = ExtResource( 2 )
-offset = Vector2( -2, 3 )
+offset = Vector2( 2, 3 )
 hframes = 20
-frame = 13
+frame = 12
 
 [node name="Sword" type="Sprite" parent="Arm"]
-position = Vector2( -1.5, 6.2 )
-rotation = -0.244346
+position = Vector2( 1.5, 6.2 )
+rotation = 0.244346
 z_index = -1
 texture = ExtResource( 2 )
-offset = Vector2( -6, -6 )
+offset = Vector2( 6, -6 )
 hframes = 20
-frame = 15
+frame = 14
 
 [node name="Light2D" type="Light2D" parent="Arm/Sword"]
-position = Vector2( -8.2563, -8.43628 )
-rotation = 3.92818
+position = Vector2( 9.75269, -9.57863 )
+rotation = 5.49936
 scale = Vector2( 0.1, 0.05 )
 enabled = false
 texture = ExtResource( 4 )

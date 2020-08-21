@@ -17,9 +17,8 @@ _global_script_class_icons={
 
 config/name="game1"
 run/main_scene="res://Scenes/Main.tscn"
-boot_splash/fullsize=false
-boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0.231373, 0.231373, 0.231373, 1 )
+config/icon="res://Resources/Sprites/icon.png"
 
 [autoload]
 
@@ -35,7 +34,6 @@ shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.501961 )
 window/size/width=320
 window/size/height=180
 window/size/resizable=false
-window/size/fullscreen=true
 window/size/test_width=1280
 window/size/test_height=720
 mouse_cursor/custom_image="res://Resources/Sprites/crosshair.png"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/play1.png" type="Texture" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Resources/Sprites/Buttons/2d.png" type="Texture" id=13]
 [ext_resource path="res://Resources/Sprites/Buttons/2.png" type="Texture" id=14]
 [ext_resource path="res://Resources/Sprites/Misc/arrow.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Sprites/Buttons/4.png" type="Texture" id=16]
+[ext_resource path="res://Resources/Sprites/Buttons/4d.png" type="Texture" id=17]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -270,12 +272,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="map4" type="TextureButton" parent="CanvasLayer/MapSelect"]
+margin_left = 146.683
+margin_top = 81.585
+margin_right = 170.683
+margin_bottom = 105.585
+disabled = true
+texture_normal = ExtResource( 16 )
+texture_hover = ExtResource( 17 )
+texture_disabled = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Sprite" type="Sprite" parent="CanvasLayer/MapSelect"]
 position = Vector2( 43.5866, 93.8188 )
 texture = ExtResource( 15 )
 
 [node name="Sprite2" type="Sprite" parent="CanvasLayer/MapSelect"]
 position = Vector2( 88.1885, 93.9757 )
+texture = ExtResource( 15 )
+
+[node name="Sprite3" type="Sprite" parent="CanvasLayer/MapSelect"]
+position = Vector2( 134.683, 94.2792 )
 texture = ExtResource( 15 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -302,3 +321,4 @@ anims/mapSelect = SubResource( 7 )
 [connection signal="pressed" from="CanvasLayer/MapSelect/map1" to="." method="_on_map1_pressed"]
 [connection signal="pressed" from="CanvasLayer/MapSelect/map2" to="." method="_on_map2_pressed"]
 [connection signal="pressed" from="CanvasLayer/MapSelect/map3" to="." method="_on_map3_pressed"]
+[connection signal="pressed" from="CanvasLayer/MapSelect/map4" to="." method="_on_map4_pressed"]

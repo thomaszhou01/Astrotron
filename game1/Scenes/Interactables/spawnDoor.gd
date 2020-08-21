@@ -24,8 +24,8 @@ func _on_spawnDoor_body_entered(body):
 
 func _on_AnimatedSprite_animation_finished():
 	for _i in range(0, mobsSpawned):
-		yield(get_tree().create_timer(3), "timeout")
+		yield(get_tree().create_timer(1), "timeout")
 		mob = mobType.instance()
-		get_parent().get_parent().get_parent().call_deferred("add_child", mob)
+		get_parent().call_deferred("add_child", mob)
 		mob.position = position
 

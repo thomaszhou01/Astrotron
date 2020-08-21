@@ -12,7 +12,7 @@ var globalGunClips = []
 var gunID
 var gunID2
 var money = 0
-var onLevel = 1
+var onLevel = 4
 
 
 func save_game():
