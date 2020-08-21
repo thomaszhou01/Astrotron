@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Resources/Sprites/characters/boss.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/UI/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scenes/Mobs/Boss.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Misc/fire.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 29.3037
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 300.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 3 )
+
+[node name="Boss" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 43
+script = ExtResource( 4 )
+damage = 20
+hp = 5000
+speed = 20
+patrolRange = 100
+fireRates = 0.5
+turretTurn = 10.0
+wait = 2.0
+bulletSpeed = 200
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 2
+
+[node name="Turret" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 2
+frame = 1
+
+[node name="bulletpoint1" type="Position2D" parent="Turret"]
+position = Vector2( 21.2702, -5.79084 )
+
+[node name="bulletpoint2" type="Position2D" parent="Turret"]
+position = Vector2( 21.2702, 5.34539 )
+
+[node name="rocketpoint1" type="Position2D" parent="Turret"]
+position = Vector2( 4.56586, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.140305, 5.3317 )
+shape = SubResource( 1 )
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource( 2 )
+
+[node name="WaitTime" type="Timer" parent="."]
+
+[node name="FireRate" type="Timer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="Fire" type="Node2D" parent="."]
+visible = false
+
+[node name="fire" parent="Fire" instance=ExtResource( 5 )]
+position = Vector2( 20.5922, -8.79443 )
+rotation = 0.444934
+
+[node name="fire2" parent="Fire" instance=ExtResource( 5 )]
+position = Vector2( -21.921, 15.1982 )
+rotation = -0.368482
+
+[node name="fire3" parent="Fire" instance=ExtResource( 5 )]
+position = Vector2( 0.668543, 1.58834 )
+rotation = -0.0737942
+
+[node name="fire4" parent="Fire" instance=ExtResource( 5 )]
+position = Vector2( 6.00024, 32.456 )
+rotation = 0.233482
+
+[node name="fire5" parent="Fire" instance=ExtResource( 5 )]
+position = Vector2( -16.8699, -8.65413 )
+rotation = -0.165914
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.457
+margin_top = 166.928
+margin_right = -159.543
+margin_bottom = 0.927765
+rect_scale = Vector2( 2, 0.5 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 132.029
+margin_top = 150.641
+margin_right = -131.971
+margin_bottom = 1.64108
+custom_fonts/font = SubResource( 3 )
+text = "Boss"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_DetectPlayer_body_entered"]
+[connection signal="body_exited" from="DetectPlayer" to="." method="_on_DetectPlayer_body_exited"]
+[connection signal="timeout" from="WaitTime" to="." method="_on_WaitTime_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
