@@ -10,13 +10,19 @@ func _ready():
 	$AnimationPlayer.play("Default")
 	if Global.onLevel == 2:
 		$CanvasLayer/MapSelect/map2.disabled = false
-	if Global.onLevel == 3:
+	elif Global.onLevel == 3:
 		$CanvasLayer/MapSelect/map2.disabled = false
 		$CanvasLayer/MapSelect/map3.disabled = false
-	if Global.onLevel == 4:
+	elif Global.onLevel == 4:
 		$CanvasLayer/MapSelect/map2.disabled = false
 		$CanvasLayer/MapSelect/map3.disabled = false
 		$CanvasLayer/MapSelect/map4.disabled = false
+	elif Global.onLevel == 5:
+		$CanvasLayer/MapSelect/map2.disabled = false
+		$CanvasLayer/MapSelect/map3.disabled = false
+		$CanvasLayer/MapSelect/map4.disabled = false
+	
+	
 
 func _on_TextureButton_pressed():
 	$AnimationPlayer.play("ToMapSelect")

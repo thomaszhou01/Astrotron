@@ -4,6 +4,7 @@ extends Area2D
 var object
 export (Resource) var maps
 export (int) var nextLevel
+export (bool) var endGame
 var gun
 var gunIndex
 
@@ -53,11 +54,17 @@ func _input(event):
 				Global.globalGunIDs[gunIndex] = (null)
 				Global.globalGunAmmos[gunIndex] = (0)
 				Global.globalGunClips[gunIndex] = (0)
+		
+		
 		SceneTransition.fadeIn()
 		yield(get_tree().create_timer(1), "timeout")
 		get_parent().get_parent().queue_free()
-		get_parent().get_parent().get_parent().get_parent().add_child(map)
-		map.get_node("AnimationPlayer").play("mapSelect")
+		if endGame:
+			map = load("res://Scenes/Maps/WinGame.tscn").instance()
+			get_parent().get_parent().get_parent().get_parent().add_child(map)
+		else:
+			get_parent().get_parent().get_parent().get_parent().add_child(map)
+			map.get_node("AnimationPlayer").play("mapSelect")
 		SceneTransition.fadeOut()
 
 func _on_nextLevelDoor_body_entered(body):

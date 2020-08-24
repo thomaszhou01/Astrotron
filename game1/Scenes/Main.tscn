@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Pause.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/resume2.png" type="Texture" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://Resources/Sprites/Buttons/quit2.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Sprites/Buttons/quit1.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Resources/Sprites/Buttons/menu2.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Menu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Resources/Sprites/Buttons/menu1.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -46,28 +48,45 @@ __meta__ = {
 [node name="Resume" type="TextureButton" parent="PauseTab/Pause"]
 anchor_right = 8.0
 anchor_bottom = 4.5
-margin_left = 133.032
-margin_top = 63.1591
-margin_right = -134.968
-margin_bottom = -101.841
+margin_left = 133.066
+margin_top = 53.7798
+margin_right = -134.934
+margin_bottom = -111.22
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="TextureButton" parent="PauseTab/Pause"]
+margin_left = 132.701
+margin_top = 77.5401
+margin_right = 184.701
+margin_bottom = 92.5401
+texture_normal = ExtResource( 10 )
+texture_hover = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Quit" type="TextureButton" parent="PauseTab/Pause"]
 anchor_right = 8.0
 anchor_bottom = 4.5
 margin_left = 133.454
-margin_top = 91.2952
+margin_top = 102.972
 margin_right = -134.546
-margin_bottom = -73.7048
+margin_bottom = -62.0281
 texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CheckButton" type="CheckButton" parent="PauseTab/Pause"]
-margin_left = 123.0
-margin_top = 118.0
-margin_right = 265.0
-margin_bottom = 158.0
+margin_left = 123.375
+margin_top = 126.615
+margin_right = 265.375
+margin_bottom = 166.615
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
 pressed = true
@@ -76,5 +95,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="PauseTab/Pause/Resume" to="PauseTab/Pause" method="_on_Resume_pressed"]
+[connection signal="pressed" from="PauseTab/Pause/Menu" to="PauseTab/Pause" method="_on_Menu_pressed"]
 [connection signal="pressed" from="PauseTab/Pause/Quit" to="PauseTab/Pause" method="_on_Quit_pressed"]
 [connection signal="pressed" from="PauseTab/Pause/CheckButton" to="PauseTab/Pause" method="_on_CheckButton_pressed"]

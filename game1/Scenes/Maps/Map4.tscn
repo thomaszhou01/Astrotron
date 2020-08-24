@@ -59,6 +59,8 @@ format = 1
 
 [node name="nextLevelDoor" parent="Environment" instance=ExtResource( 9 )]
 position = Vector2( 1398.32, -286.233 )
+nextLevel = 5
+endGame = true
 
 [node name="doorKey" parent="Environment" instance=ExtResource( 10 )]
 position = Vector2( 223.769, -210.14 )
@@ -80,7 +82,6 @@ needsKey = true
 
 [node name="Boss" parent="Mobs" instance=ExtResource( 13 )]
 position = Vector2( 687.649, -297.042 )
-hp = 1
 speed = 10
 
 [node name="spawnDoor" parent="Mobs" instance=ExtResource( 14 )]
@@ -105,3 +106,4 @@ dist = 226.0
 autoStart = true
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1360.35, -292.412 )

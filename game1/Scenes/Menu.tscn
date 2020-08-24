@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Buttons/play1.png" type="Texture" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://Resources/Sprites/Buttons/play2.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Fonts/SFPixelate.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Resources/Audio/Ambiant/dark fallout.ogg" type="AudioStream" id=6]
-[ext_resource path="res://Resources/Sprites/spaceStation.png" type="Texture" id=7]
-[ext_resource path="res://Scenes/Misc/fire.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Misc/Station.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Resources/Sprites/Buttons/1.png" type="Texture" id=9]
 [ext_resource path="res://Resources/Sprites/Buttons/1d.png" type="Texture" id=10]
 [ext_resource path="res://Resources/Sprites/Buttons/3d.png" type="Texture" id=11]
@@ -162,28 +161,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite2" type="Sprite" parent="NodeBase"]
-position = Vector2( 258.568, 133.995 )
-rotation = 0.248624
-scale = Vector2( 0.04, 0.04 )
-texture = ExtResource( 7 )
-
-[node name="fire" parent="NodeBase/Sprite2" instance=ExtResource( 8 )]
-show_behind_parent = true
-position = Vector2( 732.598, -321.276 )
-rotation = 0.0229201
-scale = Vector2( 20, 20 )
-
-[node name="fire2" parent="NodeBase/Sprite2" instance=ExtResource( 8 )]
-show_behind_parent = true
-position = Vector2( -162.157, -301.289 )
-rotation = 0.0229201
-scale = Vector2( 20, 20 )
-
-[node name="fire3" parent="NodeBase/Sprite2" instance=ExtResource( 8 )]
-position = Vector2( -638.206, 71.4224 )
-rotation = 0.0229201
-scale = Vector2( 20, 20 )
+[node name="Sprite2" parent="NodeBase" instance=ExtResource( 7 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
