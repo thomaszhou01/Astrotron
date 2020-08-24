@@ -1,3 +1,3 @@
 # GodotGame
 
-A game I've been working on using the Godot game engine.
+A 2D side-scrolling shooter made using the Godot game engine. 
