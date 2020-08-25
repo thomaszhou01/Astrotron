@@ -48,23 +48,20 @@ func _on_map2_pressed():
 	x = load("res://Scenes/Maps/Map2.tscn").instance()
 	SceneTransition.fadeIn()
 	yield(get_tree().create_timer(1), "timeout")
-	get_parent().get_node("Worlds").add_child(x)
 	queue_free()
+	get_parent().get_node("Worlds").add_child(x)
 	SceneTransition.fadeOut()
 
 
 func _on_map3_pressed():
 	$Tween.interpolate_property($MenuMusic, "volume_db", -5, -20, 1, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	$Tween.start()
-	if devMode:
-		x = test.instance()
-	else:
-		x = load("res://Scenes/Maps/Map3.tscn").instance()
+	x = load("res://Scenes/Maps/Map3.tscn").instance()
 	SceneTransition.fadeIn()
 	yield(get_tree().create_timer(1), "timeout")
 	get_parent().get_node("Worlds").add_child(x)
-	queue_free()
 	SceneTransition.fadeOut()
+	queue_free()
 
 
 func _on_map4_pressed():

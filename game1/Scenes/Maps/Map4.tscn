@@ -106,4 +106,3 @@ dist = 226.0
 autoStart = true
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1360.35, -292.412 )

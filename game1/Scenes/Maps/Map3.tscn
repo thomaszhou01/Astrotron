@@ -123,6 +123,12 @@ position = Vector2( -47.6688, 4.01358 )
 [node name="RespawnPointSet" parent="Environment" instance=ExtResource( 12 )]
 position = Vector2( 595.341, 83.7438 )
 
+[node name="RespawnPointSet2" parent="Environment" instance=ExtResource( 12 )]
+position = Vector2( 472.151, 338.247 )
+
+[node name="RespawnPointSet3" parent="Environment" instance=ExtResource( 12 )]
+position = Vector2( 2478.47, 1008.35 )
+
 [node name="bridge" parent="Environment" instance=ExtResource( 15 )]
 position = Vector2( 616, 91 )
 pieces = 19
